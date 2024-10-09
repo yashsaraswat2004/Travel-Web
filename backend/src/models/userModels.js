@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema({
             ref: "payment_information"
         }
     ],
+    favorites: [ 
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'destination' 
+        }
+    ],
     createAt: { type: Date, default: Date.now() }
 })
 

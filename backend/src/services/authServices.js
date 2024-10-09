@@ -43,17 +43,6 @@ const loginUser = async (email) => {
     }
 }
 
-const getUserProfile = async (token) => {
-    try {
-        const userId = await getUserIdFromToken(token);
-        if (!userId)
-            throw new Error("user is not found with given token")
 
-        const user = await User.findById(userId);
-        return user;
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
 
-export { registerUser, getUserProfile, loginUser }
+export { registerUser, loginUser }
