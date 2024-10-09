@@ -1,4 +1,4 @@
-import Destination from "../models/destinationModel";
+import Destination from "../models/destinationModel.js";
 
 const searchDestinations = async (req, res) => {
     try {

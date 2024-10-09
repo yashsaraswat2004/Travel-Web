@@ -15,4 +15,17 @@ const getUserProfile = async (token) => {
     }
 }
 
-export { getUserProfile }
+const findUserById = async (userId) => {
+    try {
+        const user = await User.findById(userId).populate("booking");
+        if (!user) {
+            throw new Error(`User not found with userID: ${userId}`);
+        }
+        return user;
+
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export { getUserProfile, findUserById }

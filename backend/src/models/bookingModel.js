@@ -19,3 +19,4 @@ const bookingSchema = new mongoose.Schema({
 
 const Booking = mongoose.model('booking', bookingSchema);
 export default Booking;
+
