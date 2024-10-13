@@ -1,17 +1,41 @@
 import { loginUser, registerUser } from "../services/authServices.js"
 import { generateToken } from "../config/jwt.js";
 import bcrypt from "bcrypt"
+import User from "../models/userModels.js";
 
 const register = async (req, res) => {
     try {
-        const user = await registerUser(req.body);
-        const jwt = generateToken(user._id);
+        const { firstName, lastName, email, password } = req.body;
 
-        return res.status(200).send({ jwt, message: "registered " })
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).send({ message: 'User already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        let role = 'user';
+        if (email === 'admin303@gmail.com') {
+            role = 'admin';
+        }
+
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+            role, 
+        });
+
+        await newUser.save();
+
+        const jwt = generateToken(newUser._id, newUser.role);
+
+        return res.status(201).send({ jwt, message: 'User registered successfully', role: newUser.role });
     } catch (error) {
         return res.status(500).send({ error: error.message });
     }
-}
+};
 
 const login = async (req, res) => {
     try {
@@ -25,11 +49,17 @@ const login = async (req, res) => {
         if (!isPasswordValid)
             return res.status(401).send({ message: "Invalid password" });
 
+        if (email === 'admin303@gmail.com' && user.role !== 'admin') {
+            user.role = 'admin';
+            await user.save();
+        }
+
         const jwt = generateToken(user._id);
-        return res.status(200).send({ jwt, message: "login success " })
+
+        return res.status(200).send({ jwt, message: "Login success", role: user.role });
     } catch (error) {
         return res.status(500).send({ error: error.message });
     }
-}
+};
 
 export { login, register };

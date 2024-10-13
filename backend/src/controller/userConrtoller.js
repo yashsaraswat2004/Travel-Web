@@ -5,10 +5,14 @@ import { getUserProfile } from "../services/userService.js";
 const userProfile = async (req, res) => {
     try {
         const jwt = req.headers.authorization?.split(" ")[1];
-        if (!jwt)
-            return res.status(401).json({ message: "token not found" });
-        const user = await getUserProfile(jwt);
-        return res.status(200).send(user)
+
+        if (!jwt) {
+            return res.status(404).send({ error: "token not found" })
+        }
+
+        const user = await getUserProfile(jwt)
+
+        return res.status(200).send(user);
     } catch (error) {
         return res.status(500).send({ error: error.message })
     }
