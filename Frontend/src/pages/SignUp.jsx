@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Form submission handler
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -21,15 +27,22 @@ const SignUp = () => {
       return;
     }
 
-    setTimeout(() => {
+    try {
+      const response = await axios.post('http://localhost:5070/auth/register', userData);
+      setMessage(response.data.message);
+      setError('');
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'An error occurred');
+      setMessage('');
+    } finally {
       setLoading(false);
-      navigate("/");
-    }, 3000);
+    }
 
     console.log("userData", userData);
   };
 
-  const [errors, setErrors] = useState({});
+  // Form validation logic
   const validate = (userData) => {
     let newErrors = {};
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -51,8 +64,9 @@ const SignUp = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   return (
-    <div className="al bg-white  min-h-screen place-content-center flex justify-center items-center">
+    <div className="al bg-white min-h-screen place-content-center flex justify-center items-center">
       <div className="absolute top-0 left-0">
         <img src="./aeroplane.png" alt="" className="w-[14rem] h-[14rem]" />
       </div>
@@ -67,7 +81,7 @@ const SignUp = () => {
           </p>
         </p>
       </div>
-      <div className="grid  bg-white border border-white h-50 w-96 border-1 rounded m-2 p-8 py-2">
+      <div className="grid bg-white border border-white h-50 w-96 border-1 rounded m-2 p-8 py-2">
         {loading ? (
           <div className="flex justify-center items-center">
             <l-reuleaux
@@ -87,6 +101,9 @@ const SignUp = () => {
             <h1 className="text-3xl font-bold text-black my-3 text-center">
               Sign Up
             </h1>
+            {message && <div className="text-green-500 text-center mb-4">{message}</div>}
+            {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+
             <div className="mb-6">
               <label
                 htmlFor="firstName"
