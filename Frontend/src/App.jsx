@@ -1,10 +1,11 @@
 import Homepage from "./components/Homepage";
 import SignIn from "./pages/SIgnIn";
 import SignUp from "./pages/SignUp";
-import ChooseUS from "./components/WhyChooseUs/ChooseUS";
+import TopDestinations from "./components/WhyChooseUs/TopDestinations";
 import { Routes, Route } from "react-router-dom";
-import Main from "./components/FamousAttraction/Main";
+import AdvertiseSection from "./components/FamousAttraction/AdvertiseSection";
 import Footer from "./components/Footer/Footer";
+import BookNextTrip from "./components/BookYourNextTrip/BookNextTrip";
 function App() {
   return (
     <div>
@@ -14,8 +15,9 @@ function App() {
           element={
             <div>
               <Homepage />
-              <ChooseUS />
-              <Main />
+              <TopDestinations />
+              <AdvertiseSection />
+              <BookNextTrip />
               <Footer />
             </div>
           }

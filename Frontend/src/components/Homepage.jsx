@@ -20,8 +20,8 @@ const Homepage = () => {
               <div className="ml-[3.05rem]">
                 <input
                   type="text"
-                  placeholder="Where to?"
-                  className="py-2 px-2 focus:outline-none text-[1.25rem] font-[600] font-poppins placeholder:text-white placeholder:text-[1.25rem] placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  placeholder="Where to ?"
+                  className="py-2 px-2 focus:outline-none text-[1.25rem] font-[600] font-poppins placeholder:text-black placeholder:text-[1.25rem] placeholder:font-[600] placeholder:font-poppins bg-transparent"
                 />
               </div>
               <div className="flex focus:outline-none h-[4.4287rem] w-[12.3125rem] bg-transparent rounded-[0.625rem] items-center justify-center">
@@ -99,7 +99,7 @@ const Homepage = () => {
               </div>
             </div>
             <p className="text-[0.783rem] font-[500] font-poppins text-white leading-10">
-              2,500 people booked Tommorowland Event in last 24 hours
+              2,500 people booked Goa Trip in last 24 hours
             </p>
           </div>
         </div>
