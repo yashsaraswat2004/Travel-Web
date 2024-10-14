@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { InfinitySpin } from "react-loader-spinner";
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -68,7 +67,7 @@ const SignIn = () => {
       <div className="grid  bg-white border border-white h-50 w-96 border-1 rounded m-2 p-8 py-2">
         {loading ? (
           <div className="flex justify-center items-center">
-            <InfinitySpin color="black" radius={"8px"} />
+            {/* <InfinitySpin color="black" radius={"8px"} /> */}
           </div>
         ) : (
           <form

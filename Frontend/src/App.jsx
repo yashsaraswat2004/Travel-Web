@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp";
 import ChooseUS from "./components/WhyChooseUs/ChooseUS";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/FamousAttraction/Main";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
               <Homepage />
               <ChooseUS />
               <Main />
+              <Footer />
             </div>
           }
         />
