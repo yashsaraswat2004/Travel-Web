@@ -1,3 +1,4 @@
+import Destination from "../models/destinationModel.js";
 import User from "../models/userModels.js";
 import { getUserProfile } from "../services/userService.js";
 
@@ -24,11 +25,11 @@ const addUserFavoriteDestination = async (req, res) => {
         if (!user)
             return res.status(404).json({ message: "user not found" })
 
-        const { destinationId } = req.body;
-        if (user.favorites.includes(destinationId))
+        const { id } = req.params;
+        if (user.favorites.includes(id))
             return res.status(404).json({ message: "destination is alrady in favorites" })
 
-        user.favorites.push(destinationId)
+        user.favorites.push(id)
         await user.save()
 
         return res.status(200).json({ message: "destion is added to favorite" })
@@ -48,5 +49,18 @@ const getUserFavoriteDestination = async (req, res) => {
     }
 };
 
+const getFavoriteDestinationById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const destination = await Destination.findById(id);
+        if (!destination)
+            return res.status(404).json({ message: "Destination not found" })
 
-export { userProfile, addUserFavoriteDestination, getUserFavoriteDestination };
+        res.status(200).json(destination);
+    } catch (error) {
+        return res.status(500).json({ message: "Error while fetching the destination" })
+    }
+}
+
+
+export { userProfile, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };

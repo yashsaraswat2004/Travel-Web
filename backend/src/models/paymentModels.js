@@ -1,21 +1,25 @@
 import mongoose from "mongoose";
 
-const paymentSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required: true
     },
-    booking: {
+    destination: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'booking',
+        ref: 'destination',
         required: true
     },
-    paymentId: { type: String, required: true },
-    amount: { type: Number, required: true },
-    paymentDate: { type: Date, default: Date.now },
-    status: { type: String, enum: ['pending', 'completed', 'failed'], default: 'pending' },
+    numberOfPeople: { type: Number, required: true },
+    totalPrice: { type: Number, required: true },
+    bookingDate: { type: Date, default: Date.now },
+    paymentDetails: {
+        paymentId: { type: String, required: false },
+        status: { type: String, enum: ['PENDING', 'COMPLETED'], default: 'PENDING' }
+    },
+    status: { type: String, enum: ['PLACED', 'CANCELLED'], default: 'PLACED' }
 });
 
-const Payment = mongoose.model('payment_information', paymentSchema);
-export default Payment;
+const Booking = mongoose.model('booking', bookingSchema);
+export default Booking;

@@ -14,7 +14,7 @@ const destinationSchema = new mongoose.Schema({
     facilities: { type: String, required: true },
     numberOfNights: { type: Number, required: true },
     images: [{ type: String, required: true }],
-    itinerary: [itinerarySchema], // corrected from 'initenary'
+    itinerary: [itinerarySchema], 
     createdAt: { type: Date, default: Date.now },
 });
 

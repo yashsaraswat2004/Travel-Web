@@ -8,12 +8,11 @@ const searchDestinations = async (req, res) => {
             $or: [
                 { name: { $regex: keyword, $options: 'i' } },
                 { city: { $regex: keyword, $options: 'i' } },
-                { country: { $regex: keyword, $options: 'i' } },
-                { description: { $regex: keyword, $options: 'i' } },
+                { country: { $regex: keyword, $options: 'i' } }
             ]
         });
 
-        if (destinations.length() === 0)
+        if (destinations.length === 0)
             return res.status(404).json({ message: "No destinations found" });
 
         return res.status(200).send(destinations)
@@ -24,13 +23,13 @@ const searchDestinations = async (req, res) => {
 
 const getDestinationById = async (req, res) => {
     try {
-        const destinationId = req.params.id;
-        const destination = await Destination.findById(destinationId);
+        const { id } = req.params;
+        const destination = await Destination.findById(id);
 
         if (!destination)
-            return res.status(404).json({ message: `No destinations found with id ${destinationId} ` });
+            return res.status(404).json({ message: `No destinations found with id ${id} ` });
 
-        return destination;
+        return res.status(200).json(destination);
     } catch (error) {
         return res.status(500).json({ message: "error in finding destinations" });
     }
@@ -39,7 +38,7 @@ const getDestinationById = async (req, res) => {
 const getAllDestinations = async (req, res) => {
     try {
         const destinatons = await Destination.find();
-        return res.status(200).json(destinatons);   
+        return res.status(200).json(destinatons);
     } catch (error) {
         return res.status(500).json({ message: "error in finding destinations" });
     }
