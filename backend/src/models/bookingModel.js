@@ -13,9 +13,14 @@ const bookingSchema = new mongoose.Schema({
     },
     numberOfPeople: {
         type: Number,
+        required: true
+    },
+    totalPrice: {
+        type: Number,
+        required: true
     },
     bookingDate: { type: Date, default: Date.now() }
-})  
+})
 
 const Booking = mongoose.model('booking', bookingSchema);
 export default Booking;

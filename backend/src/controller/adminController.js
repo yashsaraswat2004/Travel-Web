@@ -9,6 +9,7 @@ const addDestination = async (req, res) => {
             return res.status(404).json({ message: "All fiels are required" });
         }
 
+        const { destinationId } = req.params;
         // Create a new destination with provided data
         const destination = await Destination.create({
             name,
@@ -19,7 +20,7 @@ const addDestination = async (req, res) => {
             facilities,
             numberOfNights,
             images,
-            itinerary  // corrected spelling from 'initenary'
+            itinerary
         });
 
         return res.status(200).json({ message: "Destination added successfully", destination });
@@ -29,44 +30,9 @@ const addDestination = async (req, res) => {
     }
 };
 
-const updateDestination = async (req, res) => {
-    const { id } = req.params;
-    const updates = req.body;
-
-    try {
-        const updatedDestination = await Destination.findByIdAndUpdate(
-            id,
-            { $set: updates },  // Use $set to update only the provided fields
-            { new: true, runValidators: true }
-        );
-
-        if (!updatedDestination) {
-            return res.status(404).json({ message: "Destination ID not found" });
-        }
-
-        res.status(200).json({
-            message: "Destination updated successfully",
-            destination: updatedDestination
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error' });
-    }
-};
-
-const deleteDestination = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const destination = await Destination.findByIdAndDelete(id);
-
-        if (!destination)
-            return res.status(404).json({ message: "Destination ID not found" });
-
-        res.status(200).json({ message: "Destination Deleted" })
-
-    } catch (error) {
-        res.status(500).json({ message: 'Error while deleting' });
-    }
-}
+// updateDestination and deleteDestination api need to be created
 
 
-export { addDestination, updateDestination, deleteDestination };
+
+
+export { addDestination };
