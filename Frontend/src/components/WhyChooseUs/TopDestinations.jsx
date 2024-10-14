@@ -1,7 +1,7 @@
 import Card from "./Card";
 export default function TopDestinations() {
   return (
-    <div className="h-[36.5rem] w-full">
+    <div className="h-[36.5rem] w-full mt-[5rem]">
       <div className="flex items-center justify-center gap-5">
         <img src="/aeroplane.png" alt="" className="w-24 h-24" />
         <h1 className="text-4xl font-bold">Explore Our Top Destinations</h1>

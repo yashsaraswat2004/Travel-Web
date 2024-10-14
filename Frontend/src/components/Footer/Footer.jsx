@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer mt-[10rem]">
       <div className="footer-container">
         <div className="footer-section about">
           <img src="./logo.svg" alt="logo" />
