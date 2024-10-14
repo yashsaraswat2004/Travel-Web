@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         Montserrat: ["Montserrat", "sans-serif"],
+        Poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         "custom-pink": "#FF6400",
