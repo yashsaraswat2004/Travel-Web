@@ -1,6 +1,13 @@
 import { IoIosArrowDown } from "react-icons/io";
 import Navbar from "./Navbar";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Homepage = () => {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    navigate(`/package/${search}`);
+  };
   return (
     <div>
       <Navbar />
@@ -20,6 +27,8 @@ const Homepage = () => {
               <div className="ml-[3.05rem]">
                 <input
                   type="text"
+                  onChange={(e) => setSearch(e.target.value)}
+                  value={search}
                   placeholder="Where to ?"
                   className="py-2 px-2 focus:outline-none text-[1.25rem] font-[600] font-poppins placeholder:text-black placeholder:text-[1.25rem] placeholder:font-[600] placeholder:font-poppins bg-transparent"
                 />
@@ -44,7 +53,10 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-            <button className="bg-[#DF6951] w-[11.83rem] h-[2.46rem] rounded-md text-white text-[1.25rem] font-[600] font-poppins hover:bg-[#E0761F] transition duration-300 transform hover:scale-105 mr-[3.05rem]">
+            <button
+              onClick={handleSearch}
+              className="bg-[#DF6951] w-[11.83rem] h-[2.46rem] rounded-md text-white text-[1.25rem] font-[600] font-poppins hover:bg-[#E0761F] transition duration-300 transform hover:scale-105 mr-[3.05rem]"
+            >
               Search
             </button>
           </div>
