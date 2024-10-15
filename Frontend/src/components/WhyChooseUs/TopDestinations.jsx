@@ -6,7 +6,7 @@ export default function TopDestinations() {
         <img src="/aeroplane.png" alt="" className="w-24 h-24" />
         <h1 className="text-4xl font-bold">Explore Our Top Destinations</h1>
       </div>
-      <div className="flex items-center justify-center gap-10 mt-10">
+      <div className="flex items-center justify-center gap-10 mt-10 ">
         <Card
           src="Tajmahal.jpeg"
           Days="4 Days"

@@ -2,6 +2,8 @@ import { FiUser } from "react-icons/fi";
 import { SlLocationPin } from "react-icons/sl";
 import { IoTodayOutline } from "react-icons/io5";
 import PropTypes from "prop-types";
+import { FaRegHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const Card = ({
   src,
   Days,
@@ -11,8 +13,12 @@ const Card = ({
   DiscountedPrice,
   price,
 }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/packageinfo");
+  };
   return (
-    <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-2 rounded-lg">
+    <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-1 rounded-lg hover:cursor-pointer hover:scale-105 duration-300 hover:shadow-2xl">
       <div className="w-[19.6875rem] h-[12.625rem] rounded-lg">
         <img
           src={src}
@@ -47,10 +53,17 @@ const Card = ({
           </h1>
         </div>
       </div>
-      <div>
-        <button className="w-[8.48rem] h-[2.35rem] rounded-lg ml-5 text-lg bg-[#DF6951] text-white">
+      <div className="flex items-center justify-between mb-2">
+        <button
+          className="w-[8.48rem] h-[2.35rem] rounded-lg ml-5 text-lg bg-[#DF6951] text-white"
+          onClick={handleClick}
+        >
           Book Now
         </button>
+        <FaRegHeart
+          size={24}
+          className="hover:cursor-pointer hover:scale-105 duration-300 mr-10"
+        />
       </div>
     </div>
   );

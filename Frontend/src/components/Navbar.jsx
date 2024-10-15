@@ -2,16 +2,9 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoMenuSharp } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import Swal from "sweetalert2";
-import PropTypes from "prop-types";
-import Avatar from '@mui/material/Avatar';  // Material UI Avatar
-import Menu from '@mui/material/Menu';      // Material UI Menu
-import MenuItem from '@mui/material/MenuItem'; // Material UI MenuItem
-import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ jwt }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);  // Store user data
   const [anchorEl, setAnchorEl] = useState(null);  // For controlling the dropdown
@@ -58,8 +51,15 @@ const Navbar = ({ jwt }) => {
 
   return (
     <div className="flex justify-between items-center h-[5rem] max-w-full px-4 py-4 font-Montserrat cursor-pointer shadow-lg md:px-10">
+<<<<<<< HEAD
       <div className="flex items-center gap-4">
         <img src="logo.svg" alt="logo" className="w-[7.875rem] h-[3.2rem]" />
+=======
+      <div className="flex items-center gap-4 ">
+        <Link to="/">
+          <img src="logo.svg" alt="logo" className="w-[7.875rem] h-[3.2rem]" />
+        </Link>
+>>>>>>> 5bdee712672373fc18fdbf0978bc36c4359d9a95
       </div>
 
       {/* Search bar for larger screens */}
@@ -96,6 +96,7 @@ const Navbar = ({ jwt }) => {
           <FaSearch size={18} color="white" />
         </div>
       </div>
+<<<<<<< HEAD
 
       {/* Profile or Avatar */}
       <div className="flex items-center w-[7.5rem] h-[3.125rem] gap-4 border border-gray-300 rounded-full justify-center py-3 shadow-lg hover:shadow-xl bg-white transition duration-300">
@@ -157,9 +158,48 @@ const Navbar = ({ jwt }) => {
             <div className="w-full h-10 flex items-center justify-center bg-custom-pink hover:bg-dark-pink rounded-full transition duration-300 transform hover:scale-105">
               <FaSearch size={18} color="white" />
             </div>
+=======
+      <div className="relative flex items-center w-[7.5rem] h-[3.125rem] gap-4 border border-gray-300 rounded-full justify-center py-3 shadow-lg hover:shadow-xl bg-white transition duration-300">
+        <IoMenuSharp
+          size={30}
+          color="black"
+          onClick={() => setIsOpen(!isOpen)}
+        />
+        {/* <Link to="/signin"> */}
+        <CgProfile size={30} color="black" />
+        {/* </Link> */}
+        {isOpen && (
+          <div className="absolute right-[-2.3rem] top-[4rem] w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+            <ul className="py-2">
+              <Link to="/account">
+                <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
+                  Account
+                </li>
+              </Link>
+              <Link to="/signin">
+                <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
+                  Login
+                </li>
+              </Link>
+              <Link to="/wishlist">
+                {" "}
+                <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
+                  Wishlist
+                </li>
+              </Link>
+              <Link to="/orders">
+                <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
+                  Orders
+                </li>
+              </Link>
+              <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
+                Logout
+              </li>
+            </ul>
+>>>>>>> 5bdee712672373fc18fdbf0978bc36c4359d9a95
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

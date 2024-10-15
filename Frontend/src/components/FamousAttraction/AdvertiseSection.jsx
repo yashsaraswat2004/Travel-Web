@@ -2,9 +2,12 @@ const AdvertiseSection = () => {
   return (
     <div className="h-[19.5rem] w-full flex">
       <div
-        className="w-[46rem] flex flex-col items-center justify-center"
+        className="w-[50%] flex flex-col items-center justify-center"
         style={{
           backgroundImage: "url('./.svg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <h1 className="text-white text-[1.125rem] font-[700] font-poppins">
@@ -18,9 +21,12 @@ const AdvertiseSection = () => {
         </button>
       </div>
       <div
-        className="w-[43.81rem]"
+        className="w-[50%]"
         style={{
           backgroundImage: "url('./Explore Cities.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       ></div>
     </div>
