@@ -2,17 +2,24 @@ import { MdOutlineModeOfTravel } from "react-icons/md";
 import { MdOutlinePayment } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
+import { useState } from "react";
 const BookNextTrip = () => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className="h-[33.3125rem] w-full flex justify-between">
       <div>
-        <p className="text-[1rem] font-[600] text-[#5E6282] font-poppins mt-[3.5rem] ml-[3.5rem]">
+        <p className="text-[1rem] font-[600] text-[#5E6282] font-poppins mt-[2rem] ml-[3.5rem]">
           Easy and Fast
         </p>
         <h1 className="text-[2rem] text-[#14183E] leading-10 font-[700] font-poppins ml-[3.5rem] w-[20rem]">
           Book your next trip in 3 easy steps
         </h1>
-        <div className="w-[35.75rem] h-[12.55rem] flex flex-col gap-4 ml-[4.25rem] mt-[2rem]">
+        <div className="w-[35.75rem] h-[12.55rem] flex flex-col gap-2 ml-[4.25rem] mt-[1rem]">
           <div className="flex items-center gap-[6rem] h-[5.7268rem] justify-around">
             <div className="flex items-center justify-center w-[4.5rem] h-[4.5rem] rounded-full ml-[1.5rem]">
               <MdOutlineModeOfTravel size={44} />
@@ -23,8 +30,8 @@ const BookNextTrip = () => {
                 Choose Destination
               </h1>
               <p className="text-[#5E6282] font-poppins text-[1rem] font-[400]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit, quibusdam.
+                Choose your dream destination and explore the best places around
+                the world.
               </p>
             </div>
           </div>
@@ -37,8 +44,8 @@ const BookNextTrip = () => {
                 Make Payment
               </h1>
               <p className="text-[#5E6282] font-poppins text-[1rem] font-[400]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit, quibusdam.
+                Make payment for your trip and get your booking confirmed in
+                minutes.
               </p>
             </div>
           </div>
@@ -53,7 +60,7 @@ const BookNextTrip = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-4 ml-[1.5rem] mt-[1.5rem]">
+        <div className="flex flex-col gap-4 ml-[1.5rem] mt-[1.5rem] h-[5rem] w-[22.4375rem] rounded-3xl">
           <h1 className="text-[1.5rem] font-[700] font-poppins text-[#14183E]">
             Trip To Bhopal
           </h1>
@@ -71,7 +78,13 @@ const BookNextTrip = () => {
               <BsPeopleFill size={24} />
               <p>24 people going</p>
             </div>
-            <FaRegHeart size={24} />
+            <FaRegHeart
+              size={24}
+              onClick={handleLike}
+              className={`hover:cursor-pointer hover:scale-105 duration-300 ${
+                isLiked ? "text-red-700" : ""
+              }`}
+            />
           </div>
         </div>
       </div>
