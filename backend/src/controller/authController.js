@@ -7,6 +7,9 @@ const register = async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
 
+        if (!firstName || !lastName || !email || !password)
+            return res.status(404).json({ message: "All fields are required" });
+
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).send({ message: 'User already exists' });
@@ -24,7 +27,7 @@ const register = async (req, res) => {
             lastName,
             email,
             password: hashedPassword,
-            role, 
+            role,
         });
 
         await newUser.save();
@@ -40,14 +43,16 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await loginUser(email);
+        if (!email || !password)
+            return res.status(404).json({ message: "All fields are required" })
 
+        const user = await loginUser(email);
         if (!user)
-            return res.status(404).send({ message: "User not found" });
+            return res.status(401).send({ message: "User not found" });
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid)
-            return res.status(401).send({ message: "Invalid password" });
+            return res.status(402).send({ message: "Invalid password" });
 
         if (email === 'admin303@gmail.com' && user.role !== 'admin') {
             user.role = 'admin';

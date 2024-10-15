@@ -1,68 +1,53 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 const SignUp = () => {
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [values, setValues] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
   const navigate = useNavigate();
+  const [errors] = useState({});
+
+
+  const handleInput = (event) => {
+    setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
 
   // Form submission handler
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
-
-    const data = new FormData(event.currentTarget);
-    const userData = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-
-    if (!validate(userData)) {
-      setLoading(false);
-      return;
-    }
-
     try {
-      const response = await axios.post('http://localhost:5070/auth/register', userData);
-      setMessage(response.data.message);
-      setError('');
-      navigate('/');
-    } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
-      setMessage('');
-    } finally {
-      setLoading(false);
+      let response = await axios.post('http://localhost:5070/auth/register', values, {
+        'Content-Type': 'application/json',
+      });
+      if (response.status === 201) {
+        Swal.fire("Registered Successfully", '', "success")
+          .then((result) => {
+            if (result.isConfirmed || result.dismiss === Swal.DismissReason.close) {
+              window.location.href = '/';
+              const token = response.data.jwt;
+              localStorage.setItem('token', token);
+            }
+          });
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        Swal.fire("All Fields Are Required", '', "info");
+      }
+      else if (error.response && error.response.status == 400) {
+        Swal.fire("", 'Email already in use', "info");
+      }
+      else {
+        Swal.fire("Internal Server Error", '', "danger");
+      }
+
     }
-
-    console.log("userData", userData);
-  };
-
-  // Form validation logic
-  const validate = (userData) => {
-    let newErrors = {};
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!userData.firstName.trim())
-      newErrors.firstName = "First Name is required";
-    if (!userData.lastName.trim()) newErrors.lastName = "Last Name is required";
-    if (!userData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!emailRegex.test(userData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-    if (!userData.password) {
-      newErrors.password = "Password is required";
-    } else if (userData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters long";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   return (
@@ -82,131 +67,108 @@ const SignUp = () => {
         </p>
       </div>
       <div className="grid bg-white border border-white h-50 w-96 border-1 rounded m-2 p-8 py-2">
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <l-reuleaux
-              size="40"
-              stroke="5"
-              stroke-length="0.15"
-              bg-opacity="0"
-              speed="1.2"
-              color="black"
-            ></l-reuleaux>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="p-10 rounded-2xl shadow-lg hover:shadow-xl w-[28rem] mt-8 ml-5 py-3"
-          >
-            <h1 className="text-3xl font-bold text-black my-3 text-center">
-              Sign Up
-            </h1>
-            {message && <div className="text-green-500 text-center mb-4">{message}</div>}
-            {error && <div className="text-red-500 text-center mb-4">{error}</div>}
-
-            <div className="mb-6">
-              <label
-                htmlFor="firstName"
-                className="block mb-2 text-sm font-medium text-gray-700"
-              >
-                First Name
-              </label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
-                id="firstName"
-                placeholder="Enter Your First Name"
-                name="firstName"
-              />
-              {errors.firstName && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {errors.firstName}
-                </p>
-              )}
-            </div>
-
-            <div className="mb-6">
-              <label
-                htmlFor="lastName"
-                className="block mb-2 text-sm font-medium text-gray-700"
-              >
-                Last Name
-              </label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
-                id="lastName"
-                placeholder="Enter Your Last Name"
-                name="lastName"
-              />
-              {errors.lastName && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {errors.lastName}
-                </p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
-                id="email"
-                placeholder="Enter Your Email"
-                name="email"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {errors.email}
-                </p>
-              )}
-            </div>
-
-            <div className="mb-6">
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
-                id="password"
-                placeholder="Enter Your Password"
-                name="password"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-xs italic mt-1">
-                  {errors.password}
-                </p>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-custom-pink text-white py-2 rounded-lg mt-4"
+        <div className="flex justify-center items-center">
+          <l-reuleaux
+            size="40"
+            stroke="5"
+            stroke-length="0.15"
+            bg-opacity="0"
+            speed="1.2"
+            color="black"
+          ></l-reuleaux>
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="p-10 rounded-2xl shadow-lg hover:shadow-xl w-[28rem] mt-8 ml-5 py-3"
+        >
+          <h1 className="text-3xl font-bold text-black my-3 text-center">
+            Sign Up
+          </h1>
+          <div className="mb-6">
+            <label
+              htmlFor="firstName"
+              className="block mb-2 text-sm font-medium text-gray-700"
             >
-              Sign Up
+              First Name
+            </label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
+              id="firstName"
+              placeholder="Enter Your First Name"
+              name="firstName"
+              onChange={handleInput}
+            />
+            {errors.firstName && <span className='text-danger'>{errors.firstName}</span>}
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="lastName"
+              className="block mb-2 text-sm font-medium text-gray-700"
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
+              id="lastName"
+              placeholder="Enter Your Last Name"
+              name="lastName"
+              onChange={handleInput}
+            />
+            {errors.lastName && <span className='text-danger'>{errors.lastName}</span>}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
+              id="email"
+              placeholder="Enter Your Email"
+              name="email"
+              onChange={handleInput}
+            />
+            {errors.email && <span className='text-danger'>{errors.email}</span>}
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-custom-pink"
+              id="password"
+              placeholder="Enter Your Password"
+              name="password"
+              onChange={handleInput}
+            />
+            {errors.password && <span className='text-danger'>{errors.password}</span>}
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-custom-pink text-white py-2 rounded-lg mt-4"
+          >
+            Sign Up
+          </button>
+          <p className="text-center mt-4">
+            Already have an account?{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/SignIn")}
+              className="text-custom-pink hover:underline"
+            >
+              Login
             </button>
-
-            <p className="text-center mt-4">
-              Already have an account?{" "}
-              <button
-                type="button"
-                onClick={() => navigate("/SignIn")}
-                className="text-custom-pink hover:underline"
-              >
-                Login
-              </button>
-            </p>
-          </form>
-        )}
+          </p>
+        </form>
       </div>
     </div>
   );

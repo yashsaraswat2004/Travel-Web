@@ -1,9 +1,46 @@
 import { IoIosArrowDown } from "react-icons/io";
 import Navbar from "./Navbar";
+import { useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+
 const Homepage = () => {
+
+  const jwt = localStorage.getItem('token');
+
+  // for navbar
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        console.log('JWT Token:', jwt);
+
+        const response = await axios.get('http://localhost:5070/api/user/profile', {
+          headers: {
+            'Authorization': `Bearer ${jwt}` 
+          }
+        });
+
+        if (response.status !== 200) {
+          Swal.fire("You need to login", "", "question");
+        }
+      } catch (error) {
+        console.error('Error verifying user:', error);
+
+        if (error.response && error.response.status === 401) {
+          Swal.fire("Please login to use freely.", "", "warning");
+          // window.location.href = '/signin';
+        } else {
+          Swal.fire("An error occurred. Please try again.", "", "error");
+        }
+      }
+    };
+    verifyUser();
+  }, []);
+
+
   return (
     <div>
-      <Navbar />
+      <Navbar jwt={jwt} />
       <div
         className=" h-[31.375rem] w-full bg-cover bg-center relative"
         style={{

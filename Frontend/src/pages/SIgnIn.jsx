@@ -1,52 +1,65 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+
 const SignIn = () => {
-  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email_verification_token');
+  }, [])
+  const [value, setValues] = useState({
+    email: '',
+    password: ''
+  });
+
   const navigate = useNavigate();
+  const [errors] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleInput = (event) => {
+    setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    try {
+      const response = await axios.post('http://localhost:5070/auth/login', value, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const data = new FormData(event.currentTarget);
-    const userData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-
-    if (!CheckValidation(userData)) {
-      setLoading(false);
-      return;
+      console.log('response', response); // Log the full response
+      const token = response.data.jwt; // Extract the token
+      if (token) { // Check if token exists
+        localStorage.setItem('token', token);
+        console.log('token', token);
+        setIsLoggedIn(true);
+        window.location.href = '/';
+      } else {
+        Swal.fire("Login failed, no token returned", '', "error");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        Swal.fire("All Fields Are Required", '', "info");
+      }
+      else if (error.response && error.response.status === 401) {
+        Swal.fire("User not found", '', "error");
+      }
+      else {
+        Swal.fire("invalid credentials", '', "info");
+      }
     }
-
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/");
-    }, 3000);
-
-    console.log("userData", userData);
   };
 
-  const [errorObject, setErrorObject] = useState({});
-  const CheckValidation = (userData) => {
-    let errorText = {};
-    const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!userData.email || userData.email.trim() === "") {
-      errorText.Email = "Email is required";
-    } else if (!emailFormat.test(userData.email)) {
-      errorText.Email = "Enter a valid email";
-    }
+  if (isLoggedIn) {
+    return null;
+  }
 
-    if (!userData.password || userData.password.trim() === "") {
-      errorText.Password = "Password is required";
-    } else if (userData.password.length < 8) {
-      errorText.Password = "Password should be at least 8 characters long";
-    }
-
-    setErrorObject(errorText);
-    return Object.keys(errorText).length === 0;
-  };
 
   return (
     <div className="al bg-white  min-h-screen place-content-center flex justify-center items-center relative">
@@ -65,82 +78,72 @@ const SignIn = () => {
         </p>
       </div>
       <div className="grid  bg-white border border-white h-50 w-96 border-1 rounded m-2 p-8 py-2">
-        {loading ? (
-          <div className="flex justify-center items-center">
-            {/* <InfinitySpin color="black" radius={"8px"} /> */}
+
+        <div className="flex justify-center items-center">
+          {/* <InfinitySpin color="black" radius={"8px"} /> */}
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="ml-20 w-[24rem] p-10 rounded-2xl shadow-lg hover:shadow-xl mt-5 font-Montserrat"
+        >
+          <h1 className="text-2xl font-bold text-black my-4 text-center">
+            Login
+          </h1>
+
+          <div className="mb-4">
+            <label className="block mb-2" htmlFor="exampleInputEmail1">
+              Email address
+            </label>
+            <input
+              type="email"
+              name="email"
+              className="w-full border border-gray-300 rounded px-2 py-1"
+              id="exampleInputEmail1"
+              placeholder="Enter email"
+              onChange={handleInput}
+            />
+            {errors.email && <span className="text-danger" > {errors.email} </span>}
           </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="ml-20 w-[24rem] p-10 rounded-2xl shadow-lg hover:shadow-xl mt-5 font-Montserrat"
+          <div className="mb-4">
+            <label className="block mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              className="w-full border border-gray-300 rounded px-2 py-1"
+              id="password"
+              placeholder="Enter Password"
+              onChange={handleInput}
+            />
+            {errors.password && <span className="text-danger" >{errors.password}</span>}
+          </div>
+          <div className="flex  justify-center ">
+            <div className="ml-40">
+              <Link to="/recover_password" className="opacity-70 ">
+                Forgot Password
+              </Link>
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-custom-pink text-white py-2 rounded mt-4"
           >
-            <h1 className="text-2xl font-bold text-black my-4 text-center">
-              Login
-            </h1>
+            Sign In
+          </button>
 
-            <div className="mb-4">
-              <label className="block mb-2" htmlFor="exampleInputEmail1">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                className="w-full border border-gray-300 rounded px-2 py-1"
-                id="exampleInputEmail1"
-                placeholder="Enter email"
-                required
-              />
-              {errorObject.Email && (
-                <p className="text-red-500 text-xs italic">
-                  {errorObject.Email}
-                </p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <label className="block mb-2" htmlFor="password">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                className="w-full border border-gray-300 rounded px-2 py-1"
-                id="password"
-                placeholder="Enter Password"
-                required
-              />
-              {errorObject.Password && (
-                <p className="text-red-500 text-xs italic">
-                  {errorObject.Password}
-                </p>
-              )}
-            </div>
-            <div className="flex  justify-center ">
-              <div className="ml-40">
-                <Link to="/recover_password" className="opacity-70 ">
-                  Forgot Password
-                </Link>
-              </div>
-            </div>
+          <p className="text-center mt-4">
+            Don&apos;t have an account?{" "}
             <button
-              type="submit"
-              className="w-full bg-custom-pink text-white py-2 rounded mt-4"
+              type="button"
+              onClick={() => navigate("/signup")}
+              className="text-custom-pink"
             >
-              Sign In
+              Sign up
             </button>
-
-            <p className="text-center mt-4">
-              Don&apos;t have an account?{" "}
-              <button
-                type="button"
-                onClick={() => navigate("/signup")}
-                className="text-custom-pink"
-              >
-                Sign up
-              </button>
-            </p>
-          </form>
-        )}
+          </p>
+        </form>
       </div>
     </div>
   );

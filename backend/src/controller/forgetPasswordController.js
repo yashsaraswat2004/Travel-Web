@@ -34,7 +34,7 @@ const recoverPassword = async (req, res) => {
             },
         });
 
-        const emailTemplate = emailTemplete.resetPassword(user.firstName, 'http://localhost:3000/reset-password', token);
+        const emailTemplate = emailTemplete.resetPassword(user.firstName, 'http://localhost:5173/reset_password', token);
 
         const mailOptions = {
             from: process.env.SMTP_USERNAME,

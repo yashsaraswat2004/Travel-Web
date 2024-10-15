@@ -19,6 +19,14 @@ const userProfile = async (req, res) => {
     }
 }
 
+async function verifyUser(req, res) {
+    try {
+        return res.status(200).json({ message: "success" });
+    } catch (error) {
+        return res.status(500).json({ message: "Internal Server Error", error });
+    }
+}
+
 const addUserFavoriteDestination = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
@@ -63,4 +71,4 @@ const getFavoriteDestinationById = async (req, res) => {
 }
 
 
-export { userProfile, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };
+export { userProfile, verifyUser, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };
