@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Footer";
 import BookNextTrip from "./components/BookYourNextTrip/BookNextTrip";
 import PackageShowing from "./pages/PackageShowing";
 import PackageInfo from "./pages/PackageInfo";
+import TourPlan from "./components/TourPlan";
 function App() {
   return (
     <div className="overflow-x-hidden font-poppins">
@@ -27,7 +28,11 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/package/:id" element={<PackageShowing />} />
-        <Route path="/packageinfo" element={<PackageInfo />} />
+        <Route path="/package/:id/packageinfo" element={<PackageInfo />} />
+        <Route
+          path="/package/:id/packageinfo/tourplan"
+          element={<TourPlan />}
+        />
       </Routes>
     </div>
   );

@@ -15,7 +15,7 @@ const Card = ({
 }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/packageinfo");
+    navigate(`/package/${City}/packageinfo`);
   };
   return (
     <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-1 rounded-lg hover:cursor-pointer hover:scale-105 duration-300 hover:shadow-2xl">
@@ -58,7 +58,7 @@ const Card = ({
           className="w-[8.48rem] h-[2.35rem] rounded-lg ml-5 text-lg bg-[#DF6951] text-white"
           onClick={handleClick}
         >
-          Book Now
+          View Now
         </button>
         <FaRegHeart
           size={24}
