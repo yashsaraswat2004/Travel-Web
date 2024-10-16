@@ -10,7 +10,6 @@
     justify-content: space-between;
     padding: 0 50px;
     flex-wrap: wrap;
-    /* Allows wrapping on smaller screens */
 }
 
 .footer-section {

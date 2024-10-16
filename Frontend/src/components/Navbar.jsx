@@ -4,14 +4,8 @@ import { IoMenuSharp } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const navigate = useNavigate();
-  const handleSearch = () => {
-    navigate(`/package/${search}`);
-  };
   return (
     <div className="flex justify-between items-center h-[5rem] max-w-full px-4 py-4 font-Montserrat cursor-pointer shadow-lg md:px-10">
       <div className="flex items-center gap-4 ">
@@ -23,8 +17,6 @@ const Navbar = () => {
         <div className="w-[15.1875rem] h-[2.6875rem] m-0 border-gray-300 flex ">
           <input
             type="text"
-            onChange={(e) => setSearch(e.target.value)}
-            value={search}
             placeholder="Search Destinations"
             className="w-full h-full rounded-sm px-4 focus:outline-none transition duration-200 border-gray-300 border-r-2"
           />
@@ -49,7 +41,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="w-[2.1875rem] h-[2.1875rem] ml-9 flex items-center justify-center bg-[#F18227] hover:bg-[#E0761F] rounded-full transition duration-300 transform hover:scale-105">
-          <FaSearch size={18} color="white" onClick={handleSearch} />
+          <FaSearch size={18} color="white" />
         </div>
       </div>
       <div className="relative flex items-center w-[7.5rem] h-[3.125rem] gap-4 border border-gray-300 rounded-full justify-center py-3 shadow-lg hover:shadow-xl bg-white transition duration-300">
