@@ -11,6 +11,8 @@ import ResetPassword from "./pages/ResetPassword";
 import PackageShowing from "./pages/PackageShowing";
 import PackageInfo from "./pages/PackageInfo";
 import TourPlan from "./components/TourPlan";
+import Wishlist from "./pages/Wishlist";
+import Orders from "./pages/Orders";
 function App() {
   return (
     <div className="overflow-x-hidden font-poppins">

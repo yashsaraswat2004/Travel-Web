@@ -3,49 +3,59 @@ import { FaSearch } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import { CiHeart } from "react-icons/ci";
 import axios from "axios";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const Navbar = ({ jwt }) => {
   const [user, setUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [keyword, setKeyword] = useState("");
-
+  const [errors, setErrors] = useState({});
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
-    if (keyword.trim === "")
+    if (!keyword.trim()) {
+      setErrors({ keyword: "**Please enter a destination." });
       return;
+    }
     try {
-      const response = await axios.get(`http://localhost:5070/api/destination/?keyword=${keyword}`)
-      console.log("response from navbar", response.data)
+      const response = await axios.get(
+        `http://localhost:5070/api/destination/?keyword=${keyword}`
+      );
+      if (response.status !== 200) {
+        setErrors(response.data.errors);
+      }
+      console.log("response from navbar", response.data);
       navigate(`/package/${keyword}`);
     } catch (error) {
       console.log("Error fetching search results", error);
       Swal.fire("Enter something to search", "", "info");
-
     }
-  }
+  };
 
   const handleKeywordChange = (e) => {
-    setKeyword(e.target.value)
-  }
+    setKeyword(e.target.value);
+  };
 
   // Fetch user info
   useEffect(() => {
     const getUserById = async () => {
       if (!jwt) return;
       try {
-        const response = await axios.get('http://localhost:5070/api/user/profile', {
-          headers: {
-            'Authorization': `Bearer ${jwt}`
+        const response = await axios.get(
+          "http://localhost:5070/api/user/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
           }
-        });
+        );
         if (response) {
           setUser(response.data);
         }
@@ -68,8 +78,8 @@ const Navbar = ({ jwt }) => {
 
   // Handle logout
   const handleLogout = () => {
-    localStorage.removeItem('jwt')
-    navigate('/signin');
+    localStorage.removeItem("jwt");
+    navigate("/signin");
   };
 
   return (
@@ -81,7 +91,7 @@ const Navbar = ({ jwt }) => {
       </div>
 
       <div className="hidden md:flex border border-gray-300 shadow-lg w-[37.5rem] h-[3.125rem] rounded-full mt-2 justify-between items-center px-6 bg-white transition duration-300 hover:shadow-xl">
-        <div className="w-[15.1875rem] h-[2.6875rem] m-0 border-gray-300 flex ">
+        <div className="w-[15.1875rem] h-[2.6875rem] m-0 border-gray-300 flex flex-col justify-center">
           <input
             type="text"
             placeholder="Search Destinations"
@@ -89,6 +99,11 @@ const Navbar = ({ jwt }) => {
             value={keyword}
             className="text-transform: capitalize w-full h-full rounded-sm px-4 focus:outline-none transition duration-200 border-gray-300 border-r-2"
           />
+          {errors.keyword && (
+            <p className="text-[#DF6951] font-poppins text-sm ml-2">
+              {errors.keyword}
+            </p>
+          )}
         </div>
         <div className="relative flex items-center rounded-sm focus:outline-none px-5 py-2 transition duration-200 w-[12.3125rem] h-[2.375rem] bg-white">
           <select
@@ -114,11 +129,14 @@ const Navbar = ({ jwt }) => {
         </div>
       </div>
 
-      <div className="relative flex items-center w-[7.5rem] h-[3.125rem] gap-4 border border-gray-300 rounded-full justify-center py-3 shadow-lg hover:shadow-xl bg-white transition duration-300 ">
+      <div className="relative flex items-center w-[7.5rem] h-[3.125rem] gap-4 rounded-full justify-center py-3 hover:scale-105 transition duration-300 ">
+        <Link to="/wishlist">
+          <CiHeart size={38} color="black" />
+        </Link>
         {user ? (
           <Avatar
             onClick={handleAvatarClick}
-            sx={{ cursor: 'pointer', backgroundColor: '#F18227' }}
+            sx={{ cursor: "pointer", backgroundColor: "#F18227" }}
           >
             {user.firstName.charAt(0).toUpperCase()}
           </Avatar>
@@ -134,31 +152,48 @@ const Navbar = ({ jwt }) => {
           open={open}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
+            vertical: "bottom",
+            horizontal: "right",
           }}
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+            vertical: "top",
+            horizontal: "right",
+          }}
+          sx={{
+            "& .MuiMenuItem-root": {
+              // Style for MenuItem
+              fontSize: "1rem",
+              fontWeight: "500",
+              fontFamily: "Poppins",
+              color: "#7D7D7D",
+              // border: "1px solid black",
+              padding: "10px 20px", // Adjust padding
+              "&:hover": {
+                backgroundColor: "#F18227", // Change hover background color
+                color: "white",
+                width: "100%", // Change text color on hover
+              },
+            },
+            "& .MuiPaper-root": {
+              // Style for dropdown paper
+              borderRadius: "8px", // Rounded corners
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+              padding: "",
+              width: "10rem",
+              marginTop: "1rem",
+              marginLeft: "4rem",
+            },
           }}
         >
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
           <MenuItem>
-            <li onClick={handleLogout} className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
-              Logout
-            </li>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/account">
-              <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
-                Account
-              </li>
+            <Link to="/account" className="w-full text-left">
+              Account
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/orders">
-              <li className="px-4 py-2 hover:bg-[#F18227] cursor-pointer">
-                Orders
-              </li>
+            <Link to="/orders" className="w-full text-left">
+              Orders
             </Link>
           </MenuItem>
         </Menu>
@@ -168,7 +203,7 @@ const Navbar = ({ jwt }) => {
 };
 
 Navbar.propTypes = {
-  jwt: PropTypes.string.isRequired,  // jwt is a required string prop
+  jwt: PropTypes.string.isRequired, // jwt is a required string prop
 };
 
 export default Navbar;
