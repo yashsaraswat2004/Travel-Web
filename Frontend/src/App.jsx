@@ -10,6 +10,7 @@ import RecoveryPassword from "./pages/RecoveryPassword";
 import ResetPassword from "./pages/ResetPassword";
 import PackageShowing from "./pages/PackageShowing";
 import PackageInfo from "./pages/PackageInfo";
+import TourPlan from "./components/TourPlan";
 function App() {
   return (
     <div className="overflow-x-hidden font-poppins">
@@ -31,7 +32,11 @@ function App() {
         <Route path="/recover_password" element={<RecoveryPassword />} />
         <Route path="/reset_password" element={<ResetPassword />} />
         <Route path="/package/:id" element={<PackageShowing />} />
-        <Route path="/packageinfo" element={<PackageInfo />} />
+        <Route path="/package/:id/packageinfo" element={<PackageInfo />} />
+        <Route
+          path="/package/:id/packageinfo/tourplan"
+          element={<TourPlan />}
+        />
       </Routes>
     </div>
   );
