@@ -8,10 +8,8 @@ const Card = ({
   _id, // Add _id to the props
   src,
   Days,
-  peoples,
   City,
   Country,
-  DiscountedPrice,
   price,
 }) => {
   const navigate = useNavigate();
@@ -75,9 +73,7 @@ Card.propTypes = {
   _id: PropTypes.string.isRequired,
   src: PropTypes.string,
   Days: PropTypes.number,
-  peoples: PropTypes.string,
   City: PropTypes.string,
   Country: PropTypes.string,
-  DiscountedPrice: PropTypes.string,
   price: PropTypes.number,
 };

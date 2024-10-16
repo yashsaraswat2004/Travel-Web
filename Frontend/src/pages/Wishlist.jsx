@@ -1,9 +1,7 @@
-import Navbar from "../components/Navbar";
 import Card from "../components/WhyChooseUs/Card";
 const Wishlist = () => {
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <Navbar />
+    <div className="bg-gray-100 min-h-screen py-10">
       <div className="w-[90%] max-h-full min-h-screen mx-auto mt-10 rounded-lg shadow-lg">
         <h1 className="text-4xl font-bold p-5 text-[#DF6951] font-poppins">
           Your Liked Destinations

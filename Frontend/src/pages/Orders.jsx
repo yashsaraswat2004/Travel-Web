@@ -7,11 +7,9 @@ import {
   FaUtensils,
   FaCreditCard,
 } from "react-icons/fa";
-import Navbar from "../components/Navbar";
 export default function OrderPage() {
   return (
     <div>
-      <Navbar />
       <div className="min-h-screen bg-gray-100 p-4 lg:p-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">
