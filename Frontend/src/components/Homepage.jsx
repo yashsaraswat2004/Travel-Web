@@ -1,14 +1,16 @@
 import { IoIosArrowDown } from "react-icons/io";
 import Navbar from "./Navbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
 
   const jwt = localStorage.getItem('token');
+  const navigate = useNavigate();
 
-  // for navbar
+  // for navbar user verify
   useEffect(() => {
     const verifyUser = async () => {
       try {
@@ -16,7 +18,7 @@ const Homepage = () => {
 
         const response = await axios.get('http://localhost:5070/api/user/profile', {
           headers: {
-            'Authorization': `Bearer ${jwt}` 
+            'Authorization': `Bearer ${jwt}`
           }
         });
 
@@ -26,17 +28,31 @@ const Homepage = () => {
       } catch (error) {
         console.error('Error verifying user:', error);
 
-        if (error.response && error.response.status === 401) {
-          Swal.fire("Please login to use freely.", "", "warning");
-          // window.location.href = '/signin';
-        } else {
-          Swal.fire("An error occurred. Please try again.", "", "error");
-        }
+
       }
     };
     verifyUser();
   }, []);
 
+
+  //body search
+  const [keyword, setKeyword] = useState([]);
+
+  const handleSearch = async () => {
+    if (keyword.trim === "")
+      return;
+    try {
+      const response = await axios.get(`http://localhost:5070/api/destination/?keyword=${keyword}`);
+      console.log("response from homeage search", response.data);
+      navigate(`/package/${keyword}`)
+    } catch (error) {
+      console.log("error while searching from homepage body", error)
+    }
+  }
+
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+  }
 
   return (
     <div>
@@ -58,7 +74,9 @@ const Homepage = () => {
                 <input
                   type="text"
                   placeholder="Where to ?"
-                  className="py-2 px-2 focus:outline-none text-[1.25rem] font-[600] font-poppins placeholder:text-black placeholder:text-[1.25rem] placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  className="text-transform: capitalize py-2 px-2 focus:outline-none text-[1.25rem] font-[600] font-poppins placeholder:text-black placeholder:text-[1.25rem] placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  value={keyword}
+                  onChange={handleKeywordChange}
                 />
               </div>
               <div className="flex focus:outline-none h-[4.4287rem] w-[12.3125rem] bg-transparent rounded-[0.625rem] items-center justify-center">
@@ -81,7 +99,7 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-            <button className="bg-[#DF6951] w-[11.83rem] h-[2.46rem] rounded-md text-white text-[1.25rem] font-[600] font-poppins hover:bg-[#E0761F] transition duration-300 transform hover:scale-105 mr-[3.05rem]">
+            <button onClick={handleSearch} className="bg-[#DF6951] w-[11.83rem] h-[2.46rem] rounded-md text-white text-[1.25rem] font-[600] font-poppins hover:bg-[#E0761F] transition duration-300 transform hover:scale-105 mr-[3.05rem]">
               Search
             </button>
           </div>

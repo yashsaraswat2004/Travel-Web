@@ -4,6 +4,7 @@ import { IoTodayOutline } from "react-icons/io5";
 import PropTypes from "prop-types";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
 const Card = ({
   src,
   Days,
