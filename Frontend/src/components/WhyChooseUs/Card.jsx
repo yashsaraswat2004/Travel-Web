@@ -1,26 +1,17 @@
-import { FiUser } from "react-icons/fi";
 import { SlLocationPin } from "react-icons/sl";
-import { IoTodayOutline } from "react-icons/io5";
+import { CiClock2 } from "react-icons/ci";
 import PropTypes from "prop-types";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({
-  src,
-  Days,
-  peoples,
-  City,
-  Country,
-  DiscountedPrice,
-  price,
-}) => {
+const Card = ({ src, Days, City, Country, price }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/package/${City}/packageinfo`);
   };
   return (
     <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-1 rounded-lg hover:cursor-pointer hover:scale-105 duration-300 hover:shadow-2xl">
-      <div className="w-[19.6875rem] h-[12.625rem] rounded-lg">
+      <div className="w-full h-[12.625rem] rounded-lg">
         <img
           src={src}
           alt=""
@@ -29,12 +20,9 @@ const Card = ({
       </div>
       <div className="flex flex-col">
         <div className="flex items-center ml-5 gap-2">
-          <IoTodayOutline />
-          <p>{Days} </p>
-          <div className="flex items-center justify-center gap-2 ml-5">
-            <FiUser />
-            <p>{peoples} people Going</p>
-          </div>
+          <CiClock2 size={20} />
+          <p>{Days} Days</p>
+          <p>{Days - 1} Nights</p>
         </div>
         <div className="flex items-center justify-start ml-5 mt-2">
           <h1 className="text-[1.25rem] font-[700] font-poppins">{City}</h1>
@@ -45,12 +33,9 @@ const Card = ({
             {Country}
           </h1>
         </div>
-        <div className="flex items-center justify-start gap-4 mt-2">
-          <h1 className="text-[#DF6951] font-[500] text-[1.5rem] font-Poppins ml-5">
-            {DiscountedPrice}
-          </h1>
-          <h1 className="text-[1.375rem] font-[500] text-[#7D7D7D] font-Poppins  line-through">
-            {price}
+        <div className="flex items-center ml-5 mt-2">
+          <h1 className="text-[1.575rem] font-[600] text-[#DF6951] font-Poppins">
+            ₹ {price}
           </h1>
         </div>
       </div>

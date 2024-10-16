@@ -7,8 +7,8 @@ const Information = () => {
       <div className="w-[79rem] h-[67.96rem] rounded-md pt-[2.625rem] shadow-xl mt-5">
         <div className="flex w-[40rem] gap-10 mt-[1.625rem] ml-[1.625rem]">
           <div className="flex flex-col ml-[1.625rem]">
-            <h1 className="text-4xl font-Poppins">{id}</h1>
-            <div className="flex w-[12rem] gap-1">
+            <h1 className="text-4xl font-Poppins w-[23rem] px-1">{id}</h1>
+            <div className="flex w-[12rem] gap-1 mt-1 ml-1">
               <FaStar size={14} />
               <FaStar size={14} />
               <FaStar size={14} />
@@ -20,7 +20,7 @@ const Information = () => {
               </p>
             </div>
           </div>
-          <div className="flex justify-center items-center w-[14rem]">
+          <div className="flex justify-center items-center w-[20rem]">
             <p className="text-3xl font-Poppins text-[#DF6951]">₹ 6999 </p>
             <p className="text-md font-Poppins text-[#7D7D7D]">
               {"   "} / Per Person

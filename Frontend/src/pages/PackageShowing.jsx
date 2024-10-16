@@ -5,27 +5,26 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
-
 const PackageShowing = () => {
   const { id } = useParams();
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
         try {
-          const response = await axios.get(`http://localhost:5070/api/destination?keyword=${id}`);
-          setSearchResults(response.data)
-          console.log(response.data)
+          const response = await axios.get(
+            `http://localhost:5070/api/destination?keyword=${id}`
+          );
+          setSearchResults(response.data);
+          console.log(response.data);
         } catch (error) {
-          console.log("error while fetching the datas", error)
+          console.log("error while fetching the datas", error);
         }
       }
     };
     fetchData();
-  }, [id])
-
+  }, [id]);
 
   return (
     <div className="flex flex-col">
@@ -42,7 +41,7 @@ const PackageShowing = () => {
           searchResults.map((result) => (
             <Card
               key={result._id}
-              src={result.images[0]}  
+              src={result.images[0]}
               Days={result.numberOfNights}
               price={result.pricePerPerson}
               City={result.name}

@@ -6,53 +6,60 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
-
-  const jwt = localStorage.getItem('token');
+  const jwt = localStorage.getItem("token");
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
   // for navbar user verify
   useEffect(() => {
     const verifyUser = async () => {
       try {
-        console.log('JWT Token:', jwt);
+        console.log("JWT Token:", jwt);
 
-        const response = await axios.get('http://localhost:5070/api/user/profile', {
-          headers: {
-            'Authorization': `Bearer ${jwt}`
+        const response = await axios.get(
+          "http://localhost:5070/api/user/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
           }
-        });
+        );
 
         if (response.status !== 200) {
           Swal.fire("You need to login", "", "question");
         }
       } catch (error) {
-        console.error('Error verifying user:', error);
-
-
+        console.error("Error verifying user:", error);
       }
     };
     verifyUser();
   }, []);
 
-
   //body search
   const [keyword, setKeyword] = useState([]);
 
   const handleSearch = async () => {
-    if (keyword.trim === "")
+    if (!keyword.trim) {
+      setErrors({ keyword: "**Please enter a destination." });
       return;
-    try {
-      const response = await axios.get(`http://localhost:5070/api/destination/?keyword=${keyword}`);
-      console.log("response from homeage search", response.data);
-      navigate(`/package/${keyword}`)
-    } catch (error) {
-      console.log("error while searching from homepage body", error)
     }
-  }
+    try {
+      const response = await axios.get(
+        `http://localhost:5070/api/destination/?keyword=${keyword}`
+      );
+      if (response.status !== 200) {
+        setErrors(response.data.errors);
+      }
+      console.log("response from homeage search", response.data);
+      navigate(`/package/${keyword}`);
+    } catch (error) {
+      console.log("error while searching from homepage body", error);
+    }
+  };
 
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
-  }
+  };
 
   return (
     <div>
@@ -78,6 +85,11 @@ const Homepage = () => {
                   value={keyword}
                   onChange={handleKeywordChange}
                 />
+                {errors.keyword && (
+                  <p className="text-[#DF6951] font-poppins font-bold text-md mb-2 ml-2">
+                    {errors.keyword}
+                  </p>
+                )}
               </div>
               <div className="flex focus:outline-none h-[4.4287rem] w-[12.3125rem] bg-transparent rounded-[0.625rem] items-center justify-center">
                 <select
@@ -99,7 +111,10 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-            <button onClick={handleSearch} className="bg-[#DF6951] w-[11.83rem] h-[2.46rem] rounded-md text-white text-[1.25rem] font-[600] font-poppins hover:bg-[#E0761F] transition duration-300 transform hover:scale-105 mr-[3.05rem]">
+            <button
+              onClick={handleSearch}
+              className="bg-[#DF6951] w-[11.83rem] h-[2.46rem] rounded-md text-white text-[1.25rem] font-[600] font-poppins hover:bg-[#E0761F] transition duration-300 transform hover:scale-105 mr-[3.05rem]"
+            >
               Search
             </button>
           </div>
