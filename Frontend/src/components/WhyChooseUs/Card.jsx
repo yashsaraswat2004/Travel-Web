@@ -3,22 +3,54 @@ import { CiClock2 } from "react-icons/ci";
 import PropTypes from "prop-types";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const Card = ({
   _id, // Add _id to the props
   src,
   Days,
-  peoples,
   City,
   Country,
-  DiscountedPrice,
   price,
 }) => {
   const navigate = useNavigate();
+  const jwt = localStorage.getItem("token");
 
   const handleClick = () => {
     navigate(`/package/packageinfo/${_id}`);
   };
+
+  const handleFavorite = async () => {
+    if (!jwt) {
+      Swal.fire("You need to login to add destination", "", "error");
+      return;
+    }
+
+    try {
+      const response = await axios.put(
+        `http://localhost:5070/api/user/put/${_id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        Swal.fire("Destination added to wishlist", '', "success");
+      } else if (response.status === 404 && response.data.message === "Destination is already in favorites") {
+        Swal.fire("Destination already in favorites", '', "info");
+      } else {
+        Swal.fire("Unexpected response from server", "", "warning");
+      }
+    } catch (error) {
+      Swal.fire("Destination is already in favorites", "", "info")
+      console.log("Error:", error.response?.data || error.message);
+    }
+  };
+
 
   return (
     <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-1 rounded-lg hover:cursor-pointer hover:scale-105 duration-300 hover:shadow-2xl">
@@ -60,6 +92,7 @@ const Card = ({
           View Now
         </button>
         <FaRegHeart
+          onClick={handleFavorite}
           size={24}
           className="hover:cursor-pointer hover:scale-105 duration-300 mr-10"
         />
@@ -75,9 +108,7 @@ Card.propTypes = {
   _id: PropTypes.string.isRequired,
   src: PropTypes.string,
   Days: PropTypes.number,
-  peoples: PropTypes.string,
   City: PropTypes.string,
   Country: PropTypes.string,
-  DiscountedPrice: PropTypes.string,
   price: PropTypes.number,
 };

@@ -8,6 +8,7 @@ import axios from "axios";
 const PackageShowing = () => {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState([]);
+  const jwt = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +29,7 @@ const PackageShowing = () => {
 
   return (
     <div className="flex flex-col">
-      <Navbar />
+      <Navbar jwt={jwt} />
       <div>
         <h1 className="text-3xl text-transform: capitalize font-bold ml-[6.8rem] pt-[1rem] mt-5">
           Results for {id}
@@ -42,7 +43,7 @@ const PackageShowing = () => {
             <Card
               key={result._id}
               _id={result._id}
-              src={result.images[0]}  
+              src={result.images[0]}
               Days={result.numberOfNights}
               price={result.pricePerPerson}
               City={result.name}

@@ -32,8 +32,8 @@ const SignIn = () => {
         },
       });
 
-      console.log('response', response); // Log the full response
-      const token = response.data.jwt; // Extract the token
+      console.log('response', response); 
+      const token = response.data.jwt; 
       if (token) { // Check if token exists
         localStorage.setItem('token', token);
         console.log('token', token);

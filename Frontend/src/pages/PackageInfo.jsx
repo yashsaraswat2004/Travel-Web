@@ -13,6 +13,7 @@ const PackageInfo = () => {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState([]);
   const [activeTab, setActiveTab] = useState("information");
+  const jwt = localStorage.getItem("token");
 
   useEffect(() => {
     if (!id)
@@ -31,7 +32,7 @@ const PackageInfo = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar jwt={jwt} />
 
       {searchResults.length > 0 ? (
         searchResults.map((result) => (

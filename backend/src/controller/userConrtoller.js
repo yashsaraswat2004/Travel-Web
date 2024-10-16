@@ -30,21 +30,26 @@ async function verifyUser(req, res) {
 const addUserFavoriteDestination = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        if (!user)
-            return res.status(404).json({ message: "user not found" })
+        if (!user) {
+            return res.status(400).json({ message: "User not found" });
+        }
 
         const { id } = req.params;
-        if (user.favorites.includes(id))
-            return res.status(404).json({ message: "destination is alrady in favorites" })
 
-        user.favorites.push(id)
-        await user.save()
+        if (user.favorites.includes(id)) {
+            return res.status(404).json({ message: "Destination is already in favorites" });
+        }
 
-        return res.status(200).json({ message: "destion is added to favorite" })
+        user.favorites.push(id);
+        await user.save();
+
+        return res.status(200).json({ message: "Destination added to favorites" });
     } catch (error) {
-        return res.status(500).json({ message: "error in fetching the favorite", error })
+        console.error("Error in adding to favorites:", error); // Log the error
+        return res.status(500).json({ message: "Internal server error", error });
     }
-}
+};
+
 
 const getUserFavoriteDestination = async (req, res) => {
     try {

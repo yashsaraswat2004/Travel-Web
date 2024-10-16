@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+
 const TourPlan = ({ itinerary }) => {
   return (
     <div className="ml-[5rem] mt-[3rem]">
@@ -15,7 +16,7 @@ const TourPlan = ({ itinerary }) => {
 
               </div>
               <p className="text-sm text-[#181E4B]">
-                {dayPlan.activities} {/* Full activities description */}
+                {dayPlan.activities} 
               </p>
             </div>
           ))}
@@ -25,6 +26,9 @@ const TourPlan = ({ itinerary }) => {
   );
 };
 
+TourPlan.propTypes = {
+  itinerary: PropTypes.array  
+};
 
 
 export default TourPlan;
