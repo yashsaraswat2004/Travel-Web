@@ -187,8 +187,8 @@ const Navbar = ({ jwt }) => {
         >
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
           <MenuItem>
-            <Link to="/account" className="w-full text-left">
-              Account
+            <Link to="/profile" className="w-full text-left">
+              Profile
             </Link>
           </MenuItem>
           <MenuItem>

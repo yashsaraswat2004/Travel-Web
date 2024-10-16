@@ -1,39 +1,14 @@
 import { IoIosArrowDown } from "react-icons/io";
-import Navbar from "./Navbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
+
 import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
-  const jwt = localStorage.getItem("token");
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   // for navbar user verify
-  useEffect(() => {
-    const verifyUser = async () => {
-      try {
-        console.log("JWT Token:", jwt);
-
-        const response = await axios.get(
-          "http://localhost:5070/api/user/profile",
-          {
-            headers: {
-              Authorization: `Bearer ${jwt}`,
-            },
-          }
-        );
-
-        if (response.status !== 200) {
-          Swal.fire("You need to login", "", "question");
-        }
-      } catch (error) {
-        console.error("Error verifying user:", error);
-      }
-    };
-    verifyUser();
-  }, []);
 
   //body search
   const [keyword, setKeyword] = useState([]);
@@ -63,7 +38,6 @@ const Homepage = () => {
 
   return (
     <div>
-      <Navbar jwt={jwt} />
       <div
         className=" h-[31.375rem] w-full bg-cover bg-center relative"
         style={{

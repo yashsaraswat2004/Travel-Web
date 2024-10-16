@@ -13,8 +13,38 @@ import PackageInfo from "./pages/PackageInfo";
 // import TourPlan from "./components/TourPlan";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
-
+import { useEffect } from "react";
+import Navbar from "./components/Navbar";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Profile from "./pages/Profile";
+import TourPlan from "./components/TourPlan";
 function App() {
+  const jwt = localStorage.getItem("token");
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        console.log("JWT Token:", jwt);
+
+        const response = await axios.get(
+          "http://localhost:5070/api/user/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        );
+
+        if (response.status !== 200) {
+          Swal.fire("You need to login", "", "question");
+        }
+      } catch (error) {
+        console.error("Error verifying user:", error);
+      }
+    };
+    verifyUser();
+  }, []);
+
   return (
     <div className="overflow-x-hidden font-poppins">
       <Routes>
@@ -22,6 +52,7 @@ function App() {
           path="/"
           element={
             <div>
+              <Navbar jwt={jwt} />
               <Homepage />
               <TopDestinations />
               <AdvertiseSection />
@@ -34,14 +65,42 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/recover_password" element={<RecoveryPassword />} />
         <Route path="/reset_password" element={<ResetPassword />} />
-        <Route path="/package/:id" element={<PackageShowing />} />
+        <Route
+          path="/package/:id"
+          element={
+            <>
+              <Navbar jwt={jwt} />
+              <PackageShowing />
+              <Footer />
+            </>
+          }
+        />
         <Route path="/package/packageinfo/:id" element={<PackageInfo />} />
-        {/* <Route
+         <Route
           path="/package/:id/packageinfo/tourplan"
           element={<TourPlan />}
-        /> */}
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <>
+              <Navbar jwt={jwt} />
+              <Wishlist />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <>
+              <Navbar jwt={jwt} />
+              <Orders />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

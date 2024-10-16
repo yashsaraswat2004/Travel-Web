@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer/Footer";
 import Card from "../components/WhyChooseUs/Card";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -29,7 +27,6 @@ const PackageShowing = () => {
 
   return (
     <div className="flex flex-col">
-      <Navbar jwt={jwt} />
       <div>
         <h1 className="text-3xl text-transform: capitalize font-bold ml-[6.8rem] pt-[1rem] mt-5">
           Results for {id}
@@ -51,10 +48,11 @@ const PackageShowing = () => {
             />
           ))
         ) : (
-          <h1 className="text-2xl font-bold">No Results Found</h1>
+          <h1 className="text-2xl font-bold text-center font-poppins">
+            No Trips Found
+          </h1>
         )}
       </div>
-      <Footer />
     </div>
   );
 };
