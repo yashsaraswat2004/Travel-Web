@@ -42,6 +42,7 @@ const PackageShowing = () => {
           searchResults.map((result) => (
             <Card
               key={result._id}
+              _id={result._id}
               src={result.images[0]}  
               Days={result.numberOfNights}
               price={result.pricePerPerson}

@@ -32,7 +32,7 @@ function App() {
         <Route path="/recover_password" element={<RecoveryPassword />} />
         <Route path="/reset_password" element={<ResetPassword />} />
         <Route path="/package/:id" element={<PackageShowing />} />
-        <Route path="/package/:id/packageinfo" element={<PackageInfo />} />
+        <Route path="/package/packageinfo/:id" element={<PackageInfo />} />
         <Route
           path="/package/:id/packageinfo/tourplan"
           element={<TourPlan />}

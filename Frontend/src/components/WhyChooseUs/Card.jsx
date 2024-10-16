@@ -6,6 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Card = ({
+  _id, // Add _id to the props
   src,
   Days,
   peoples,
@@ -15,9 +16,11 @@ const Card = ({
   price,
 }) => {
   const navigate = useNavigate();
+
   const handleClick = () => {
-    navigate(`/package/${City}/packageinfo`);
+    navigate(`/package/packageinfo/${_id}`);
   };
+
   return (
     <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-1 rounded-lg hover:cursor-pointer hover:scale-105 duration-300 hover:shadow-2xl">
       <div className="w-[19.6875rem] h-[12.625rem] rounded-lg">
@@ -27,6 +30,7 @@ const Card = ({
           className="w-full h-full object-cover rounded-lg"
         />
       </div>
+
       <div className="flex flex-col">
         <div className="flex items-center ml-5 gap-2">
           <IoTodayOutline />
@@ -54,6 +58,7 @@ const Card = ({
           </h1>
         </div>
       </div>
+
       <div className="flex items-center justify-between mb-2">
         <button
           className="w-[8.48rem] h-[2.35rem] rounded-lg ml-5 text-lg bg-[#DF6951] text-white"
@@ -72,12 +77,14 @@ const Card = ({
 
 export default Card;
 
+// Add _id to PropTypes validation
 Card.propTypes = {
+  _id: PropTypes.string.isRequired,
   src: PropTypes.string,
-  Days: PropTypes.string,
+  Days: PropTypes.number,
   peoples: PropTypes.string,
   City: PropTypes.string,
   Country: PropTypes.string,
   DiscountedPrice: PropTypes.string,
-  price: PropTypes.string,
+  price: PropTypes.number,
 };
