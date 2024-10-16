@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Profile from "./pages/Profile";
 function App() {
   const jwt = localStorage.getItem("token");
   useEffect(() => {
@@ -98,6 +99,7 @@ function App() {
             </>
           }
         />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
