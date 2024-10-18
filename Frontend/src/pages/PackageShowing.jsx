@@ -6,7 +6,7 @@ import axios from "axios";
 const PackageShowing = () => {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-  const jwt = localStorage.getItem("token");
+  // const jwt = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,3 +1,4 @@
+import { getUserIdFromToken } from "../config/jwt.js";
 import Destination from "../models/destinationModel.js";
 import User from "../models/userModels.js";
 import { getUserProfile } from "../services/userService.js";
@@ -75,5 +76,43 @@ const getFavoriteDestinationById = async (req, res) => {
     }
 }
 
+const updateUserDetails = async (req, res) => {
+    try {
+        const jwt = req.headers.authorization?.split(" ")[1];
+        if (!jwt)
+            return res.status(404).json({ message: "No token is provided" })
 
-export { userProfile, verifyUser, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };
+        const userId = await getUserIdFromToken(jwt);
+        if (!userId)
+            return res.status(404).json({ message: "No user is found with the id came from token" })
+
+        const { firstName, lastName, email } = req.body;
+        const updates = {};
+        if (firstName) updates.firstName = firstName;
+        if (lastName) updates.lastName = lastName;
+        if (email) {
+            const existingUser = await User.findOne({ email });
+            if (existingUser)
+                return res.status(400).json({ message: "user already presernt with the same email" })
+            updates.email = email;
+        }
+
+        if (Object.keys(updates).length === 0)
+            return res.status(404).json({ message: "No fields to update" });
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { $set: updates },
+            { new: true }
+        )
+        if (!updatedUser)
+            return res.status(404).json({ message: "No user found" })
+
+        return res.status(200).json({ message: "User updated successfully", updatedUser })
+    } catch (error) {
+        return res.status(404).send({ error: "token not found" })
+
+    }
+}
+
+export { userProfile, updateUserDetails, verifyUser, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };

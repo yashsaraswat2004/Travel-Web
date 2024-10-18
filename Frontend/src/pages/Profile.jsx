@@ -5,27 +5,96 @@ import {
   FiCreditCard,
   FiGlobe,
   FiMapPin,
-  FiCalendar,
 } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { FaPlane } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+
 export default function Profile() {
+  const jwt = localStorage.getItem("token");
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:5070/api/user/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`
+          }
+        }
+      );
+      setUser(response.data)
+      console.log("user profile", response.data);
+    }
+    fetchData();
+  }, [jwt])
+
+
   const [activeTab, setActiveTab] = useState("personal");
+
+  const formatDate = (createAt) => {
+    const date = new Date(createAt);
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  };
+
+  //update user
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  })
+  const handleInput = (event) => {
+    setValues((prev) => (
+      {
+        ...prev,
+        [event.target.name]: event.target.value
+      }
+    ))
+  }
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.put("http://localhost:5070/api/user/updateuser", values, {
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      });
+      if (response.status === 200) {
+        Swal.fire("User Updated successfully", "", "success").then(() => {
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        })
+      }
+    } catch (e) {
+      if (e.response && e.response.status === 400) {
+        Swal.fire("User already exists with the email", "", "info")
+      }
+      console.log("error while updating", e)
+    }
+  }
+
+
   return (
     <div className="min-h-screen bg-gray-100 p-4 lg:p-8 font-poppins">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 rounded-full bg-[#ff694b] flex items-center justify-center text-white text-2xl font-bold">
-              YS
+              {user.firstName ? user.firstName.charAt(0).toUpperCase() : "?"}
             </div>
+
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
-                Welcome, Yash
+                Welcome, {user.firstName}
               </h1>
-              <p className="text-gray-600">Member since 2024</p>
+              <p className="text-gray-600">
+                Member since {user.createAt ? formatDate(user.createAt) : "N/A"}              </p>
             </div>
           </div>
           <button className="px-4 py-2 border rounded-md flex items-center space-x-2">
@@ -39,93 +108,97 @@ export default function Profile() {
             <div className="w-full">
               <div className="flex space-x-4 mb-4">
                 <button
-                  className={`py-2 px-4 ${
-                    activeTab === "personal"
-                      ? "bg-[#ff694b] text-white"
-                      : "bg-gray-200"
-                  }`}
+                  className={`py-2 px-4 ${activeTab === "personal"
+                    ? "bg-[#ff694b] text-white"
+                    : "bg-gray-200"
+                    }`}
                   onClick={() => setActiveTab("personal")}
                 >
                   Personal
                 </button>
                 <button
-                  className={`py-2 px-4 ${
-                    activeTab === "upcoming"
-                      ? "bg-[#ff694b] text-white"
-                      : "bg-gray-200"
-                  }`}
+                  className={`py-2 px-4 ${activeTab === "upcoming"
+                    ? "bg-[#ff694b] text-white"
+                    : "bg-gray-200"
+                    }`}
                   onClick={() => setActiveTab("upcoming")}
                 >
                   Upcoming
                 </button>
                 <button
-                  className={`py-2 px-4 ${
-                    activeTab === "past"
-                      ? "bg-[#ff694b] text-white"
-                      : "bg-gray-200"
-                  }`}
+                  className={`py-2 px-4 ${activeTab === "past"
+                    ? "bg-[#ff694b] text-white"
+                    : "bg-gray-200"
+                    }`}
                   onClick={() => setActiveTab("past")}
                 >
                   Past Trips
                 </button>
                 <button
-                  className={`py-2 px-4 ${
-                    activeTab === "preferences"
-                      ? "bg-[#ff694b] text-white"
-                      : "bg-gray-200"
-                  }`}
+                  className={`py-2 px-4 ${activeTab === "preferences"
+                    ? "bg-[#ff694b] text-white"
+                    : "bg-gray-200"
+                    }`}
                   onClick={() => setActiveTab("preferences")}
                 >
                   Preferences
                 </button>
               </div>
               {activeTab === "personal" && (
-                <div className="p-6 bg-white rounded-lg shadow">
-                  <h2 className="text-xl font-bold mb-4">
-                    Personal Information
-                  </h2>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="fullName">Full Name</label>
-                      <input
-                        id="fullName"
-                        placeholder="Your Name"
-                        className="border p-2 rounded w-full"
-                      />
+                <form onSubmit={handleUpdate}  >
+                  <div className="p-6 bg-white rounded-lg shadow">
+                    <h2 className="text-xl font-bold mb-4">
+                      Personal Information
+                    </h2>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label htmlFor="fullName">First Name</label>
+                        <input
+                          id="firstName"
+                          type="text"
+                          placeholder={user.firstName}
+                          className="border p-2 rounded w-full"
+                          onChange={handleInput}
+                          name="firstName"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label htmlFor="fullName">Last Name</label>
+                        <input
+                          id="lastName"
+                          type="text"
+                          placeholder={user.lastName}
+                          className="border p-2 rounded w-full"
+                          onChange={handleInput}
+                          name="lastName"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label htmlFor="fullName">Email</label>
+                        <input
+                          id="email"
+                          type="text"
+                          placeholder={user.email}
+                          className="border p-2 rounded w-full"
+                          onChange={handleInput}
+                          name="email"
+                        />
+                      </div>
+                      <div className="space-y-2 mt-9 ml-5">
+                        <Link to="/recover_password" className="opacity-70 ">
+                          Click to change password
+                        </Link>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email">Email</label>
-                      <input
-                        id="email"
-                        type="email"
-                        placeholder="Your Email"
-                        className="border p-2 rounded w-full"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="phone">Phone</label>
-                      <input
-                        id="phone"
-                        type="tel"
-                        placeholder="+91"
-                        className="border p-2 rounded w-full"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="dateOfBirth">Date of Birth</label>
-                      <input
-                        id="dateOfBirth"
-                        type="date"
-                        placeholder="Your Date of Birth"
-                        className="border p-2 rounded w-full"
-                      />
-                    </div>
+                    <button type="submit" className="mt-4 px-4 py-2 bg-[#ff694b] text-white rounded flex items-center space-x-2">
+                      <FiEdit className="w-4 h-4" />
+                      <span>Update Information</span>
+                    </button>
                   </div>
-                  <button className="mt-4 px-4 py-2 bg-[#ff694b] text-white rounded flex items-center space-x-2">
-                    <FiEdit className="w-4 h-4" />
-                    <span>Update Information</span>
-                  </button>
-                </div>
+                </form>
+
               )}
               {activeTab === "upcoming" && (
                 <div className="bg-white p-4 rounded-lg shadow">
@@ -265,34 +338,29 @@ export default function Profile() {
             </div>
 
             <div className="p-6 bg-white rounded-lg shadow">
-              <h2 className="text-xl font-bold mb-4">Trip Statistics</h2>
+              <h2 className="text-xl font-bold mb-4">Extra Info</h2>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="flex gap-2 items-center">
                     <FiGlobe className="w-4 h-4 text-[#ff694b]" />
                     Cities Visited
                   </span>
-                  <span className="font-semibold">12</span>
+                  <span className="font-semibold">{user.bookings ? user.bookings.length : 0}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex gap-2 items-center">
-                    <FiMapPin className="w-4 h-4 text-[#ff694b]" />
-                    Total Trips
-                  </span>
-                  <span className="font-semibold">24</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex gap-2 items-center">
-                    <FiCalendar className="w-4 h-4 text-[#ff694b]" />
-                    Travel Days
-                  </span>
-                  <span className="font-semibold">187</span>
-                </div>
+                <Link to="/wishlist">
+                  <div className="flex mt-2 items-center justify-between">
+                    <span className="flex gap-2 items-center">
+                      <FiMapPin className="w-4 h-4 text-[#ff694b]" />
+                      Total Favs
+                    </span>
+                    <span className="font-semibold">{user.favorites ? user.favorites.length : 0}</span>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
