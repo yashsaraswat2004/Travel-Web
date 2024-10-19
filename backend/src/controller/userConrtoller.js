@@ -1,4 +1,5 @@
 import { getUserIdFromToken } from "../config/jwt.js";
+import Booking from "../models/bookingModel.js";
 import Destination from "../models/destinationModel.js";
 import User from "../models/userModels.js";
 import { getUserProfile } from "../services/userService.js";
@@ -20,13 +21,25 @@ const userProfile = async (req, res) => {
     }
 }
 
-async function verifyUser(req, res) {
+const userBooking = async (req, res) => {
     try {
-        return res.status(200).json({ message: "success" });
+        const user = await User.findById(req.user._id).populate({
+            path: 'bookings',
+            populate: {
+                path: 'destination', 
+                model: 'destination' 
+            }
+        });
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.status(200).json(user.bookings);
     } catch (error) {
-        return res.status(500).json({ message: "Internal Server Error", error });
+        res.status(500).json({ message: "Error fetching bookings", error: error.message || error });
     }
 }
+
+
 
 const addUserFavoriteDestination = async (req, res) => {
     try {
@@ -115,4 +128,4 @@ const updateUserDetails = async (req, res) => {
     }
 }
 
-export { userProfile, updateUserDetails, verifyUser, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };
+export { userProfile, userBooking, updateUserDetails, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };

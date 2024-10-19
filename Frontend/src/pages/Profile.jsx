@@ -18,6 +18,7 @@ export default function Profile() {
   const jwt = localStorage.getItem("token");
   const [user, setUser] = useState({});
 
+  //profile
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get("http://localhost:5070/api/user/profile",
@@ -35,7 +36,6 @@ export default function Profile() {
 
 
   const [activeTab, setActiveTab] = useState("personal");
-
   const formatDate = (createAt) => {
     const date = new Date(createAt);
     const options = { month: 'short', day: 'numeric', year: 'numeric' };
@@ -80,9 +80,26 @@ export default function Profile() {
   }
 
 
+  //upcoming trips
+  const [bookings, setBookings] = useState([]);
+  useEffect(() => {
+    const fetchBookings = async () => {
+      const response = await axios.get("http://localhost:5070/api/user/bookings", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      console.log("bookings", response.data)
+      setBookings(response.data);
+    };
+
+    fetchBookings();
+  }, [jwt]);
+
   return (
     <div className="min-h-screen bg-gray-100 p-4 lg:p-8 font-poppins">
       <div className="max-w-6xl mx-auto">
+
         <header className="mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 rounded-full bg-[#ff694b] flex items-center justify-center text-white text-2xl font-bold">
@@ -200,32 +217,26 @@ export default function Profile() {
                 </form>
 
               )}
+
               {activeTab === "upcoming" && (
                 <div className="bg-white p-4 rounded-lg shadow">
                   <h2 className="text-xl font-bold mb-4">Upcoming Trips</h2>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-gray-100 rounded">
-                      <div>
-                        <h3 className="font-semibold">Beautiful Munnar</h3>
-                        <p className="text-gray-600">Munnar, India</p>
+                    {bookings.map((booking) => (
+                      <div key={booking._id} className="flex items-center justify-between p-4 bg-gray-100 rounded">
+                        <div>
+                          <h3 className="font-semibold">{booking.destination.name}</h3> {/* Access name */}
+                          <p className="text-gray-600">{booking.destination.city}, {booking.destination.country}</p>
+                        </div>
+                        <div className="text-right">
+                          <p>December 15 - 21, 2024</p>
+                          <Link to={`/orders/${booking._id}`}>
+                            <button className="text-[#ff694b]">View Details</button>
+                          </Link>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p>December 15 - 21, 2024</p>
-                        <button className="text-[#ff694b]">View Details</button>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between p-4 bg-gray-100 rounded">
-                      <div>
-                        <h3 className="font-semibold">
-                          Feel Alive in Kashmir in Summer
-                        </h3>
-                        <p className="text-gray-600">Kashmir, India</p>
-                      </div>
-                      <div className="text-right">
-                        <p>December 3 - 10, 2024</p>
-                        <button className="text-[#ff694b]">View Details</button>
-                      </div>
-                    </div>
+                    ))}
+
                   </div>
                 </div>
               )}
@@ -345,7 +356,7 @@ export default function Profile() {
                     <FiGlobe className="w-4 h-4 text-[#ff694b]" />
                     Cities Visited
                   </span>
-                  <span className="font-semibold">{user.bookings ? user.bookings.length : 0}</span>
+                  <span className="font-semibold">{user.paymentInformation ? user.paymentInformation.length : 0}</span>
                 </div>
                 <Link to="/wishlist">
                   <div className="flex mt-2 items-center justify-between">

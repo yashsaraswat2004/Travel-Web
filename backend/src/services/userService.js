@@ -4,7 +4,9 @@ import User from "../models/userModels.js";
 const getUserProfile = async (token) => {
     try {
         const userId = await getUserIdFromToken(token);
-        const user = await User.findById(userId);
+        const user = await User.findById(userId)
+            .populate("bookings")
+            .populate("favorites");
 
         if (!user)
             throw new Error("user is not found with given token")
