@@ -19,7 +19,7 @@ const bookingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    bookingDate: { type: Date, default: Date.now() }
+    bookingDate: { type: Date, default: Date.now }
 })
 
 const Booking = mongoose.model('booking', bookingSchema);

@@ -218,28 +218,52 @@ export default function Profile() {
 
               )}
 
+
+
               {activeTab === "upcoming" && (
                 <div className="bg-white p-4 rounded-lg shadow">
                   <h2 className="text-xl font-bold mb-4">Upcoming Trips</h2>
                   <div className="space-y-4">
-                    {bookings.map((booking) => (
-                      <div key={booking._id} className="flex items-center justify-between p-4 bg-gray-100 rounded">
-                        <div>
-                          <h3 className="font-semibold">{booking.destination.name}</h3> {/* Access name */}
-                          <p className="text-gray-600">{booking.destination.city}, {booking.destination.country}</p>
-                        </div>
-                        <div className="text-right">
-                          <p>December 15 - 21, 2024</p>
-                          <Link to={`/orders/${booking._id}`}>
-                            <button className="text-[#ff694b]">View Details</button>
-                          </Link>
-                        </div>
-                      </div>
-                    ))}
+                    {bookings.map((booking) => {
+                      const bookingDate = new Date(booking.bookingDate);
 
+                      if (isNaN(bookingDate.getTime())) {
+                        console.error("Invalid booking date:", booking.bookingDate);
+                        return null; // Skip invalid dates
+                      }
+
+                      const endDate = new Date(bookingDate);
+                      endDate.setDate(bookingDate.getDate() + booking.destination.numberOfNights);
+
+                      // Format the start and end dates
+                      const formattedStartDate = formatDate(bookingDate);
+                      const formattedEndDate = formatDate(endDate);
+
+                      // Create the combined date string without extra commas
+                      const dateRange = `${formattedStartDate.split(' ')[0]} ${formattedStartDate.split(' ')[1]}-${formattedEndDate.split(' ')[1]}, ${formattedEndDate.split(' ')[2]}`;
+
+                      return (
+                        <div key={booking._id} className="flex items-center justify-between p-4 bg-gray-100 rounded">
+                          <div>
+                            <h3 className="font-semibold">{booking.destination.name}</h3>
+                            <p className="text-gray-600">{booking.destination.city}, {booking.destination.country}</p>
+                          </div>
+                          <div className="text-right">
+                            <p>{dateRange}</p>
+                            <Link to={`/orders/${booking._id}`}>
+                              <button className="text-[#ff694b]">View Details</button>
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
+
+
+
+
 
               {activeTab === "past" && (
                 <div className="bg-white p-4 rounded-lg shadow">

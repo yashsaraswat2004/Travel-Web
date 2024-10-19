@@ -4,11 +4,11 @@ import User from "../models/userModels.js";
 
 const createBooking = async (req, res) => {
     const { id } = req.params;
-    const { numberOfPeople } = req.body;
+    const { numberOfPeople, bookingDate } = req.body;
     try {
         const destination = await Destination.findById(id);
-        if (!destination || !numberOfPeople)
-            return res.status(404).json({ message: "All fields are required" })
+        if (!destination || !numberOfPeople || !bookingDate) 
+            return res.status(404).json({ message: "All fields are required" });
 
         const totalPrice = numberOfPeople * destination.pricePerPerson;
 
@@ -16,21 +16,24 @@ const createBooking = async (req, res) => {
             destination: destination._id,
             user: req.user._id,
             numberOfPeople,
-            totalPrice
-        })
-        if (!booking)
-            return res.status(404).json({ message: "Booking not completed" })
+            totalPrice,
+            bookingDate 
+        });
 
-        // after creating a booking we need to update the booking part in the user modal
+        if (!booking)
+            return res.status(404).json({ message: "Booking not completed" });
+
         const user = await User.findById(req.user._id);
         user.bookings.push(booking._id);
         await user.save();
 
-        return res.status(200).json({ message: "Booking completed", booking })
+        return res.status(200).json({ message: "Booking completed", booking });
     } catch (error) {
-        return res.status(500).json({ message: "there is a error while booking" })
+        console.error(error); 
+        return res.status(500).json({ message: "There was an error while booking" });
     }
 };
+
 
 
 const findBookingId = async (req, res) => {
@@ -65,12 +68,12 @@ const findBookingIdForPayment = async (id) => {
             .populate("destination");
 
         if (!booking) {
-            return null; 
+            return null;
         }
 
-        return booking; 
+        return booking;
     } catch (error) {
-        throw new Error("Error while retrieving booking"); 
+        throw new Error("Error while retrieving booking");
     }
 };
 
