@@ -31,15 +31,18 @@ const SignIn = () => {
           'Content-Type': 'application/json',
         },
       });
-
-      console.log('response', response); 
-      const token = response.data.jwt; 
-      if (token) { // Check if token exists
+      console.log('response user role', response.data.role);
+      const token = response.data.jwt;
+      if (token && response.data.role === "user") { // Check if token exists
         localStorage.setItem('token', token);
-        console.log('token', token);
         setIsLoggedIn(true);
         window.location.href = '/';
-      } else {
+      } else if (token && response.data.role === "admin") {
+        localStorage.setItem('token', token);
+        setIsLoggedIn(true);
+        window.location.href = '/admin';
+      }
+      else {
         Swal.fire("Login failed, no token returned", '', "error");
       }
     } catch (error) {

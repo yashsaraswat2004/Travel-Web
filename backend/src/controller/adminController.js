@@ -1,3 +1,4 @@
+import Booking from "../models/bookingModel.js";
 import Destination from "../models/destinationModel.js";
 
 const addDestination = async (req, res) => {
@@ -30,9 +31,22 @@ const addDestination = async (req, res) => {
     }
 };
 
+const getAllBooking = async (req, res) => {
+    try {
+        const bookings = await Booking.find()
+            .populate('user') 
+            .populate('destination'); 
+
+        return res.status(200).json({ message: "Bookings found", bookings });
+    } catch (error) {
+        return res.status(500).json({ message: "Bookings not found", error });
+    }
+};
+
+
 // updateDestination and deleteDestination api need to be created
 
 
 
 
-export { addDestination };
+export { addDestination, getAllBooking };

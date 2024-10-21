@@ -229,7 +229,7 @@ export default function Profile() {
 
                       if (isNaN(bookingDate.getTime())) {
                         console.error("Invalid booking date:", booking.bookingDate);
-                        return null; // Skip invalid dates
+                        return null; 
                       }
 
                       const endDate = new Date(bookingDate);
@@ -246,7 +246,7 @@ export default function Profile() {
                         <div key={booking._id} className="flex items-center justify-between p-4 bg-gray-100 rounded">
                           <div>
                             <h3 className="font-semibold">{booking.destination.name}</h3>
-                            <p className="text-gray-600">{booking.destination.city}, {booking.destination.country}</p>
+                            <p className="text-gray-600">{booking.destination.city} {booking.destination.country}</p>
                           </div>
                           <div className="text-right">
                             <p>{dateRange}</p>

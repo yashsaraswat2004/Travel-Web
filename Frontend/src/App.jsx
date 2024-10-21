@@ -19,6 +19,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Profile from "./pages/Profile";
 import TourPlan from "./components/TourPlan";
+import Admin from "./admin/Admin";
+
 function App() {
   const jwt = localStorage.getItem("token");
   useEffect(() => {
@@ -101,6 +103,7 @@ function App() {
           }
         />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );
