@@ -1,4 +1,3 @@
-import "./Footer.css";
 import {
   FaFacebookF,
   FaInstagram,
@@ -6,93 +5,112 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="footer mt-[10rem]">
-      <div className="footer-container">
-        <div className="footer-section about">
+    <footer className=" mt-40">
+      <div className="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* About Section */}
+        <div className="space-y-4">
           <img src="./logo.svg" alt="logo" />
-          <p className="mt-4">
-            Travel helps people to find their dream destination easily.
-          </p>
-          <br />
-
-          <div className="social-icons">
+          <p>Travel helps people to find their dream destination easily.</p>
+          <div className="flex space-x-4">
             <Link
               to="https://www.facebook.com"
               target="_blank"
               rel="noreferrer"
+              className="text-[#df6951]"
             >
-              <FaFacebookF />
+              <FaFacebookF size={20}/>
             </Link>
             <Link
               to="https://www.instagram.com"
               target="_blank"
               rel="noreferrer"
+              className="text-[#df6951]"
             >
-              <FaInstagram />
+              <FaInstagram  size={20}/>
             </Link>
             <Link
               to="https://www.linkedin.com"
               target="_blank"
               rel="noreferrer"
+              className="text-[#df6951]"
             >
-              <FaLinkedinIn />
+              <FaLinkedinIn size={20}/>
             </Link>
-            <Link to="https://www.twitter.com" target="_blank" rel="noreferrer">
-              <FaTwitter />
+            <Link
+              to="https://www.twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#df6951]"
+            >
+              <FaTwitter size={20}/>
             </Link>
           </div>
         </div>
 
-        <div className="footer-section links">
-          <h2>Company</h2>
-          <ul>
+        {/* Links Section */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Company</h2>
+          <ul className="space-y-2">
             <li>
-              <Link to="#">About Us</Link>
+              <Link to="#" className="text-base">
+                About Us
+              </Link>
             </li>
             <li>
-              <Link to="#">Careers</Link>
+              <Link to="#" className="text-base">
+                Careers
+              </Link>
             </li>
             <li>
-              <Link to="#">Blog</Link>
+              <Link to="#" className="text-base">
+                Blog
+              </Link>
             </li>
             <li>
-              <Link to="#">Pricing</Link>
+              <Link to="#" className="text-base">
+                Pricing
+              </Link>
             </li>
           </ul>
         </div>
 
-        <div className="footer-section contact">
-          <h2>Destinations</h2>
-          <ul>
-            <li>Maldives</li>
-            <li>Los Angeles</li>
-            <li>Las Vegas</li>
-            <li>Toronto</li>
+        {/* Destinations Section */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Destinations</h2>
+          <ul className="space-y-2">
+            <li className="text-base">Delhi</li>
+            <li className="text-base">Mumbai</li>
+            <li className="text-base">Banglore</li>
+            <li className="text-base">Shimla</li>
           </ul>
         </div>
 
-        <div className="footer-section newsletter">
-          <h2>Join Our Newsletter</h2>
-          <form className="newsletter-form" onSubmit={handleSubscribe}>
+        {/* Newsletter Section */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Join Our Newsletter</h2>
+          <form className="flex flex-row  items-center" onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="Enter your email"
-              className="newsletter-input"
+              className="p-2 bg-gray-100 rounded-l-md h-10 focus:outline-none focus:ring-2 focus:ring-[#df6951]"
               required
             />
-            <button type="submit" className="newsletter-btn">
+            <button
+              type="submit"
+              className="p-2 bg-[#df6951] text-white rounded-r-md "
+            >
               Subscribe
             </button>
           </form>
         </div>
       </div>
-      <br />
-      <hr />
-      <br />
+      
+      <hr className="my-8 border-gray-300 mx-8 " />
 
-      <div className="footer-bottom">
+      <div className="text-center py-4 text-sm">
         &copy; 2024 Travel Tour | All Rights Reserved.
       </div>
     </footer>
