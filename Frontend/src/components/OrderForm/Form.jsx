@@ -18,7 +18,7 @@ const TravelForm = () => {
   };
 
   return (
-    <div className="w-full max-w-[25rem] h-[30rem] mt-[6rem] mr-[5rem] p-8 bg-white rounded-lg">
+    <div className="w-full max-w-[25rem] h-[30rem] mt-[5rem] mr-[5rem] px-8 bg-white rounded-lg">
       <h1 className="text-3xl font-bold text-center mb-6 text-black">
         Book This Tour
       </h1>
