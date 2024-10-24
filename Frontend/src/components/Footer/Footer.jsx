@@ -101,7 +101,6 @@ const Footer = () => {
 
 const handleSubscribe = (e) => {
   e.preventDefault();
-  console.log("Subscribed successfully!");
 };
 
 export default Footer;

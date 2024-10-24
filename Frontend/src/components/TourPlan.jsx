@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-
 const TourPlan = ({ itinerary }) => {
   return (
     <div className="ml-[5rem] mt-[3rem]">
@@ -13,11 +12,8 @@ const TourPlan = ({ itinerary }) => {
                 <p className="font-bold text-2xl font-Poppins text-[#181E4B]">
                   Day {dayPlan.day} :
                 </p>
-
               </div>
-              <p className="text-sm text-[#181E4B]">
-                {dayPlan.activities} 
-              </p>
+              <p className="text-sm text-[#181E4B]">{dayPlan.activities}</p>
             </div>
           ))}
         </div>
@@ -27,8 +23,7 @@ const TourPlan = ({ itinerary }) => {
 };
 
 TourPlan.propTypes = {
-  itinerary: PropTypes.array  
+  itinerary: PropTypes.array,
 };
-
 
 export default TourPlan;

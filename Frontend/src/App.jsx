@@ -10,7 +10,7 @@ import RecoveryPassword from "./pages/RecoveryPassword";
 import ResetPassword from "./pages/ResetPassword";
 import PackageShowing from "./pages/PackageShowing";
 import PackageInfo from "./pages/PackageInfo";
-// import TourPlan from "./components/TourPlan";
+import TravelForm from "./components/OrderForm/Form";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
 import { useEffect } from "react";
@@ -18,9 +18,9 @@ import Navbar from "./components/Navbar";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Profile from "./pages/Profile";
-import TourPlan from "./components/TourPlan";
 import Admin from "./admin/Admin";
 
+import TourPlan from "./components/TourPlan";
 function App() {
   const jwt = localStorage.getItem("token");
   useEffect(() => {
@@ -67,6 +67,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/recover_password" element={<RecoveryPassword />} />
         <Route path="/reset_password" element={<ResetPassword />} />
+        <Route path="/orderform" element={<TravelForm />} />
         <Route
           path="/package/:id"
           element={
@@ -78,7 +79,7 @@ function App() {
           }
         />
         <Route path="/package/packageinfo/:id" element={<PackageInfo />} />
-         <Route
+        <Route
           path="/package/:id/packageinfo/tourplan"
           element={<TourPlan />}
         />
@@ -93,7 +94,7 @@ function App() {
           }
         />
         <Route
-          path="/orders/:id"
+          path="/orders"
           element={
             <>
               <Navbar jwt={jwt} />
@@ -108,5 +109,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
