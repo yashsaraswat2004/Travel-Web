@@ -13,6 +13,12 @@ const Homepage = () => {
   //body search
   const [keyword, setKeyword] = useState([]);
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const handleSearch = async () => {
     if (!keyword.trim) {
       setErrors({ keyword: "**Please enter a destination." });
@@ -58,6 +64,7 @@ const Homepage = () => {
                   className="text-transform: capitalize py-2 px-2 focus:outline-none text-[1.25rem] font-[600] font-poppins placeholder:text-black placeholder:text-[1.25rem] placeholder:font-[600] placeholder:font-poppins bg-transparent"
                   value={keyword}
                   onChange={handleKeywordChange}
+                  onKeyDown={handleKeyDown}
                 />
                 {errors.keyword && (
                   <p className="text-[#DF6951] font-poppins font-bold text-md mb-2 ml-2">

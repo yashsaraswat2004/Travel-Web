@@ -17,17 +17,20 @@ const PackageInfo = () => {
   const jwt = localStorage.getItem("token");
 
   useEffect(() => {
-    if (!id)
-      Swal.fire("No id is Provided", "", "warning")
+    if (!id) Swal.fire("No id is Provided", "", "warning");
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5070/api/destination/id/${id}`);
-        setSearchResults(Array.isArray(response.data) ? response.data : [response.data]);
+        const response = await axios.get(
+          `http://localhost:5070/api/destination/id/${id}`
+        );
+        setSearchResults(
+          Array.isArray(response.data) ? response.data : [response.data]
+        );
         console.log("search results package info", response.data);
       } catch (error) {
         console.log("error in package info", error);
       }
-    }
+    };
     getData();
   }, [id]);
 

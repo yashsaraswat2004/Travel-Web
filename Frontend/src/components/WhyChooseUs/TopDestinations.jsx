@@ -8,31 +8,31 @@ export default function TopDestinations() {
       </div>
       <div className="flex items-center justify-center gap-10 mt-10 ">
         <Card
+          _id="Agra"
           src="Tajmahal.jpeg"
-          Days="4 Days"
+          Days="4"
           peoples="25"
           City="Agra"
           Country="India"
-          DiscountedPrice="₹6290"
-          price="₹7790"
+          price="7790"
         />
         <Card
+          _id="Jaipur"
           src="Hawamahal.jpeg"
           City="Jaipur"
           Country="India"
-          Days="5 Days"
+          Days="5"
           peoples="10"
-          DiscountedPrice="₹8290"
-          price="₹9790"
+          price="9790"
         />
         <Card
+          _id="GOA"
           src="https://media.easemytrip.com/media/Blog/India/637796764366393506/6377967643663935062h8Tc5.jpg"
           City="GOA"
           Country="India"
-          Days="8 Days"
+          Days="8"
           peoples="18"
-          DiscountedPrice="₹18290"
-          price="₹28790"
+          price="28790"
         />
       </div>
     </div>
