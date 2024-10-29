@@ -23,7 +23,7 @@ const Card = ({
 
   const handleFavorite = async () => {
     if (!jwt) {
-      Swal.fire("You need to login to add destination", "", "error");
+      Swal.fire("Need to login", "", "info");
       return;
     }
 
@@ -65,8 +65,8 @@ const Card = ({
       <div className="flex flex-col">
         <div className="flex items-center ml-5 gap-2">
           <CiClock2 size={20} />
-          <p>{Days} Days</p>
-          <p>{Days - 1} Nights</p>
+          <p>{Days} Nights</p>
+          <p>{Days + 1} Days</p>
         </div>
         <div className="flex items-center justify-start ml-5 mt-2">
           <h1 className="text-[1.25rem] font-[700] font-poppins">{City}</h1>

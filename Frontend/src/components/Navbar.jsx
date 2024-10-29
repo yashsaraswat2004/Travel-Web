@@ -191,11 +191,6 @@ const Navbar = ({ jwt }) => {
               Profile
             </Link>
           </MenuItem>
-          <MenuItem>
-            <Link to="/orders" className="w-full text-left">
-              Orders
-            </Link>
-          </MenuItem>
         </Menu>
       </div>
     </div>

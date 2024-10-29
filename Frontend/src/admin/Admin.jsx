@@ -8,8 +8,9 @@ import AddDestination from './components/AddDestination'
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import {  MenuItem, Menu as DropdownMenu } from '@mui/material'
+import { MenuItem, Menu as DropdownMenu } from '@mui/material'
 import { CgProfile } from 'react-icons/cg'
+import Swal from 'sweetalert2'
 
 export default function TravelAdminPanel() {
     const [activePage, setActivePage] = useState('dashboard')
@@ -26,6 +27,7 @@ export default function TravelAdminPanel() {
             if (!jwt) {
                 navigate('/signin')
             };
+
             try {
                 const response = await axios.get(
                     "http://localhost:5070/api/user/profile",
@@ -35,7 +37,11 @@ export default function TravelAdminPanel() {
                         },
                     }
                 );
-                if (response) {
+                if (jwt && response.data.role === "user") {
+                    Swal.fire("You are not authorized to that page", "", "warning");
+                    navigate('/')
+                }
+                else if (response) {
                     setUser(response.data);
                 }
             } catch (error) {
@@ -122,7 +128,7 @@ export default function TravelAdminPanel() {
                                         onClick={handleAvatarClick}
                                         className="cursor-pointer font-medium text-gray-700 hover:text-gray-900"
                                     >
-                                     Admin :   {user.firstName}
+                                        Admin :   {user.firstName}
                                     </span>
 
                                 ) : (

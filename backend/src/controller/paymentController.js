@@ -29,7 +29,7 @@ const createPaymentLink = async (req, res) => {
                 sms: true,
                 email: true
             },
-            callback_url: `http://localhost:3000/payment/${id}`,
+            callback_url: `http://localhost:5173/payment/${id}`,
             callback_method: 'get',
         };
 
@@ -77,9 +77,19 @@ const updatePaymentInfo = async (req, res) => {
             const user = await User.findById(booking.user);
             if (user) {
                 user.paymentInformation.push(booking._id);
-                await user.save()
+                await user.save();
             }
-            return res.status(200).json({ message: "Your order is placed", success: true });
+
+            // Format the booking date
+            const formattedBookingDate = booking.bookingDate ?
+                new Date(booking.bookingDate).toLocaleDateString() :
+                "N/A";
+
+            return res.status(200).json({
+                message: "PLACED",
+                success: true,
+                bookingDate: formattedBookingDate
+            });
         } else {
             return res.status(400).json({ message: "Payment not captured. Status: " + payment.status });
         }
@@ -87,6 +97,7 @@ const updatePaymentInfo = async (req, res) => {
         return res.status(500).json({ message: "Error while updating the payment details" });
     }
 };
+
 
 
 

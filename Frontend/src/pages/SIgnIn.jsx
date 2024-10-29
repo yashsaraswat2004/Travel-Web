@@ -40,6 +40,7 @@ const SignIn = () => {
       } else if (token && response.data.role === "admin") {
         localStorage.setItem('token', token);
         setIsLoggedIn(true);
+
         window.location.href = '/admin';
       }
       else {

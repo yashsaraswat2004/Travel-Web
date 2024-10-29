@@ -8,6 +8,7 @@ import TourPlan from "../components/TourPlan";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
+import Gallery from "../components/Gallery";
 
 const PackageInfo = () => {
   const { id } = useParams();
@@ -47,6 +48,8 @@ const PackageInfo = () => {
 
             <div className="flex flex-col justify-center items-center gap-4">
               <div className="w-[68.8125rem] h-[4.588rem] mx-auto bg-white rounded-sm flex pl-7 mt-3">
+
+                {/* information section  */}
                 <div
                   className={`w-[18.8125rem] h-[4.588rem] ml-[4rem] border border-black flex items-center justify-center gap-2 ${activeTab === "information"
                     ? "bg-[#8B8484]"
@@ -60,6 +63,7 @@ const PackageInfo = () => {
                   </button>
                 </div>
 
+                {/* tour plan section  */}
                 <div
                   className={`w-[18.8125rem] h-[4.588rem] border-y border-black flex items-center justify-center gap-2 ${activeTab === "tourplan"
                     ? "bg-[#8B8484]"
@@ -71,6 +75,7 @@ const PackageInfo = () => {
                   <button className="h-full text-xl font-Poppins">Tour Plan</button>
                 </div>
 
+                {/* gallery section  */}
                 <div
                   className={`w-[18.8125rem] h-[4.588rem] border border-black flex items-center justify-center gap-2 ${activeTab === "gallery" ? "bg-[#8B8484]" : "bg-white text-black"
                     }`}
@@ -80,6 +85,7 @@ const PackageInfo = () => {
                   <button className="h-full text-xl font-Poppins">Gallery</button>
                 </div>
               </div>
+
               {activeTab === "information" ?
                 <Information
                   key={result._id}
@@ -96,16 +102,17 @@ const PackageInfo = () => {
                   itinerary={result.itinerary}
                 />
                 : null}
+              {activeTab === "gallery" ?
+                <Gallery
+                  images={result.images}
+                />
+                : null}
             </div>
           </div>
         ))
       ) : (
         <h1 className="text-2xl font-bold">No Results Found</h1>
       )}
-
-
-
-
       <Footer />
     </div>
   );
