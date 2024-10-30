@@ -12,8 +12,8 @@
 
 ## Demo
 
-Check out the live app here: [Travel WebApp Demo](https://traveltour-i4r3.onrender.com/)  
-Backend is hosted at: [Travel WebApp API]((https://travel-tour-mlya.onrender.com))
+Check out the live app here: [Travel Tour Website](https://traveltour-i4r3.onrender.com/)  
+Backend is hosted at: [Travel Tour Backend]([(https://travel-tour-mlya.onrender.com)](https://travel-tour-mlya.onrender.com))
 
 ## Features
 
