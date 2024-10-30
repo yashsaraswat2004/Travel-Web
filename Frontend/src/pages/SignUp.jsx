@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
 
   const navigate = useNavigate();
   const [errors] = useState({});
-
 
   const handleInput = (event) => {
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -23,30 +22,33 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      let response = await axios.post('http://localhost:5070/auth/register', values, {
-        'Content-Type': 'application/json',
-      });
+      let response = await axios.post(
+        "https://travel-tour-mlya.onrender.com/auth/register",
+        values,
+        {
+          "Content-Type": "application/json",
+        }
+      );
       if (response.status === 201) {
-        Swal.fire("Registered Successfully", '', "success")
-          .then((result) => {
-            if (result.isConfirmed || result.dismiss === Swal.DismissReason.close) {
-              window.location.href = '/';
-              const token = response.data.jwt;
-              localStorage.setItem('token', token);
-            }
-          });
+        Swal.fire("Registered Successfully", "", "success").then((result) => {
+          if (
+            result.isConfirmed ||
+            result.dismiss === Swal.DismissReason.close
+          ) {
+            window.location.href = "/";
+            const token = response.data.jwt;
+            localStorage.setItem("token", token);
+          }
+        });
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        Swal.fire("All Fields Are Required", '', "info");
+        Swal.fire("All Fields Are Required", "", "info");
+      } else if (error.response && error.response.status == 400) {
+        Swal.fire("", "Email already in use", "info");
+      } else {
+        Swal.fire("Internal Server Error", "", "danger");
       }
-      else if (error.response && error.response.status == 400) {
-        Swal.fire("", 'Email already in use', "info");
-      }
-      else {
-        Swal.fire("Internal Server Error", '', "danger");
-      }
-
     }
   };
 
@@ -99,7 +101,9 @@ const SignUp = () => {
               name="firstName"
               onChange={handleInput}
             />
-            {errors.firstName && <span className='text-danger'>{errors.firstName}</span>}
+            {errors.firstName && (
+              <span className="text-danger">{errors.firstName}</span>
+            )}
           </div>
           <div className="mb-6">
             <label
@@ -116,7 +120,9 @@ const SignUp = () => {
               name="lastName"
               onChange={handleInput}
             />
-            {errors.lastName && <span className='text-danger'>{errors.lastName}</span>}
+            {errors.lastName && (
+              <span className="text-danger">{errors.lastName}</span>
+            )}
           </div>
           <div className="mb-4">
             <label
@@ -133,7 +139,9 @@ const SignUp = () => {
               name="email"
               onChange={handleInput}
             />
-            {errors.email && <span className='text-danger'>{errors.email}</span>}
+            {errors.email && (
+              <span className="text-danger">{errors.email}</span>
+            )}
           </div>
           <div className="mb-6">
             <label
@@ -150,7 +158,9 @@ const SignUp = () => {
               name="password"
               onChange={handleInput}
             />
-            {errors.password && <span className='text-danger'>{errors.password}</span>}
+            {errors.password && (
+              <span className="text-danger">{errors.password}</span>
+            )}
           </div>
           <button
             type="submit"

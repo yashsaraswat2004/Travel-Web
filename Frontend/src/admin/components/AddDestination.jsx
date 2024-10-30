@@ -65,7 +65,7 @@ export default function AddDestination() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5070/api/admin/add-destination",
+        "https://travel-tour-mlya.onrender.com/api/admin/add-destination",
         destination,
         {
           headers: {
@@ -115,7 +115,7 @@ export default function AddDestination() {
                 id="name"
                 value={destination.name}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               />
             </div>
@@ -133,7 +133,7 @@ export default function AddDestination() {
                 id="country"
                 value={destination.country}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               />
             </div>
@@ -151,7 +151,7 @@ export default function AddDestination() {
                 id="city"
                 value={destination.city}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               />
             </div>
@@ -169,7 +169,7 @@ export default function AddDestination() {
                 id="pricePerPerson"
                 value={destination.pricePerPerson}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               />
             </div>
@@ -187,7 +187,7 @@ export default function AddDestination() {
                 rows={3}
                 value={destination.description}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               ></textarea>
             </div>
@@ -205,7 +205,7 @@ export default function AddDestination() {
                 id="facilities"
                 value={destination.facilities}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               />
             </div>
@@ -223,7 +223,7 @@ export default function AddDestination() {
                 id="numberOfNights"
                 value={destination.numberOfNights}
                 onChange={handleChange}
-                className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                 required
               />
             </div>
@@ -238,7 +238,7 @@ export default function AddDestination() {
                     type="url"
                     value={image}
                     onChange={(e) => handleImageChange(e, index)}
-                    className="focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                    className="focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border px-2 py-1"
                     placeholder="Image URL"
                   />
                   <button
@@ -252,7 +252,7 @@ export default function AddDestination() {
                     <button
                       type="button"
                       onClick={addImageField}
-                      className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#DF6951] hover:bg-[#fa5c3c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#DF6951]"
                     >
                       Add Image
                     </button>
@@ -275,7 +275,7 @@ export default function AddDestination() {
                     value={day.activities}
                     onChange={(e) => handleItineraryChange(e, index)}
                     rows={2}
-                    className="px-2 py-1 mt-1 focus:ring-blue-500 focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
+                    className="px-2 py-1 mt-1 focus:ring-[#DF6951] focus:border-gray-300 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border"
                     placeholder="Activities for this day"
                     required
                   ></textarea>

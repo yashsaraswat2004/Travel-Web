@@ -6,14 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const Card = ({
-  _id, // Add _id to the props
-  src,
-  Days,
-  City,
-  Country,
-  price,
-}) => {
+const Card = ({ _id, src, Days, City, Country, price }) => {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("token");
 
@@ -29,7 +22,7 @@ const Card = ({
 
     try {
       const response = await axios.put(
-        `http://localhost:5070/api/user/put/${_id}`,
+        `https://travel-tour-mlya.onrender.com/api/user/put/${_id}`,
         {},
         {
           headers: {
@@ -39,18 +32,20 @@ const Card = ({
       );
 
       if (response.status === 200) {
-        Swal.fire("Destination added to wishlist", '', "success");
-      } else if (response.status === 404 && response.data.message === "Destination is already in favorites") {
-        Swal.fire("Destination already in favorites", '', "info");
+        Swal.fire("Destination added to wishlist", "", "success");
+      } else if (
+        response.status === 404 &&
+        response.data.message === "Destination is already in favorites"
+      ) {
+        Swal.fire("Destination already in favorites", "", "info");
       } else {
         Swal.fire("Unexpected response from server", "", "warning");
       }
     } catch (error) {
-      Swal.fire("Destination is already in favorites", "", "info")
+      Swal.fire("Destination is already in favorites", "", "info");
       console.log("Error:", error.response?.data || error.message);
     }
   };
-
 
   return (
     <div className="w-[21.625rem] h-[25.45rem] flex flex-col justify-between py-1 rounded-lg hover:cursor-pointer hover:scale-105 duration-300 hover:shadow-2xl">
@@ -103,7 +98,6 @@ const Card = ({
 
 export default Card;
 
-// Add _id to PropTypes validation
 Card.propTypes = {
   _id: PropTypes.string.isRequired,
   src: PropTypes.string,

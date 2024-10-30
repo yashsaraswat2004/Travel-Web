@@ -21,7 +21,7 @@ const PackageInfo = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5070/api/destination/id/${id}`
+          `https://travel-tour-mlya.onrender.com/api/destination/id/${id}`
         );
         setSearchResults(
           Array.isArray(response.data) ? response.data : [response.data]
@@ -51,13 +51,13 @@ const PackageInfo = () => {
 
             <div className="flex flex-col justify-center items-center gap-4">
               <div className="w-[68.8125rem] h-[4.588rem] mx-auto bg-white rounded-sm flex pl-7 mt-3">
-
                 {/* information section  */}
                 <div
-                  className={`w-[18.8125rem] h-[4.588rem] ml-[4rem] border border-black flex items-center justify-center gap-2 ${activeTab === "information"
-                    ? "bg-[#8B8484]"
-                    : "bg-white text-black"
-                    }`}
+                  className={`w-[18.8125rem] h-[4.588rem] ml-[4rem] border border-black flex items-center justify-center gap-2 ${
+                    activeTab === "information"
+                      ? "bg-[#8B8484]"
+                      : "bg-white text-black"
+                  }`}
                   onClick={() => setActiveTab("information")}
                 >
                   <FaInfo size={20} className="cursor-pointer" />
@@ -68,28 +68,36 @@ const PackageInfo = () => {
 
                 {/* tour plan section  */}
                 <div
-                  className={`w-[18.8125rem] h-[4.588rem] border-y border-black flex items-center justify-center gap-2 ${activeTab === "tourplan"
-                    ? "bg-[#8B8484]"
-                    : "bg-white text-black"
-                    }`}
+                  className={`w-[18.8125rem] h-[4.588rem] border-y border-black flex items-center justify-center gap-2 ${
+                    activeTab === "tourplan"
+                      ? "bg-[#8B8484]"
+                      : "bg-white text-black"
+                  }`}
                   onClick={() => setActiveTab("tourplan")}
                 >
                   <FaCar size={28} className="cursor-pointer" />
-                  <button className="h-full text-xl font-Poppins">Tour Plan</button>
+                  <button className="h-full text-xl font-Poppins">
+                    Tour Plan
+                  </button>
                 </div>
 
                 {/* gallery section  */}
                 <div
-                  className={`w-[18.8125rem] h-[4.588rem] border border-black flex items-center justify-center gap-2 ${activeTab === "gallery" ? "bg-[#8B8484]" : "bg-white text-black"
-                    }`}
+                  className={`w-[18.8125rem] h-[4.588rem] border border-black flex items-center justify-center gap-2 ${
+                    activeTab === "gallery"
+                      ? "bg-[#8B8484]"
+                      : "bg-white text-black"
+                  }`}
                   onClick={() => setActiveTab("gallery")}
                 >
                   <RiGalleryView2 size={28} className="cursor-pointer" />
-                  <button className="h-full text-xl font-Poppins">Gallery</button>
+                  <button className="h-full text-xl font-Poppins">
+                    Gallery
+                  </button>
                 </div>
               </div>
 
-              {activeTab === "information" ?
+              {activeTab === "information" ? (
                 <Information
                   key={result._id}
                   name={result.name}
@@ -99,17 +107,13 @@ const PackageInfo = () => {
                   facilities={result.facilities}
                   nights={result.numberOfNights}
                 />
-                : null}
-              {activeTab === "tourplan" ?
-                <TourPlan
-                  itinerary={result.itinerary}
-                />
-                : null}
-              {activeTab === "gallery" ?
-                <Gallery
-                  images={result.images}
-                />
-                : null}
+              ) : null}
+              {activeTab === "tourplan" ? (
+                <TourPlan itinerary={result.itinerary} />
+              ) : null}
+              {activeTab === "gallery" ? (
+                <Gallery images={result.images} />
+              ) : null}
             </div>
           </div>
         ))

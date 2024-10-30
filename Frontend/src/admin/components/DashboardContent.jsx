@@ -43,7 +43,7 @@ function DashboardCard({ title, value, icon }) {
       <div className="p-5">
         <div className="flex items-center">
           <div className="flex-shrink-0">
-            <div className="rounded-md bg-blue-500 p-3">{icon}</div>
+            <div className="rounded-md bg-[#ff6546] p-3">{icon}</div>
           </div>
           <div className="ml-5 w-0 flex-1">
             <dl>
@@ -71,7 +71,7 @@ function RecentBookingsWidget() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5070/api/admin/bookings"
+          "https://travel-tour-mlya.onrender.com/api/admin/bookings"
         );
         setDestinations(response.data.bookings || []);
       } catch (error) {
@@ -145,7 +145,7 @@ function TopDestinationsWidget() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "http://localhost:5070/api/destination/alldestinations"
+        "https://travel-tour-mlya.onrender.com/api/destination/alldestinations"
       );
       setDestinations(response.data);
       console.log("response", response.data);

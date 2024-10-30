@@ -10,25 +10,27 @@ import {
 } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
-
 export default function OrderPage() {
   const jwt = localStorage.getItem("token");
 
-  const { id } = useParams()
+  const { id } = useParams();
   const [bookings, setBookings] = useState(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const response = await axios.get(`http://localhost:5070/api/booking/find/${id}`, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
-      console.log("details", response.data)
+      const response = await axios.get(
+        `https://travel-tour-mlya.onrender.com/api/booking/find/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      console.log("details", response.data);
       setBookings(response.data);
     };
-    fetchBookings()
-  }, [jwt])
+    fetchBookings();
+  }, [jwt]);
 
   if (!bookings) {
     return <div>Loading...</div>;
@@ -43,9 +45,10 @@ export default function OrderPage() {
               {bookings.destination.name}
             </h1>
             <p className="text-gray-600 flex items-center mt-2 font-poppins">
-              <FaCalendarDay className="w-5 h-5 mr-2" />{bookings.destination.numberOfNights} Nights, {bookings.destination.numberOfNights + 1} Days
+              <FaCalendarDay className="w-5 h-5 mr-2" />
+              {bookings.destination.numberOfNights} Nights,{" "}
+              {bookings.destination.numberOfNights + 1} Days
             </p>
-
           </header>
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-6">
@@ -144,7 +147,7 @@ export default function OrderPage() {
                     <span>₹ {bookings.totalPrice}</span>
                   </div>
                   <button className="bg-[#DF6951] text-white py-2 px-4 rounded-md w-full mt-4 hover:bg-[#ff6b4e] transition duration-200">
-                     Booking Confirmed
+                    Booking Confirmed
                   </button>
                 </div>
               </div>

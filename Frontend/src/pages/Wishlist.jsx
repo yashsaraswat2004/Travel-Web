@@ -3,25 +3,25 @@ import { useEffect, useState } from "react";
 import Card from "../components/WhyChooseUs/Card";
 import axios from "axios";
 
-
 const Wishlist = () => {
   const jwt = localStorage.getItem("token");
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:5070/api/user/favorites",
+      const response = await axios.get(
+        "https://travel-tour-mlya.onrender.com/api/user/favorites",
         {
           headers: {
-            Authorization: `Bearer ${jwt}`
-          }
+            Authorization: `Bearer ${jwt}`,
+          },
         }
       );
       setSearchResults(response.data);
       console.log("user favorities", response.data);
-    }
+    };
     fetchData();
-  }, [jwt])
+  }, [jwt]);
 
   return (
     <div className="bg-gray-100 min-h-screen py-10">
@@ -29,7 +29,6 @@ const Wishlist = () => {
         <h1 className="text-4xl font-bold p-5 text-[#DF6951] font-poppins">
           Your Dreamed Destinations
         </h1>
-
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 px-3 mt-10 pl-10 mb-10">
           {searchResults.length > 0 ? (
@@ -45,7 +44,9 @@ const Wishlist = () => {
               />
             ))
           ) : (
-            <h1 className="text-2xl font-bold">Hurry up & add your destination</h1>
+            <h1 className="text-2xl font-bold">
+              Hurry up & add your destination
+            </h1>
           )}
         </div>
       </div>

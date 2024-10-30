@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-
 export default function Profile() {
   const jwt = localStorage.getItem("token");
   const [user, setUser] = useState({});
@@ -21,25 +20,25 @@ export default function Profile() {
   //profile
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:5070/api/user/profile",
+      const response = await axios.get(
+        "https://travel-tour-mlya.onrender.com/api/user/profile",
         {
           headers: {
-            Authorization: `Bearer ${jwt}`
-          }
+            Authorization: `Bearer ${jwt}`,
+          },
         }
       );
-      setUser(response.data)
+      setUser(response.data);
       console.log("user profile", response.data);
-    }
+    };
     fetchData();
-  }, [jwt])
-
+  }, [jwt]);
 
   const [activeTab, setActiveTab] = useState("personal");
   const formatDate = (createAt) => {
     const date = new Date(createAt);
-    const options = { month: 'short', day: 'numeric', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    const options = { month: "short", day: "numeric", year: "numeric" };
+    return date.toLocaleDateString("en-US", options);
   };
 
   //update user
@@ -47,49 +46,53 @@ export default function Profile() {
     firstName: "",
     lastName: "",
     email: "",
-  })
+  });
   const handleInput = (event) => {
-    setValues((prev) => (
-      {
-        ...prev,
-        [event.target.name]: event.target.value
-      }
-    ))
-  }
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
   const handleUpdate = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put("http://localhost:5070/api/user/updateuser", values, {
-        headers: {
-          Authorization: `Bearer ${jwt}`
+      const response = await axios.put(
+        "https://travel-tour-mlya.onrender.com/api/user/updateuser",
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
         }
-      });
+      );
       if (response.status === 200) {
         Swal.fire("User Updated successfully", "", "success").then(() => {
           setTimeout(() => {
             location.reload();
           }, 1000);
-        })
+        });
       }
     } catch (e) {
       if (e.response && e.response.status === 400) {
-        Swal.fire("User already exists with the email", "", "info")
+        Swal.fire("User already exists with the email", "", "info");
       }
-      console.log("error while updating", e)
+      console.log("error while updating", e);
     }
-  }
-
+  };
 
   //upcoming trips
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     const fetchBookings = async () => {
-      const response = await axios.get("http://localhost:5070/api/user/bookings", {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
-      console.log("bookings", response.data)
+      const response = await axios.get(
+        "https://travel-tour-mlya.onrender.com/api/user/bookings",
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      console.log("bookings", response.data);
       setBookings(response.data);
     };
 
@@ -99,7 +102,6 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-gray-100 p-4 lg:p-8 font-poppins">
       <div className="max-w-6xl mx-auto">
-
         <header className="mb-8 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 rounded-full bg-[#ff694b] flex items-center justify-center text-white text-2xl font-bold">
@@ -111,7 +113,8 @@ export default function Profile() {
                 Welcome, {user.firstName}
               </h1>
               <p className="text-gray-600">
-                Member since {user.createAt ? formatDate(user.createAt) : "N/A"}              </p>
+                Member since {user.createAt ? formatDate(user.createAt) : "N/A"}{" "}
+              </p>
             </div>
           </div>
           <button className="px-4 py-2 border rounded-md flex items-center space-x-2">
@@ -125,44 +128,48 @@ export default function Profile() {
             <div className="w-full">
               <div className="flex space-x-4 mb-4">
                 <button
-                  className={`py-2 px-4 ${activeTab === "personal"
-                    ? "bg-[#ff694b] text-white"
-                    : "bg-gray-200"
-                    }`}
+                  className={`py-2 px-4 ${
+                    activeTab === "personal"
+                      ? "bg-[#ff694b] text-white"
+                      : "bg-gray-200"
+                  }`}
                   onClick={() => setActiveTab("personal")}
                 >
                   Personal
                 </button>
                 <button
-                  className={`py-2 px-4 ${activeTab === "upcoming"
-                    ? "bg-[#ff694b] text-white"
-                    : "bg-gray-200"
-                    }`}
+                  className={`py-2 px-4 ${
+                    activeTab === "upcoming"
+                      ? "bg-[#ff694b] text-white"
+                      : "bg-gray-200"
+                  }`}
                   onClick={() => setActiveTab("upcoming")}
                 >
                   Upcoming
                 </button>
                 <button
-                  className={`py-2 px-4 ${activeTab === "past"
-                    ? "bg-[#ff694b] text-white"
-                    : "bg-gray-200"
-                    }`}
+                  className={`py-2 px-4 ${
+                    activeTab === "past"
+                      ? "bg-[#ff694b] text-white"
+                      : "bg-gray-200"
+                  }`}
                   onClick={() => setActiveTab("past")}
                 >
                   Past Trips
                 </button>
                 <button
-                  className={`py-2 px-4 ${activeTab === "preferences"
-                    ? "bg-[#ff694b] text-white"
-                    : "bg-gray-200"
-                    }`}
+                  className={`py-2 px-4 ${
+                    activeTab === "preferences"
+                      ? "bg-[#ff694b] text-white"
+                      : "bg-gray-200"
+                  }`}
                   onClick={() => setActiveTab("preferences")}
                 >
                   Preferences
                 </button>
               </div>
               {activeTab === "personal" && (
-                <form onSubmit={handleUpdate}  >
+                <form onSubmit={handleUpdate}>
                   <div className="p-6 bg-white rounded-lg shadow">
                     <h2 className="text-xl font-bold mb-4">
                       Personal Information
@@ -209,16 +216,16 @@ export default function Profile() {
                         </Link>
                       </div>
                     </div>
-                    <button type="submit" className="mt-4 px-4 py-2 bg-[#ff694b] text-white rounded flex items-center space-x-2">
+                    <button
+                      type="submit"
+                      className="mt-4 px-4 py-2 bg-[#ff694b] text-white rounded flex items-center space-x-2"
+                    >
                       <FiEdit className="w-4 h-4" />
                       <span>Update Information</span>
                     </button>
                   </div>
                 </form>
-
               )}
-
-
 
               {activeTab === "upcoming" && (
                 <div className="bg-white p-4 rounded-lg shadow">
@@ -228,30 +235,50 @@ export default function Profile() {
                       const bookingDate = new Date(booking.bookingDate);
 
                       if (isNaN(bookingDate.getTime())) {
-                        console.error("Invalid booking date:", booking.bookingDate);
-                        return null; 
+                        console.error(
+                          "Invalid booking date:",
+                          booking.bookingDate
+                        );
+                        return null;
                       }
 
                       const endDate = new Date(bookingDate);
-                      endDate.setDate(bookingDate.getDate() + booking.destination.numberOfNights);
+                      endDate.setDate(
+                        bookingDate.getDate() +
+                          booking.destination.numberOfNights
+                      );
 
                       // Format the start and end dates
                       const formattedStartDate = formatDate(bookingDate);
                       const formattedEndDate = formatDate(endDate);
 
                       // Create the combined date string without extra commas
-                      const dateRange = `${formattedStartDate.split(' ')[0]} ${formattedStartDate.split(' ')[1]}-${formattedEndDate.split(' ')[1]}, ${formattedEndDate.split(' ')[2]}`;
+                      const dateRange = `${formattedStartDate.split(" ")[0]} ${
+                        formattedStartDate.split(" ")[1]
+                      }-${formattedEndDate.split(" ")[1]}, ${
+                        formattedEndDate.split(" ")[2]
+                      }`;
 
                       return (
-                        <div key={booking._id} className="flex items-center justify-between p-4 bg-gray-100 rounded">
+                        <div
+                          key={booking._id}
+                          className="flex items-center justify-between p-4 bg-gray-100 rounded"
+                        >
                           <div>
-                            <h3 className="font-semibold">{booking.destination.name}</h3>
-                            <p className="text-gray-600">{booking.destination.city} {booking.destination.country}</p>
+                            <h3 className="font-semibold">
+                              {booking.destination.name}
+                            </h3>
+                            <p className="text-gray-600">
+                              {booking.destination.city}{" "}
+                              {booking.destination.country}
+                            </p>
                           </div>
                           <div className="text-right">
                             <p>{dateRange}</p>
                             <Link to={`/orders/${booking._id}`}>
-                              <button className="text-[#ff694b]">View Details</button>
+                              <button className="text-[#ff694b]">
+                                View Details
+                              </button>
                             </Link>
                           </div>
                         </div>
@@ -260,10 +287,6 @@ export default function Profile() {
                   </div>
                 </div>
               )}
-
-
-
-
 
               {activeTab === "past" && (
                 <div className="bg-white p-4 rounded-lg shadow">
@@ -380,7 +403,11 @@ export default function Profile() {
                     <FiGlobe className="w-4 h-4 text-[#ff694b]" />
                     Cities Visited
                   </span>
-                  <span className="font-semibold">{user.paymentInformation ? user.paymentInformation.length : 0}</span>
+                  <span className="font-semibold">
+                    {user.paymentInformation
+                      ? user.paymentInformation.length
+                      : 0}
+                  </span>
                 </div>
                 <Link to="/wishlist">
                   <div className="flex mt-2 items-center justify-between">
@@ -388,7 +415,9 @@ export default function Profile() {
                       <FiMapPin className="w-4 h-4 text-[#ff694b]" />
                       Total Favs
                     </span>
-                    <span className="font-semibold">{user.favorites ? user.favorites.length : 0}</span>
+                    <span className="font-semibold">
+                      {user.favorites ? user.favorites.length : 0}
+                    </span>
                   </div>
                 </Link>
               </div>
@@ -396,6 +425,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }

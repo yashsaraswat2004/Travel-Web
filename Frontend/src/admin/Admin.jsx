@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react'
-import { Globe, Calendar, Settings, Menu, TrendingUp } from 'lucide-react'
-import DashboardContent from './components/DashboardContent'
-import DestinationsContent from './components/DestinationsContent'
-import BookingsContent from './components/BookingContent'
-import PropTypes from 'prop-types'
-import AddDestination from './components/AddDestination'
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import { MenuItem, Menu as DropdownMenu } from '@mui/material'
-import { CgProfile } from 'react-icons/cg'
-import Swal from 'sweetalert2'
+import { useEffect, useState } from "react";
+import { Globe, Calendar, Settings, Menu, TrendingUp } from "lucide-react";
+import DashboardContent from "./components/DashboardContent";
+import DestinationsContent from "./components/DestinationsContent";
+import BookingsContent from "./components/BookingContent";
+import PropTypes from "prop-types";
+import AddDestination from "./components/AddDestination";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { MenuItem, Menu as DropdownMenu } from "@mui/material";
+import { CgProfile } from "react-icons/cg";
+import Swal from "sweetalert2";
 
 export default function TravelAdminPanel() {
-  const [activePage, setActivePage] = useState('dashboard')
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activePage, setActivePage] = useState("dashboard");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);  // For dropdown handling
+  const [anchorEl, setAnchorEl] = useState(null); // For dropdown handling
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
@@ -25,12 +25,12 @@ export default function TravelAdminPanel() {
   useEffect(() => {
     const getUserById = async () => {
       if (!jwt) {
-        navigate('/signin')
-      };
+        navigate("/signin");
+      }
 
       try {
         const response = await axios.get(
-          "http://localhost:5070/api/user/profile",
+          "https://travel-tour-mlya.onrender.com/api/user/profile",
           {
             headers: {
               Authorization: `Bearer ${jwt}`,
@@ -39,9 +39,8 @@ export default function TravelAdminPanel() {
         );
         if (jwt && response.data.role === "user") {
           Swal.fire("You are not authorized to that page", "", "warning");
-          navigate('/')
-        }
-        else if (response) {
+          navigate("/");
+        } else if (response) {
           setUser(response.data);
         }
       } catch (error) {
@@ -87,15 +86,44 @@ export default function TravelAdminPanel() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className={`${isMobileMenuOpen ? 'block' : 'hidden'} w-64 bg-blue-800 text-white p-4 md:block`}>
+      <aside
+        className={`${
+          isMobileMenuOpen ? "block" : "hidden"
+        } w-64 bg-[#e7593d] text-white p-4 md:block`}
+      >
         <h1 className="text-2xl font-bold mb-8">Travel Admin</h1>
         <nav>
           <ul className="space-y-2">
-            <NavItem icon={<TrendingUp />} label="Dashboard" active={activePage === 'dashboard'} onClick={() => setActivePage('dashboard')} />
-            <NavItem icon={<Globe />} label="Destinations" active={activePage === 'destinations'} onClick={() => setActivePage('destinations')} />
-            <NavItem icon={<Calendar />} label="Bookings" active={activePage === 'bookings'} onClick={() => setActivePage('bookings')} />
-            <NavItem icon={<ControlPointIcon />} label="Add Destinations" active={activePage === 'reviews'} onClick={() => setActivePage('addItem')} />
-            <NavItem icon={<Settings />} label="Settings" active={activePage === 'settings'} onClick={() => setActivePage('settings')} />
+            <NavItem
+              icon={<TrendingUp />}
+              label="Dashboard"
+              active={activePage === "dashboard"}
+              onClick={() => setActivePage("dashboard")}
+            />
+            <NavItem
+              icon={<Globe />}
+              label="Destinations"
+              active={activePage === "destinations"}
+              onClick={() => setActivePage("destinations")}
+            />
+            <NavItem
+              icon={<Calendar />}
+              label="Bookings"
+              active={activePage === "bookings"}
+              onClick={() => setActivePage("bookings")}
+            />
+            <NavItem
+              icon={<ControlPointIcon />}
+              label="Add Destinations"
+              active={activePage === "reviews"}
+              onClick={() => setActivePage("addItem")}
+            />
+            <NavItem
+              icon={<Settings />}
+              label="Settings"
+              active={activePage === "settings"}
+              onClick={() => setActivePage("settings")}
+            />
           </ul>
         </nav>
       </aside>
@@ -128,9 +156,8 @@ export default function TravelAdminPanel() {
                     onClick={handleAvatarClick}
                     className="cursor-pointer font-medium text-gray-700 hover:text-gray-900"
                   >
-                    Admin :   {user.firstName}
+                    Admin : {user.firstName}
                   </span>
-
                 ) : (
                   <Link to="/signin">
                     <CgProfile size={30} color="black" />
@@ -190,15 +217,18 @@ function NavItem({ icon, label, active, onClick }) {
   return (
     <li>
       <button
-        className={`flex items-center space-x-2 w-full p-2 rounded-lg ${active ? 'bg-blue-900 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white'
-          }`}
+        className={`flex items-center space-x-2 w-full p-2 rounded-lg ${
+          active
+            ? "bg-white text-black"
+            : "text-white hover:bg-white hover:text-black"
+        }`}
         onClick={onClick}
       >
         {icon}
         <span>{label}</span>
       </button>
     </li>
-  )
+  );
 }
 
 function SettingsContent() {
@@ -215,7 +245,7 @@ function SettingsContent() {
           {/* Form elements for settings */}
           <button
             type="submit"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#DF6951] hover:bg-[#fa5c3c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#DF6951]"
           >
             Save Settings
           </button>
