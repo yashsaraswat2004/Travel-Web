@@ -11,17 +11,17 @@ const BookNextTrip = () => {
   };
 
   return (
-    <div className="h-[33.3125rem] w-full flex justify-between">
+    <div className="md:h-[33.3125rem] h-fit w-full md:flex grid md:justify-between justify-items-center gap-5 relative mt-10">
       <div>
-        <p className="text-[1rem] font-[600] text-[#5E6282] font-poppins mt-[2rem] ml-[3.5rem]">
+        <p className="text-[1rem] font-[600] text-[#5E6282] font-poppins mt-[2rem] lg:ml-[3.5rem] ml-4 text-wrap">
           Easy and Fast
         </p>
-        <h1 className="text-[2rem] text-[#14183E] leading-10 font-[700] font-poppins ml-[3.5rem] w-[20rem]">
+        <h1 className="lg:text-[2rem] text-xl text-wrap text-[#14183E] leading-10 font-[700] font-poppins lg:ml-[3.5rem] ml-4 sm:w-[20rem]">
           Book your next trip in 3 easy steps
         </h1>
-        <div className="w-[35.75rem] h-[12.55rem] flex flex-col gap-2 ml-[4.25rem] mt-[1rem]">
-          <div className="flex items-center gap-[6rem] h-[5.7268rem] justify-around">
-            <div className="flex items-center justify-center w-[4.5rem] h-[4.5rem] rounded-full ml-[1.5rem]">
+        <div className="lg:w-[35.75rem]  lg:h-[12.55rem] flex flex-col gap-2 xl:ml-[4.25rem] ml-5 mt-[1rem] ">
+          <div className="flex items-center xl:gap-[6rem] gap-4 h-[5.7268rem] justify-around">
+            <div className="flex items-center justify-center md:w-[4.5rem] w-[2rem] h-[4.5rem] rounded-full lg:ml-[1.5rem]">
               <MdOutlineModeOfTravel size={44} />
             </div>
 
@@ -35,15 +35,15 @@ const BookNextTrip = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-[6rem] h-[5.7268rem] justify-around">
-            <div className="flex items-center justify-center w-[4.5rem] h-[4.5rem] rounded-full ml-[1.5rem]">
+          <div className="flex items-center xl:gap-[6rem] gap-4 h-[5.7268rem] justify-around ">
+            <div className="flex items-center justify-center md:w-[4.5rem] w-[2rem] h-[4.5rem] rounded-full lg:ml-[1.5rem]">
               <MdOutlinePayment size={44} />
             </div>
             <div className="">
               <h1 className="text-[1rem] text-[#14183E] leading-10 font-[700] font-poppins">
                 Make Payment
               </h1>
-              <p className="text-[#5E6282] font-poppins text-[1rem] font-[400]">
+              <p className="text-[#5E6282] font-poppins text-[1rem] font-[400] text-wrap">
                 Make payment for your trip and get your booking confirmed in
                 minutes.
               </p>
@@ -51,17 +51,18 @@ const BookNextTrip = () => {
           </div>
         </div>
       </div>
-      <div className="h-[26.1875rem] w-[26.4375rem] mr-[3.5rem] mt-[3.5rem] rounded-3xl shadow-2xl">
-        <div className="h-[12.875rem] w-[26.4375rem] rounded-3xl">
+      <div className="xl:h-[26.1875rem] lg:h-96  h-80  xl:w-[26.4375rem] lg:w-[24rem] md:w-80 w-[19rem] md:mr-[3.5rem] mt-[3.5rem] rounded-3xl shadow-2xl justify-self-center">
+        <div className="xl:h-[12.875rem] h-[10rem] xl:w-[26.4375rem] lg:w-[24rem] rounded-3xl">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRx2CuUHpaeR3wQh5eJck3BrqSKrooJu3JeA&s"
             alt=""
+            loading="lazy"
             className="w-full h-full object-cover rounded-t-3xl"
           />
         </div>
 
-        <div className="flex flex-col gap-4 ml-[1.5rem] mt-[1.5rem] h-[5rem] w-[22.4375rem] rounded-3xl">
-          <h1 className="text-[1.5rem] font-[700] font-poppins text-[#14183E]">
+        <div className="flex flex-col lg:gap-4 gap-2 ml-[1.5rem] lg:mt-[1.5rem] mt-4 h-[5rem] w-[22.4375rem] rounded-3xl">
+          <h1 className="lg:text-[1.5rem] md:text-xl font-[700] font-poppins text-[#14183E]">
             Trip To Bhopal
           </h1>
           <div className="flex gap-4 text-[#5E6282] font-poppins text-[1rem] font-[400]">
@@ -73,8 +74,8 @@ const BookNextTrip = () => {
             <img src="./map icon.svg" alt="" />
             <img src="./send.svg" alt="" />
           </div>
-          <div className="flex items-center justify-between mx-[1.5rem]">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center lg:justify-between gap-11 lg:mx-[1.5rem] md:mx-3">
+            <div className="flex items-center gap-3">
               <BsPeopleFill size={24} />
               <p>24 people going</p>
             </div>

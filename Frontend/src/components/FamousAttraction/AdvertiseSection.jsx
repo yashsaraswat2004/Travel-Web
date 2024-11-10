@@ -1,8 +1,8 @@
 const AdvertiseSection = () => {
   return (
-    <div className="h-[19.5rem] w-full flex">
+    <div className="md:h-[19.5rem] h-fit w-full sm:flex grid relative mt-16">
       <div
-        className="w-[50%] flex flex-col items-center justify-center"
+        className="sm:w-[50%] w-full  h-[221px]  md:h-auto flex flex-col items-center justify-center"
         style={{
           backgroundImage: "url('./.svg')",
           backgroundSize: "cover",
@@ -10,18 +10,18 @@ const AdvertiseSection = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <h1 className="text-white text-[1.125rem] font-[700] font-poppins">
+        <h1 className="text-white md:text-[1.125rem] text-base md:font-[700] font-medium font-poppins">
           Promotion
         </h1>
-        <p className="text-white text-[3.125rem] font-[700] font-poppins leading-[4.244rem]">
+        <p className="text-white md:text-[3.125rem] text-3xl font-[700] font-poppins leading-[4.244rem]">
           Explore Nature
         </p>
-        <button className="text-white text-[1.045rem] w-[11.034rem] h-[3.1475rem] font-[700] font-poppins border border-white rounded-[0.625rem]">
+        <button className="text-white md:text-[1.045rem] text-sm md:w-[11.034rem] md:h-[3.1475rem] w-32 h-10 font-[700] font-poppins border border-white rounded-[0.625rem]">
           View Packages
         </button>
       </div>
       <div
-        className="w-[50%]"
+        className="sm:w-[50%] w-full h-[221px] md:h-auto"
         style={{
           backgroundImage: "url('./Explore Cities.png')",
           backgroundSize: "cover",

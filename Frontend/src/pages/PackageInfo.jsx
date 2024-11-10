@@ -21,7 +21,7 @@ const PackageInfo = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5070/api/destination/id/${id}`
+          `https://travel-tour-mlya.onrender.com/api/destination/id/${id}`
         );
         setSearchResults(
           Array.isArray(response.data) ? response.data : [response.data]
@@ -35,7 +35,7 @@ const PackageInfo = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="bg-[#f9f9f9]">
       <Navbar jwt={jwt} />
 
       {searchResults.length > 0 ? (
@@ -49,47 +49,55 @@ const PackageInfo = () => {
               />
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-4">
-              <div className="w-[68.8125rem] h-[4.588rem] mx-auto bg-white rounded-sm flex pl-7 mt-3">
-
+            <div className="flex flex-col justify-center items-center gap-4 ">
+              <div className="xl:w-fit w-3/4   lg:h-[4.588rem] h-14 mx-auto  rounded-sm flex -mt-4 justify-center">
                 {/* information section  */}
                 <div
-                  className={`w-[18.8125rem] h-[4.588rem] ml-[4rem] border border-black flex items-center justify-center gap-2 ${activeTab === "information"
-                    ? "bg-[#8B8484]"
-                    : "bg-white text-black"
-                    }`}
+                  className={`xl:w-[18.8125rem] w-1/3 flex items-center justify-center md:gap-2 gap-1 ${
+                    activeTab === "information"
+                      ? "bg-[#8B8484]"
+                      : "bg-white text-black"
+                  }`}
                   onClick={() => setActiveTab("information")}
                 >
                   <FaInfo size={20} className="cursor-pointer" />
-                  <button className="h-full text-xl font-Poppins">
+                  <button className="h-full lg:text-xl md:text-base text-xs  font-Poppins">
                     Information
                   </button>
                 </div>
 
                 {/* tour plan section  */}
                 <div
-                  className={`w-[18.8125rem] h-[4.588rem] border-y border-black flex items-center justify-center gap-2 ${activeTab === "tourplan"
-                    ? "bg-[#8B8484]"
-                    : "bg-white text-black"
-                    }`}
+                  className={`xl:w-[18.8125rem] w-1/3  flex items-center justify-center md:gap-2 gap-1 ${
+                    activeTab === "tourplan"
+                      ? "bg-[#8B8484]"
+                      : "bg-white text-black"
+                  }`}
                   onClick={() => setActiveTab("tourplan")}
                 >
                   <FaCar size={28} className="cursor-pointer" />
-                  <button className="h-full text-xl font-Poppins">Tour Plan</button>
+                  <button className="h-full lg:text-xl md:text-base text-xs  font-Poppins">
+                    Tour Plan
+                  </button>
                 </div>
 
                 {/* gallery section  */}
                 <div
-                  className={`w-[18.8125rem] h-[4.588rem] border border-black flex items-center justify-center gap-2 ${activeTab === "gallery" ? "bg-[#8B8484]" : "bg-white text-black"
-                    }`}
+                  className={`xl:w-[18.8125rem] w-1/3  flex items-center justify-center md:gap-2 gap-1 ${
+                    activeTab === "gallery"
+                      ? "bg-[#8B8484]"
+                      : "bg-white text-black"
+                  }`}
                   onClick={() => setActiveTab("gallery")}
                 >
                   <RiGalleryView2 size={28} className="cursor-pointer" />
-                  <button className="h-full text-xl font-Poppins">Gallery</button>
+                  <button className="h-full lg:text-xl md:text-base text-xs font-Poppins">
+                    Gallery
+                  </button>
                 </div>
               </div>
 
-              {activeTab === "information" ?
+              {activeTab === "information" ? (
                 <Information
                   key={result._id}
                   name={result.name}
@@ -99,17 +107,13 @@ const PackageInfo = () => {
                   facilities={result.facilities}
                   nights={result.numberOfNights}
                 />
-                : null}
-              {activeTab === "tourplan" ?
-                <TourPlan
-                  itinerary={result.itinerary}
-                />
-                : null}
-              {activeTab === "gallery" ?
-                <Gallery
-                  images={result.images}
-                />
-                : null}
+              ) : null}
+              {activeTab === "tourplan" ? (
+                <TourPlan itinerary={result.itinerary} />
+              ) : null}
+              {activeTab === "gallery" ? (
+                <Gallery images={result.images} />
+              ) : null}
             </div>
           </div>
         ))

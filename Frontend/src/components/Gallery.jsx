@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 
 const Gallery = ({ images }) => {
     return (
-        <div className="w-full max-w-[68.8125rem] mx-auto mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl w-fit mx-auto -mt-4 px-4 py-9 bg-white shadow-lg shadow-zinc-300">
+            <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4">
                 {images.map((image, index) => (
                     <div key={index} className="aspect-w-16 aspect-h-9">
                         <img
