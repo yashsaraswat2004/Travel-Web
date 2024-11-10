@@ -54,8 +54,7 @@ const PackageShowing = () => {
         </h1>
       </div>
 
-      {/* Display the search results */}
-      <div className="xl:ml-[6.8rem] pt-[5rem] mt-5 lg:w-[78.625rem] w-auto md:grid flex flex-wrap justify-center md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[3rem]">
+      <div className="xl:ml-[6.8rem] pt-[5rem] mt-5 lg:w-[78.625rem] w-auto md:grid flex flex-wrap justify-center md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-[3rem]">
         {currentPackages.length > 0 ? (
           currentPackages.map((result) => (
             <Card
@@ -73,7 +72,6 @@ const PackageShowing = () => {
         )}
       </div>
 
-      {/* Pagination controls */}
       <div className="flex justify-center items-center space-x-4 mt-28">
         <button
           onClick={handlePreviousPage}
