@@ -6,7 +6,9 @@ import axios from "axios";
 const PackageShowing = () => {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-  // const jwt = localStorage.getItem("token");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const packagesPerPage = 6;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,25 +20,44 @@ const PackageShowing = () => {
           setSearchResults(response.data);
           console.log(response.data);
         } catch (error) {
-          console.log("error while fetching the datas", error);
+          console.log("Error while fetching data:", error);
         }
       }
     };
     fetchData();
   }, [id]);
 
+  const indexOfLastPackage = currentPage * packagesPerPage;
+  const indexOfFirstPackage = indexOfLastPackage - packagesPerPage;
+  const currentPackages = searchResults.slice(
+    indexOfFirstPackage,
+    indexOfLastPackage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(searchResults.length / packagesPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center ">
+    <div className="flex flex-col justify-center">
       <div>
-        <h1 className="text-3xl text-transform: capitalize font-bold lg:ml-[6.8rem] md:ml-16   md:justify-self-start justify-self-center  pt-[1rem] mt-5">
+        <h1 className="text-3xl capitalize font-bold lg:ml-[6.8rem] md:ml-16 pt-[1rem] mt-5">
           Results for {id}
         </h1>
       </div>
 
       {/* Display the search results */}
-      <div className="xl:ml-[6.8rem] justify-items-center pt-[5rem] mt-5 h-[91rem] lg:w-[78.625rem] w-auto md:grid flex flex-wrap justify-center md:grid-cols-2 lg:grid-cols-3 ">
-        {searchResults.length > 0 ? (
-          searchResults.map((result) => (
+      <div className="xl:ml-[6.8rem] pt-[5rem] mt-5 lg:w-[78.625rem] w-auto md:grid flex flex-wrap justify-center md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[3rem]">
+        {currentPackages.length > 0 ? (
+          currentPackages.map((result) => (
             <Card
               key={result._id}
               _id={result._id}
@@ -48,19 +69,35 @@ const PackageShowing = () => {
             />
           ))
         ) : (
-          <h1 className="text-2xl font-bold text-center font-poppins">
-            No Trips Found
-          </h1>
+          <h1 className="text-2xl font-bold text-center">No Trips Found</h1>
         )}
+      </div>
+
+      {/* Pagination controls */}
+      <div className="flex justify-center items-center space-x-4 mt-28">
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of{" "}
+          {Math.ceil(searchResults.length / packagesPerPage)}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={
+            currentPage === Math.ceil(searchResults.length / packagesPerPage)
+          }
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
 };
-/*
-
-  Country,
-  DiscountedPrice,
-  price,
-*/
 
 export default PackageShowing;
