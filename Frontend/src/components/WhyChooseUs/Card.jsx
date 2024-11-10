@@ -53,6 +53,7 @@ const Card = ({ _id, src, Days, City, Country, price }) => {
         <img
           src={src}
           alt=""
+          loading="lazy"
           className="w-full h-full object-cover rounded-lg"
         />
       </div>

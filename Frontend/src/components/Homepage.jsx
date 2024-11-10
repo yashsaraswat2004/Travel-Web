@@ -47,7 +47,7 @@ const Homepage = () => {
       <div
         className=" h-[31.375rem] w-full bg-cover bg-center relative"
         style={{
-          backgroundImage: "url('./HeroSection.jpeg')",
+          backgroundImage: "url('./HeroSection.webp')",
 
           opacity: "90%",
         }}
