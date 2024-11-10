@@ -48,22 +48,18 @@ const Homepage = () => {
         className=" h-[31.375rem] w-full bg-cover bg-center relative"
         style={{
           backgroundImage: "url('./HeroSection.jpeg')",
-          
+
           opacity: "90%",
         }}
       >
         <div className="w-[39.25rem] h-[20.875rem] absolute top-[8.4375rem] xl:left-[9rem] md:left-20 left-0 mx-4 right-0 flex flex-col gap-4 place-content-center ">
-
-
-          <h1 className="text-white lg:text-[2.5rem] md:text-4xl text-2xl px-2 font-[700] font-poppins md:w-[34.5rem] md:h-[12.235rem] w-screen leading-[4.244rem]">
-            No matter where you’re going to, we’ll take you there
-          </h1>
-
-
+          <div className="backdrop-blur-none rounded-lg bg-gray-800/10 mb-5">
+            <h1 className=" lg:text-[3.3rem] md:text-4xl text-4xl px-2 font-[700] font-poppins md:w-[34.5rem] md:h-[12.235rem] w-screen leading-tight lg:leading-[4.2rem] lg:text-black">
+              No matter where you’re going to, we’ll take you there
+            </h1>
+          </div>
           <div className="lg:h-[4.4287rem] md:h-24 h-14 lg:w-[56.5568rem] md:w-full w-fit border bg-[#F3F3F399] rounded-[0.625rem] flex items-center md:justify-between gap-4">
-
             <div className="flex items-center md:gap-2 gap-1">
-
               <div className="md:ml-[3.05rem]  md:w-full w-28">
                 <input
                   type="text"
@@ -99,8 +95,6 @@ const Homepage = () => {
                   <IoIosArrowDown size={20} color="black" />
                 </div>
               </div>
-
-
             </div>
 
             <button
@@ -109,11 +103,7 @@ const Homepage = () => {
             >
               Search
             </button>
-
           </div>
-
-
-
 
           <div className="md:w-[39.25rem] w-96 h-[2.875rem] flex flex-wrap items-center md:gap-4 gap-1 mt-3 md:ml-[0.7rem]">
             <div className="md:w-[12.5537rem] w-fit h-[2.6175rem] flex items-center ">

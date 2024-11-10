@@ -16,7 +16,7 @@ export default function TravelAdminPanel() {
   const [activePage, setActivePage] = useState("dashboard");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null); // For dropdown handling
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
 
@@ -89,7 +89,7 @@ export default function TravelAdminPanel() {
       <aside
         className={`${
           isMobileMenuOpen ? "block" : "hidden"
-        } w-64 bg-[#e7593d] text-white p-4 md:block`}
+        } w-64 bg-[#ff522f] text-white p-4 md:block`}
       >
         <h1 className="text-2xl font-bold mb-8">Travel Admin</h1>
         <nav>
@@ -146,12 +146,6 @@ export default function TravelAdminPanel() {
             <div className="flex items-center">
               <div className="ml-3 relative">
                 {user ? (
-                  // <Avatar
-                  //     onClick={handleAvatarClick}
-                  //     sx={{ cursor: "pointer", backgroundColor: "#F18227" }}
-                  // >
-                  //     {user.firstName.charAt(0).toUpperCase()}
-                  // </Avatar>
                   <span
                     onClick={handleAvatarClick}
                     className="cursor-pointer font-medium text-gray-700 hover:text-gray-900"
