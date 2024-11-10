@@ -123,6 +123,7 @@ export default function Profile() {
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
             <div className="w-full">
+              
               <div className="flex space-x-4 mb-4">
                 <button
                   className={`py-2 px-4 ${activeTab === "personal"
@@ -161,6 +162,7 @@ export default function Profile() {
                   Preferences
                 </button>
               </div>
+
               {activeTab === "personal" && (
                 <form onSubmit={handleUpdate}  >
                   <div className="p-6 bg-white rounded-lg shadow">
@@ -246,7 +248,7 @@ export default function Profile() {
                         <div key={booking._id} className="flex items-center justify-between p-4 bg-gray-100 rounded">
                           <div>
                             <h3 className="font-semibold">{booking.destination.name}</h3>
-                            <p className="text-gray-600">{booking.destination.city} {booking.destination.country}</p>
+                            <p className="text-gray-600">{booking.destination.city}, {booking.destination.country}</p>
                           </div>
                           <div className="text-right">
                             <p>{dateRange}</p>

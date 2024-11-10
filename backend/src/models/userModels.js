@@ -12,16 +12,14 @@ const userSchema = new mongoose.Schema({
             ref: 'booking'
         }
     ],
-    paymentInformation: [
+    paymentInformation: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'payment' // Ensure this matches the model name
+    }],
+    favorites: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "payment_information"
-        }
-    ],
-    favorites: [ 
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'destination' 
+            ref: 'destination'
         }
     ],
     createAt: { type: Date, default: Date.now() }

@@ -78,7 +78,18 @@ const updatePaymentInfo = async (req, res) => {
             if (user) {
                 user.paymentInformation.push(booking._id);
                 await user.save();
+                console.log("Updated user payments:", user.paymentInformation); // Add this log
             }
+
+            // const user = await User.findById(booking.user);
+            // if (user) {
+            //     // Push the paymentId to the user's paymentInformation array
+            //     user.paymentInformation.push(payment_id);
+            //     await user.save();
+            //     console.log("Updated user's payment information:", user.paymentInformation);
+            // } else {
+            //     console.log("User not found for booking:", booking._id);
+            // }
 
             // Format the booking date
             const formattedBookingDate = booking.bookingDate ?

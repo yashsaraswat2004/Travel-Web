@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.Schema({
+const paymentSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
@@ -21,5 +21,5 @@ const bookingSchema = new mongoose.Schema({
     status: { type: String, enum: ['PLACED', 'CANCELLED'], default: 'PLACED' }
 });
 
-const Booking = mongoose.model('booking', bookingSchema);
-export default Booking;
+const Payment = mongoose.model('payment', paymentSchema);
+export default Payment;

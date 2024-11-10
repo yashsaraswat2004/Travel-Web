@@ -1,6 +1,6 @@
 import { getUserIdFromToken } from "../config/jwt.js";
-import Booking from "../models/bookingModel.js";
 import Destination from "../models/destinationModel.js";
+import Payment from "../models/paymentModels.js";
 import User from "../models/userModels.js";
 import { getUserProfile } from "../services/userService.js";
 
@@ -26,8 +26,8 @@ const userBooking = async (req, res) => {
         const user = await User.findById(req.user._id).populate({
             path: 'bookings',
             populate: {
-                path: 'destination', 
-                model: 'destination' 
+                path: 'destination',
+                model: 'destination'
             }
         });
 
@@ -38,6 +38,33 @@ const userBooking = async (req, res) => {
         res.status(500).json({ message: "Error fetching bookings", error: error.message || error });
     }
 }
+
+const userPayments = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate({
+            path: 'paymentInformation', // Reference 'paymentInformation' field in User schema
+            model: 'payment', // Ensure the model name matches here
+            populate: {
+                path: 'destination',
+                select: 'name description pricePerPerson'
+            }
+        });
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.status(200).json({
+            success: true,
+            payments: user.paymentInformation
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching user payments", error: error.message || error });
+    }
+};
+
+
+
+
+
 
 
 
@@ -128,4 +155,4 @@ const updateUserDetails = async (req, res) => {
     }
 }
 
-export { userProfile, userBooking, updateUserDetails, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };
+export { userProfile, userPayments, userBooking, updateUserDetails, addUserFavoriteDestination, getUserFavoriteDestination, getFavoriteDestinationById };
