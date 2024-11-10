@@ -58,7 +58,7 @@ const Homepage = () => {
               No matter where you’re going to, we’ll take you there
             </h1>
           </div>
-          <div className="lg:h-[4.4287rem] md:h-24 h-14 lg:w-[56.5568rem] md:w-full w-fit border bg-[#F3F3F399] rounded-[0.625rem] flex items-center md:justify-between gap-4">
+          <div className="lg:h-[4.4287rem] md:h-24 h-14 lg:w-[56.5568rem] md:w-full w-[25rem] border bg-[#F3F3F399] rounded-[0.625rem] flex justify-center gap-10 items-center md:justify-between">
             <div className="flex items-center md:gap-2 gap-1">
               <div className="md:ml-[3.05rem]  md:w-full w-28">
                 <input
