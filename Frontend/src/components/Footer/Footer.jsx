@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container place-self-center px-4 py-8 flex flex-wrap xl:gap-36 lg:gap-20 md:gap-2 gap-x-28 gap-y-20 justify-center w-fit">
         {/* About Section */}
         <div className="space-y-4 max-w-xs">
-          <img src="./logo.svg" loading="lazy" alt="logo" />
+          <img src="/logo.svg" loading="lazy" alt="logo" />
           <p className="lg:text-lg text-base md:text-sm">
             Travel helps people to find their dream destination easily.
           </p>
