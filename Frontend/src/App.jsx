@@ -51,7 +51,7 @@ function App() {
   }, []);
 
   return (
-    <div className="overflow-x-hidden font-poppins">
+    <div className="overflow-x-hidden font-poppins relative h-full">
       <Routes>
         <Route
           path="/"

@@ -109,26 +109,26 @@ export default function Profile() {
             </div>
 
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="lg:text-3xl md:text-xl text-base font-bold text-gray-900">
                 Welcome, {user.firstName}
               </h1>
-              <p className="text-gray-600">
+              <p className="text-gray-600 lg:text-xl md:text-lg text-sm">
                 Member since {user.createAt ? formatDate(user.createAt) : "N/A"}{" "}
               </p>
             </div>
           </div>
           <button className="px-4 py-2 border rounded-md flex items-center space-x-2">
             <FiSettings className="w-4 h-4" />
-            <span>Account Settings</span>
+            <span className="lg:text-base md:text-sm">Account Settings</span>
           </button>
         </header>
 
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
             <div className="w-full">
-              <div className="flex space-x-4 mb-4">
+              <div className="flex md:space-x-4 space-x-1 mb-4">
                 <button
-                  className={`py-2 px-4 ${
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
                     activeTab === "personal"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
@@ -138,7 +138,7 @@ export default function Profile() {
                   Personal
                 </button>
                 <button
-                  className={`py-2 px-4 ${
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
                     activeTab === "upcoming"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
@@ -148,7 +148,7 @@ export default function Profile() {
                   Upcoming
                 </button>
                 <button
-                  className={`py-2 px-4 ${
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
                     activeTab === "past"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
@@ -158,7 +158,7 @@ export default function Profile() {
                   Past Trips
                 </button>
                 <button
-                  className={`py-2 px-4 ${
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
                     activeTab === "preferences"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
@@ -170,11 +170,11 @@ export default function Profile() {
               </div>
               {activeTab === "personal" && (
                 <form onSubmit={handleUpdate}>
-                  <div className="p-6 bg-white rounded-lg shadow">
+                  <div className="p-6 bg-white rounded-lg shadow w-full ">
                     <h2 className="text-xl font-bold mb-4">
                       Personal Information
                     </h2>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-4 ">
                       <div className="space-y-2">
                         <label htmlFor="fullName">First Name</label>
                         <input
@@ -210,7 +210,7 @@ export default function Profile() {
                           name="email"
                         />
                       </div>
-                      <div className="space-y-2 mt-9 ml-5">
+                      <div className="space-y-2 mt-9 sm:ml-5">
                         <Link to="/recover_password" className="opacity-70 ">
                           Click to change password
                         </Link>
@@ -220,8 +220,8 @@ export default function Profile() {
                       type="submit"
                       className="mt-4 px-4 py-2 bg-[#ff694b] text-white rounded flex items-center space-x-2"
                     >
-                      <FiEdit className="w-4 h-4" />
-                      <span>Update Information</span>
+                      <FiEdit className="w-4 h-4 " />
+                      <span className="place-self-center">Update Information</span>
                     </button>
                   </div>
                 </form>

@@ -26,15 +26,15 @@ const PackageShowing = () => {
   }, [id]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col justify-center ">
       <div>
-        <h1 className="text-3xl text-transform: capitalize font-bold ml-[6.8rem] pt-[1rem] mt-5">
+        <h1 className="text-3xl text-transform: capitalize font-bold lg:ml-[6.8rem] md:ml-16   md:justify-self-start justify-self-center  pt-[1rem] mt-5">
           Results for {id}
         </h1>
       </div>
 
       {/* Display the search results */}
-      <div className="ml-[6.8rem] pt-[5rem] mt-5 h-[91rem] w-[78.625rem] grid grid-cols-3 gap-2">
+      <div className="xl:ml-[6.8rem] justify-items-center pt-[5rem] mt-5 h-[91rem] lg:w-[78.625rem] w-auto md:grid flex flex-wrap justify-center md:grid-cols-2 lg:grid-cols-3 ">
         {searchResults.length > 0 ? (
           searchResults.map((result) => (
             <Card

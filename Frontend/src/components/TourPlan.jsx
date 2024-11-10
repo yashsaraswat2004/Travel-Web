@@ -3,22 +3,22 @@ import BookingForm from './BookingForm';
 
 const TourPlan = ({ itinerary }) => {
   return (
-    <div className="max-w-7xl mx-auto mt-8 px-4">
-      <h1 className="text-4xl font-bold mb-8">Tour Plan</h1>
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-2/3 space-y-8">
+    <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl w-fit mx-auto -mt-4 px-4 py-9 bg-white shadow-lg shadow-zinc-300">
+      <div className="flex flex-col md:flex-row gap-16 justify-center">
+        <div className="md:w-2/4 w-3/4  md:place-self-start place-self-center space-y-8">
+        <h1 className="lg:text-4xl text-3xl font-bold mb-8 justify-start">Tour Plan</h1>
           {itinerary.map((dayPlan) => (
-            <div key={dayPlan._id} className="border-b border-gray-200 pb-6 last:border-b-0">
-              <h2 className="text-2xl font-bold text-[#181E4B] mb-4">
+            <div key={dayPlan._id} className="border-b border-gray-200 lg:pb-6 pb-3 last:border-b-0">
+              <h2 className="lg:text-2xl text-base font-bold text-[#181E4B] mb-4">
                 Day {dayPlan.day}:
               </h2>
-              <p className="text-base text-gray-700 leading-relaxed">
+              <p className="lg:text-base text-xs text-gray-700 leading-relaxed">
                 {dayPlan.activities}
               </p>
             </div>
           ))}
         </div>
-        <div className="lg:w-1/3">
+        <div className="md:w-1/3 w-3/4 md:mx-0 mx-auto">
           <div className="sticky top-8">
             <BookingForm />
           </div>

@@ -83,7 +83,7 @@ const Navbar = ({ jwt }) => {
   };
 
   return (
-    <div className="flex justify-between items-center h-[5rem] max-w-full px-4 py-4 font-Montserrat cursor-pointer shadow-lg md:px-10">
+    <div className="flex justify-between items-center h-[5rem] max-w-full px-4 py-4 font-Montserrat cursor-pointer shadow-lg md:px-10 sticky top-0 z-50">
       <div className="flex items-center gap-4 ">
         <Link to="/">
           <img src="logo.svg" alt="logo" className="w-[7.875rem] h-[3.2rem]" />

@@ -12,10 +12,10 @@ const Information = ({
   nights,
 }) => {
   return (
-    <div className="flex justify-between w-full max-w-7xl mx-auto mt-8">
-      <div className="w-2/3 pr-8">
+    <div className="flex flex-col md:flex-row gap-16 w-fit xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto -mt-4 py-9 justify-center bg-white shadow-lg shadow-zinc-300">
+      <div className="md:w-2/4 w-3/4  md:place-self-start place-self-center">
         <div className="mb-6">
-          <h1 className="text-4xl font-bold mb-2">{name}</h1>
+          <h1 className="lg:text-4xl text-2xl font-bold mb-2">{name}</h1>
           <div className="flex items-center mb-2">
             {[...Array(5)].map((_, i) => (
               <FaStar key={i} className="text-yellow-400 mr-1" />
@@ -23,12 +23,12 @@ const Information = ({
             <span className="text-sm text-gray-600 ml-2">(12 Reviews)</span>
           </div>
           <div className="flex items-center">
-            <span className="text-3xl font-bold text-[#DF6951] mr-2">₹ {price}</span>
-            <span className="text-sm text-gray-600">Per Person</span>
+            <span className="md:text-3xl text-xl font-bold text-[#DF6951] mr-2">₹ {price}/</span>
+            <span className="lg:text-sm text-xs text-gray-600">Per Person</span>
           </div>
         </div>
-        <p className="text-sm mb-6">{description}</p>
-        <div className="space-y-4">
+        <p className="lg:text-base text-xs mb-6">{description}</p>
+        <div className="space-y-4 ">
           {[
             { label: "Destination", value: city },
             { label: "Total Plan", value: `${nights} Nights & ${nights + 1} Days` },
@@ -38,14 +38,14 @@ const Information = ({
             { label: "Inclusions", value: "Breakfast, Lunch, Dinner" },
             { label: "Exclusions", value: "Any Private Expenses" },
           ].map((item, index) => (
-            <div key={index} className="flex">
-              <span className="w-1/3 text-[#DF6951] font-semibold">{item.label}</span>
-              <span className="w-2/3">{item.value}</span>
+            <div key={index} className="flex ">
+              <span className="w-1/3 text-[#DF6951] font-semibold lg:text-lg text-sm">{item.label}</span>
+              <span className="w-2/3 lg:text-base text-xs">{item.value}</span>
             </div>
           ))}
         </div>
       </div>
-      <div className="w-1/3">
+      <div className="md:w-1/3 w-3/4 md:mx-0 mx-auto">
         <BookingForm name={name} price={price} />
       </div>
     </div>

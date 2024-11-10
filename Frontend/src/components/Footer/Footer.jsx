@@ -9,11 +9,16 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className=" mt-40">
-      <div className="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+
+      <div className="container place-self-center px-4 py-8 flex flex-wrap xl:gap-36 lg:gap-20 md:gap-2 gap-x-28 gap-y-20 justify-center w-fit">
+
+
+
         {/* About Section */}
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-xs">
           <img src="./logo.svg" alt="logo" />
-          <p>Travel helps people to find their dream destination easily.</p>
+          <p className="lg:text-lg text-base md:text-sm">Travel helps people to find their dream destination easily.</p>
           <div className="flex space-x-4">
             <Link
               to="https://www.facebook.com"
@@ -52,25 +57,25 @@ const Footer = () => {
 
         {/* Links Section */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Company</h2>
+          <h2 className="lg:text-lg text-base md:text-sm font-semibold">Company</h2>
           <ul className="space-y-2">
             <li>
-              <Link to="#" className="text-base">
+              <Link to="#" className="lg:text-base text-xs">
                 About Us
               </Link>
             </li>
             <li>
-              <Link to="#" className="text-base">
+              <Link to="#" className="lg:text-base text-xs">
                 Careers
               </Link>
             </li>
             <li>
-              <Link to="#" className="text-base">
+              <Link to="#" className="lg:text-base text-xs">
                 Blog
               </Link>
             </li>
             <li>
-              <Link to="#" className="text-base">
+              <Link to="#" className="lg:text-base text-xs">
                 Pricing
               </Link>
             </li>
@@ -78,24 +83,24 @@ const Footer = () => {
         </div>
 
         {/* Destinations Section */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Destinations</h2>
+        <div className="space-y-4 ">
+          <h2 className="lg:text-lg text-base md:text-sm font-semibold">Destinations</h2>
           <ul className="space-y-2">
-            <li className="text-base">Delhi</li>
-            <li className="text-base">Mumbai</li>
-            <li className="text-base">Banglore</li>
-            <li className="text-base">Shimla</li>
+            <li className="lg:text-base text-xs"><Link to="#">Delhi</Link></li>
+            <li className="lg:text-base text-xs"><Link to="#">Mumbai</Link></li>
+            <li className="lg:text-base text-xs"><Link to="">Banglore</Link></li>
+            <li className="lg:text-base text-xs"><Link to="">Shimla</Link></li>
           </ul>
         </div>
 
         {/* Newsletter Section */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Join Our Newsletter</h2>
+        <div className="space-y-4 w-fit">
+          <h2 className="lg:text-lg text-base md:text-sm font-semibold">Join Our Newsletter</h2>
           <form className="flex flex-row  items-center" onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="Enter your email"
-              className="p-2 bg-gray-100 rounded-l-md h-10 focus:outline-none focus:ring-2 focus:ring-[#df6951]"
+              className="xl:p-2 p-1 bg-gray-100 rounded-l-md h-10 w-32   xl:w-fit focus:outline-none focus:ring-2 focus:ring-[#df6951]"
               required
             />
             <button

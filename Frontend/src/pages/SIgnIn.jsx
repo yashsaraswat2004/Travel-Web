@@ -64,25 +64,25 @@ const SignIn = () => {
   }
 
   return (
-    <div className="al bg-white  min-h-screen place-content-center flex justify-center items-center relative">
+    <div className="al bg-white  min-h-screen place-content-center flex flex-wrap justify-center items-center relative gap-2">
       <div className="absolute top-0 left-0">
-        <img src="./aeroplane.png" alt="" className="w-[16rem] h-[16rem]" />
+        <img src="./aeroplane.png" alt="" className="lg:w-[16rem] md:w-56 w-24 lg:h-[16rem] md:h-56 h-24" />
       </div>
-      <div className="flex justify-center items-center gap-10 w-[32rem] mt-8 font-Montserrat shadow-lg hover:shadow-xl">
-        <p className="text-black text-3xl font-bold cursor-pointer capitalize p-8 rounded-xl">
-          <p className="text-custom-pink text-3xl font-bold">
+      <div className="flex justify-center items-center gap-10  md:w-[32rem] w-3/4 mt-8 font-Montserrat shadow-lg hover:shadow-xl">
+        <p className="text-black lg:text-3xl md:text-xl text-base font-bold cursor-pointer capitalize p-8 rounded-xl">
+          <p className="text-custom-pink lg:text-3xl md:text-xl text-base font-bold">
             Welcome back, traveler!
           </p>{" "}
           Your next adventure is waiting at EasyTrip.
-          <p className="text-custom-pink text-3xl font-bold">
+          <p className="text-custom-pink lg:text-3xl md:text-xl text-base font-bold">
             Log in to explore and book your next destination!
           </p>
         </p>
       </div>
-      <div className="grid  bg-white border border-white h-50 w-96 border-1 rounded m-2 p-8 py-2">
+      <div className="grid  bg-white border border-white h-50 w-fit  border-1 rounded m-2 sm:p-8 py-2 place-self-center">
         <form
           onSubmit={handleSubmit}
-          className="ml-20 w-[24rem] p-10 rounded-2xl shadow-lg hover:shadow-xl mt-5 font-Montserrat"
+          className="xl:ml-20 mx-auto lg:w-[24rem] w-full sm:p-10 p-4 rounded-2xl shadow-lg hover:shadow-xl mt-5 font-Montserrat"
         >
           <h1 className="text-2xl font-bold text-black my-4 text-center">
             Login
