@@ -109,42 +109,42 @@ const Homepage = () => {
             <div className="md:w-[12.5537rem] w-fit h-[2.6175rem] flex items-center ">
               <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#F3F3F399]">
                 <img
-                  src="https://s3-alpha-sig.figma.com/img/e86b/1a58/edac4decef7d3331c8b7169d259e4e8b?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=pQ1u1dPf47IrYqYD9mYCaI~CjHZZ508gnDse530IRAMGaERmkdVdOJwfAU3YetrfBHwqGSuCg7qw570KfuGJRUYgrmD2aJYkExh~Y5oIEMwUNzZ9uC5hCxxCGxmqcVr0hnsPuJzO-2Tv-TYPXqPA70~-iAJNACq6~A9n6MF~zYucUSufkkOKm4Mjra7fBhO4Qq~dpXfKalvwEU9LSw2JiOXApgoizK7CyM3owhX0ShrXKW~mlh6KVN~T2Hnyi2PeTz8IxJ42P-ZqHuADUmVxYU0YjA2ETuslWHOOTvJcWeVly8uc2FGqC3VuLQe-e9hoNfeeVVUQyeszTK6b6juYKQ__"
+                  src="../public/ClientsImage/client1.png"
                   alt=""
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full "
                 />
               </div>
               <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#F3F3F399] absolute md:left-[1.856rem] left-3">
                 <img
-                  src="https://s3-alpha-sig.figma.com/img/7a76/66b9/bf8984e03a5298eb66a5d598dc0cc0d1?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PSLj9O5WVQwhdFQNHHZ032XWJ83rQJUgprhGqmkvZ~5vGXlSs8xFLaW2xu6Rz0RLs8pHIIL6Uked2ufbPZNoSH1q91tc02rz~2ieHY-xKlzTfeEHbvTXULGRxnpJxvg35dI3XdGh8h1nj~L6uHDijJ-u-McsVrru7hCQibI1YWGMZGLpEmnwuX2G3If~k74LZjGq4TqvEjoRiM7wWzNtfDOH-vAa1CxgAzVPuAAlQE-OFYFqsM1PSM3t7~xXOH-rRjpXMz-H4eYrHVb~1QojDrRQHHMG8540e3xePY9fJzM-7zfbeX4mc81ODWXy8B3RIClwRK7a~EVAX61CEXATKA__"
+                  src="../public/ClientsImage/client2.png"
                   alt=""
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
               <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#F3F3F399] absolute md:left-[3.4rem] left-6">
                 <img
-                  src="https://s3-alpha-sig.figma.com/img/b873/e89d/2ab86ab88178bc4908f7a74af398fcdf?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hoEnsmsbo4rgac8hkuMwsg38djLiOwqi-1Rd8llLNhPgFMCcrcIso1tTweyS74Q8ibFOHzMATmI6bPyaC4Z3RoC1ejELxInokmrjLB70wdXQgSIJsdaipNqqtX4MKTu8KJFrInZJsEDyR~Kk03fpQPUbs4AWWcKsUFgGCDlpm8M658gUDTynCZCpWRZU3AeUsAg2LcPHmhbnik1L0ypNYl-54a~74~zT~1y37mjm285lhJxKt~Of~ajiVViMYQsoX4FgjDSccVjIr7ZVfncKqoafLjiORwKgjEf2sexfY12zjbuNhGSCmGH-j3e2sd~aAksmxvoTHZg7Tlpq-ZRxAA__"
+                  src="../public/ClientsImage/client3.png"
                   alt=""
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
               <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#F3F3F399] absolute md:left-[5.19rem] left-9">
                 <img
-                  src="https://s3-alpha-sig.figma.com/img/cd65/84f6/702d429835720cd261b497fc4f154e56?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KM8Y2ZjhuO8k8RS2N3Z4Gc2U8edF-pCk9UVgSd1t-nbYeJvN4aKldiQziAVEHLuh78wXm-KDmDI5KEKl9PqyegszDsxK2RyenTS8-P~WKc330UGtjwwriW4mRQB0~U-dC7VL4Y~oknrDVgFMLNYJXTiLiD-FwBMXVNs0xKqA0T5fcdOHBaSlbfmFIOahL-D4llI0MyPX4VeKQlqxBRJgZqgZPQ-aGzUb5e6w8Hg0aK7GhE4Vmi4lRvUX8ue4dCjuaWfsx8SW1LrKoL3IdwpgqCB~mmYIxs3RiTB9TGO~q24Pt7mgpeUt8WnWseXiKwH6DC7KahCEGrKqU22fMDLDhA__"
+                  src="../public/ClientsImage/client4.png"
                   alt=""
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
               <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#F3F3F399] absolute md:left-[6.822rem] left-12">
                 <img
-                  src="https://s3-alpha-sig.figma.com/img/2b7e/ae90/47b4fa95b71f17bdebc0371ca488f595?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ePnfAmFcW6VZAcMiiqMLr~LmpanIY4WRPngp8SGw3YzN1rBBn8GLajsP1zAUpcLb0ZdcHYc4JjWMdoY9FA9jEiLvxdPtILYNn1m9y90baRe-xfTuixENLT7no0NLSuzspFHaupEaXJah2nB0iotA50jkYEbXv3ceOdaCPEPz8DhMBUQBK1ovIrnw7-rwbknE5HU6Iu7dwlqNlyzRsfWUjuTLYr1lpA1JcSqUQuMC-~OHoBXRaALqD3Fyy-lNRin~U1sMu~vbTofe88dhZ34N~DCDmfZUcKOkFmjcxt-53XuuC-jkn1NwstIQs019OZrrOITU5CV7eAlDit6kK~SkZg__"
+                  src="../public/ClientsImage/client5.png"
                   alt=""
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
               <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#F3F3F399] absolute md:left-[8.357rem] left-15">
                 <img
-                  src="https://s3-alpha-sig.figma.com/img/9c41/b359/452e81bba6240b95cc06df83c02886a3?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QXH-HkCXe6~Nuo2cHmnHbihxpGVzPw4WLTA28r4ro8KKHNDj9yaaVhHpjOMdvyrkaLBFoKOpcDg7pLcjuiNhPdVtULRWvwuNSOtr2j8hW8MdiXPFEI41VhsUTD4Kl-j9XyV~5nOFLmhwGFoZV9meVJVrgTfPHgNxAzBgQy8Lhb~7Mj6em1Ufu3SvAI0ZLaEr~-xrdVEh-Op8NzvpYQRYd0o1S2OfOzQR54Or2UXaORr8dMH1XgXdWd3Hf1-UziMhRkNLQ9yybOmzapmDG55hG5XNyXyfyPQkH2Ktc2ckbZLj5HlKn2X8tpZpSMI-BVIPJx74OjYm9T5ui4PXCYeIVg__"
+                  src="../public/ClientsImage/client6.png"
                   alt=""
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
