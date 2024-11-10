@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const Homepage = lazy(() => import("./components/Homepage"));
-const SignIn = lazy(() => import("./pages/SignIn"));
+const SignIn = lazy(() => import("./pages/SIgnIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const TopDestinations = lazy(() =>
   import("./components/WhyChooseUs/TopDestinations")
