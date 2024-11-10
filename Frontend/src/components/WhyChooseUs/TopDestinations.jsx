@@ -15,7 +15,7 @@ export default function TopDestinations() {
       </div>
       <div className="flex flex-wrap items-center justify-center lg:gap-10 md:gap-6 gap-10  mt-10 ">
         <Card
-          _id="Agra"
+          _id="673111df060482f9314dc420"
           src="Tajmahal.jpeg"
           Days="4"
           peoples="25"
@@ -24,7 +24,7 @@ export default function TopDestinations() {
           price="7790"
         />
         <Card
-          _id="Jaipur"
+          _id="673113bd060482f9314dc667"
           src="Hawamahal.jpeg"
           City="Jaipur"
           Country="India"
@@ -33,7 +33,7 @@ export default function TopDestinations() {
           price="9790"
         />
         <Card
-          _id="GOA"
+          _id="670bd7499e44502c01d4ed29"
           src="https://media.easemytrip.com/media/Blog/India/637796764366393506/6377967643663935062h8Tc5.jpg"
           City="GOA"
           Country="India"
