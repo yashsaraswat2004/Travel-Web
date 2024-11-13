@@ -15,7 +15,6 @@ const addDestination = async (req, res) => {
       itinerary,
     } = req.body;
 
-    // Fix the condition to check that all required fields are present, including itinerary array and images array
     if (
       !name ||
       !description ||
@@ -25,15 +24,16 @@ const addDestination = async (req, res) => {
       !facilities ||
       !numberOfNights ||
       !images ||
-      !images.length || // Check if images array is not empty
+      !images.length || 
       !itinerary ||
-      !itinerary.length // Check if itinerary array is not empty
+      !itinerary.length 
     ) {
       return res.status(404).json({ message: "All fields are required" });
     }
 
     const { destinationId } = req.params;
-    // Create a new destination with provided data
+
+    // Create a new destination 
     const destination = await Destination.create({
       name,
       description,
@@ -50,7 +50,6 @@ const addDestination = async (req, res) => {
       .status(200)
       .json({ message: "Destination added successfully", destination });
   } catch (error) {
-    // Send a meaningful error message back
     return res.status(500).json({ message: error.message });
   }
 };

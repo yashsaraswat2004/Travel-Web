@@ -31,7 +31,6 @@ const Homepage = () => {
       if (response.status !== 200) {
         setErrors(response.data.errors);
       }
-      console.log("response from homeage search", response.data);
       navigate(`/package/${keyword}`);
     } catch (error) {
       console.log("error while searching from homepage body", error);

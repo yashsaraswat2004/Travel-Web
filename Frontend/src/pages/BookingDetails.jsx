@@ -36,7 +36,6 @@ const BookingDetailsPage = () => {
             },
           }
         );
-        console.log("response", response.data);
         setBooking(response.data);
         setLoading(false);
       } catch (err) {

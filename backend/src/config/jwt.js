@@ -5,7 +5,7 @@ dotenv.config({
 });
 
 
-const SECRET_KEY = process.env.SECRET_KEY; // Use the same key for both
+const SECRET_KEY = process.env.SECRET_KEY; 
 
 const generateToken = (userId) => {
     const token = jwt.sign({ userId }, process.env.SECRET_KEY, { expiresIn: "48h" });

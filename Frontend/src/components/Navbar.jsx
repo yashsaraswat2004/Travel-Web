@@ -31,7 +31,6 @@ const Navbar = ({ jwt }) => {
       if (response.status !== 200) {
         setErrors(response.data.errors);
       }
-      console.log("response from navbar", response.data);
       navigate(`/package/${keyword}`);
     } catch (error) {
       console.log("Error fetching search results", error);

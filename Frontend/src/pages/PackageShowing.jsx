@@ -20,7 +20,7 @@ const PackageShowing = () => {
             `https://travel-tour-mlya.onrender.com/api/destination?keyword=${id}`
           );
           setSearchResults(response.data);
-          console.log(response.data);
+        
         } catch (error) {
           console.log("Error while fetching data:", error);
         }

@@ -39,7 +39,6 @@ const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails }) => {
     if (response.data.payment_link_url) {
       window.location.href = response.data.payment_link_url;
     }
-    console.log("Proceeding to payment...", response.data);
     onClose();
   };
 

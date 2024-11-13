@@ -60,7 +60,6 @@ const BookingForm = ({ name, price }) => {
           }
         );
 
-        console.log("booking", response.data);
         const { data } = response;
         if (response.status === 200) {
           setBookingDetails({

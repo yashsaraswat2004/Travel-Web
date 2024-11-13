@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization']?.split(' ')[1]; // Get token without 'Bearer'
+    const token = req.headers['authorization']?.split(' ')[1];
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     }
@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({ message: 'Unauthorized' });
         }
-        req.userId = decoded.id; // Save the user id from token
+        req.userId = decoded.id; 
         next();
     });
 };

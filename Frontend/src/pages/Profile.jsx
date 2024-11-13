@@ -29,7 +29,6 @@ export default function Profile() {
         }
       );
       setUser(response.data);
-      console.log("user profile", response.data);
     };
     fetchData();
   }, [jwt]);
@@ -92,7 +91,6 @@ export default function Profile() {
           },
         }
       );
-      console.log("bookings", response.data);
       setBookings(response.data);
     };
 

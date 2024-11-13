@@ -11,7 +11,6 @@ export default function BookingsContent() {
         "https://travel-tour-mlya.onrender.com/api/admin/bookings"
       );
       const bookings = response.data.bookings;
-
       // Group bookings by user
       const grouped = bookings.reduce((acc, booking) => {
         const userId = booking.user._id;
