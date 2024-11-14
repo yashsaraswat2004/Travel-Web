@@ -60,10 +60,8 @@ const BookingForm = ({ name, price }) => {
           }
         );
 
-        console.log("booking", response.data);
         const { data } = response;
         if (response.status === 200) {
-          Swal.fire("Booked", "", "success");
           setBookingDetails({
             name: name,
             price: price,

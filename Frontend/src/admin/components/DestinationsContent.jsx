@@ -11,7 +11,6 @@ export default function DestinationsContent() {
         "https://travel-tour-mlya.onrender.com/api/destination/alldestinations"
       );
       setDestinations(response.data);
-      console.log("response", response.data);
     };
     fetchData();
   }, []);

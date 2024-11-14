@@ -26,7 +26,6 @@ export default function OrderPage() {
           },
         }
       );
-      console.log("details", response.data);
       setBookings(response.data);
     };
     fetchBookings();

@@ -55,7 +55,12 @@ const SignUp = () => {
   return (
     <div className="al bg-white min-h-screen place-content-center md:flex grid md:justify-center place-items-center items-center">
       <div className="absolute top-0 left-0">
-        <img src="./aeroplane.png" alt="" className="lg:w-[14rem] w-28 lg:h-[14rem] h-28" />
+        <img
+          src="./aeroplane.png"
+          loading="lazy"
+          alt=""
+          className="lg:w-[14rem] w-28 lg:h-[14rem] h-28"
+        />
       </div>
       <div className="flex md:justify-center items-center gap-10 xl:w-[32rem] lg:w-[28rem] md:w-[20rem] w-3/4 place-self-center mt-8 font-Montserrat shadow-lg hover:shadow-xl">
         <p className="text-black lg:text-3xl md:text-xl  text-base font-bold cursor-pointer capitalize p-8 rounded-xl">

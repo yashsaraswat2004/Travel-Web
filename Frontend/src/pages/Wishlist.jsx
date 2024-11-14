@@ -18,7 +18,6 @@ const Wishlist = () => {
         }
       );
       setSearchResults(response.data);
-      console.log("user favorities", response.data);
     };
     fetchData();
   }, [jwt]);

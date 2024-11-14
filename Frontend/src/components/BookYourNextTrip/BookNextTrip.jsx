@@ -50,12 +50,13 @@ const BookNextTrip = () => {
             </div>
           </div>
         </div>
-      </div> 
+      </div>
       <div className="xl:h-[26.1875rem] lg:h-96  h-80  xl:w-[26.4375rem] lg:w-[24rem] md:w-80 w-[19rem] md:mr-[3.5rem] mt-[3.5rem] rounded-3xl shadow-2xl justify-self-center">
         <div className="xl:h-[12.875rem] h-[10rem] xl:w-[26.4375rem] lg:w-[24rem] rounded-3xl">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRx2CuUHpaeR3wQh5eJck3BrqSKrooJu3JeA&s"
             alt=""
+            loading="lazy"
             className="w-full h-full object-cover rounded-t-3xl"
           />
         </div>

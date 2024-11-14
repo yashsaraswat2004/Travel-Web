@@ -74,12 +74,10 @@ export default function AddDestination() {
           },
         }
       );
-      console.log("added destination", response.data);
       if (response.status == 200)
         Swal.fire("Destination added successfully", "", "success");
     } catch (error) {
       if (error.response) {
-        console.log("Server error:", error.response.data);
         Swal.fire(
           "Error adding destination",
           error.response.data.message || "An error occurred",

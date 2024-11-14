@@ -53,18 +53,21 @@ const Card = ({ _id, src, Days, City, Country, price }) => {
         <img
           src={src}
           alt=""
+          loading="lazy"
           className="w-full h-full object-cover rounded-lg"
         />
       </div>
 
       <div className="flex flex-col">
-        <div className="flex items-center ml-5 gap-2">
+        <div className="flex items-center ml-5 gap-2 mt-3">
           <CiClock2 size={20} />
           <p className="text-sm">{Days} Nights</p>
           <p className="text-sm">{Days + 1} Days</p>
         </div>
         <div className="flex items-center justify-start ml-5 mt-2">
-          <h1 className="md:text-[1.25rem] text-lg font-[700] font-poppins">{City}</h1>
+          <h1 className="md:text-[1.25rem] text-lg font-[700] font-poppins">
+            {City}
+          </h1>
         </div>
         <div className="flex items-center justify-start gap-2 ml-5">
           <SlLocationPin />
@@ -79,7 +82,7 @@ const Card = ({ _id, src, Days, City, Country, price }) => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-2 mt-2">
         <button
           className="md:w-[8.48rem] md:h-[2.35rem] h-7 w-24 rounded-lg ml-5 md:text-lg text-sm bg-[#DF6951] text-white"
           onClick={handleClick}

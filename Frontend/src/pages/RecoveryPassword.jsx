@@ -16,7 +16,6 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form Submitted with values:", values);
 
     try {
       let response = await axios.post(

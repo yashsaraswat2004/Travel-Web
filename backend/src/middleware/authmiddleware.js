@@ -8,7 +8,7 @@ const authenticate = async (req, res, next) => {
         token = req.headers.authorization.split(" ")[1];
 
         try {
-            const userId = await getUserIdFromToken(token); // Verify token
+            const userId = await getUserIdFromToken(token); 
             const user = await findUserById(userId);
 
             if (!user) {

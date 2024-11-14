@@ -29,7 +29,6 @@ export default function Profile() {
         }
       );
       setUser(response.data);
-      console.log("user profile", response.data);
     };
     fetchData();
   }, [jwt]);
@@ -92,7 +91,6 @@ export default function Profile() {
           },
         }
       );
-      console.log("bookings", response.data);
       setBookings(response.data);
     };
 
@@ -128,46 +126,43 @@ export default function Profile() {
             <div className="w-full">
               <div className="flex md:space-x-4 space-x-1 mb-4">
                 <button
-                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
-                    activeTab === "personal"
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${activeTab === "personal"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("personal")}
                 >
                   Personal
                 </button>
                 <button
-                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
-                    activeTab === "upcoming"
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${activeTab === "upcoming"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("upcoming")}
                 >
                   Upcoming
                 </button>
                 <button
-                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
-                    activeTab === "past"
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${activeTab === "past"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("past")}
                 >
                   Past Trips
                 </button>
                 <button
-                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${
-                    activeTab === "preferences"
+                  className={`md:py-2 py-1 md:px-4 px-2 h-fit w-fit md:text-base text-sm ${activeTab === "preferences"
                       ? "bg-[#ff694b] text-white"
                       : "bg-gray-200"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("preferences")}
                 >
                   Preferences
                 </button>
               </div>
+
               {activeTab === "personal" && (
                 <form onSubmit={handleUpdate}>
                   <div className="p-6 bg-white rounded-lg shadow w-full ">
@@ -245,7 +240,7 @@ export default function Profile() {
                       const endDate = new Date(bookingDate);
                       endDate.setDate(
                         bookingDate.getDate() +
-                          booking.destination.numberOfNights
+                        booking.destination.numberOfNights
                       );
 
                       // Format the start and end dates
@@ -253,11 +248,9 @@ export default function Profile() {
                       const formattedEndDate = formatDate(endDate);
 
                       // Create the combined date string without extra commas
-                      const dateRange = `${formattedStartDate.split(" ")[0]} ${
-                        formattedStartDate.split(" ")[1]
-                      }-${formattedEndDate.split(" ")[1]}, ${
-                        formattedEndDate.split(" ")[2]
-                      }`;
+                      const dateRange = `${formattedStartDate.split(" ")[0]} ${formattedStartDate.split(" ")[1]
+                        }-${formattedEndDate.split(" ")[1]}, ${formattedEndDate.split(" ")[2]
+                        }`;
 
                       return (
                         <div

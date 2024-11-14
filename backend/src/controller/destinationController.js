@@ -46,4 +46,22 @@ const getAllDestinations = async (req, res) => {
   }
 };
 
-export { searchDestinations, getDestinationById, getAllDestinations };
+const getTopDestination = async (req, res) => {
+  try {
+    const topDestinations = await Destination.find({
+      '_id': { $in: ['670bd7499e44502c01d4ed29', '673113bd060482f9314dc667', '673111df060482f9314dc420'] }
+    });
+
+    if (topDestinations.length === 0) {
+      return res.status(404).json({ message: 'No top destinations found' });
+    }
+
+    res.status(200).json(topDestinations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+export {getTopDestination, searchDestinations, getDestinationById, getAllDestinations };

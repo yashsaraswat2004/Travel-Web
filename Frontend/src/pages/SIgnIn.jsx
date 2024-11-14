@@ -33,7 +33,6 @@ const SignIn = () => {
           },
         }
       );
-      console.log("response user role", response.data.role);
       const token = response.data.jwt;
       if (token && response.data.role === "user") {
         // Check if token exists
@@ -66,7 +65,12 @@ const SignIn = () => {
   return (
     <div className="al bg-white  min-h-screen place-content-center flex flex-wrap justify-center items-center relative gap-2">
       <div className="absolute top-0 left-0">
-        <img src="./aeroplane.png" alt="" className="lg:w-[16rem] md:w-56 w-24 lg:h-[16rem] md:h-56 h-24" />
+        <img
+          src="./aeroplane.png"
+          loading="lazy"
+          alt=""
+          className="lg:w-[16rem] md:w-56 w-24 lg:h-[16rem] md:h-56 h-24"
+        />
       </div>
       <div className="flex justify-center items-center gap-10  md:w-[32rem] w-3/4 mt-8 font-Montserrat shadow-lg hover:shadow-xl">
         <p className="text-black lg:text-3xl md:text-xl text-base font-bold cursor-pointer capitalize p-8 rounded-xl">

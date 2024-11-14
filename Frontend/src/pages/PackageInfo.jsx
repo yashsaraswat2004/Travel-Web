@@ -26,7 +26,6 @@ const PackageInfo = () => {
         setSearchResults(
           Array.isArray(response.data) ? response.data : [response.data]
         );
-        console.log("search results package info", response.data);
       } catch (error) {
         console.log("error in package info", error);
       }
