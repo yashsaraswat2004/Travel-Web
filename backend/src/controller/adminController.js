@@ -69,4 +69,32 @@ const getAllBooking = async (req, res) => {
 
 // updateDestination and deleteDestination api need to be created
 
-export { addDestination, getAllBooking };
+
+//delete Api
+const deleteDestination = async (req, res) => {
+  try {
+    const deletedDestination = await Destination.deleteOne(req.params.id);
+    if (!deletedDestination) return res.status(404).json({ message: 'Package not found' });
+    res.status(200).json({ message: 'Package deleted successfully', package: deletedDestination });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting package', error });
+  }
+};
+
+//Update Api
+const updateDestination = async (req, res) => {
+  try {
+    const updatedDestination = await Destination.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    
+    if (!updatedDestination) return res.status(404).json({ message: 'Package not found' });
+    res.status(200).json({ message: 'Package updated successfully', Destination : updatedDestination });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating package', error });
+  }
+};
+
+export { addDestination, getAllBooking, deleteDestination, updateDestination };
