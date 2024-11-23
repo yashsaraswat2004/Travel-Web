@@ -14,9 +14,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PropTypes from "prop-types";
 
 const BookingDetailsPage = () => {
-  const { bookingId } = useParams(); // Extract bookingId from URL
+  const { bookingId } = useParams();
   const queryParams = new URLSearchParams(window.location.search);
-  const razorpay_payment_id = queryParams.get("razorpay_payment_id"); // Extract payment ID from query string
+  const razorpay_payment_id = queryParams.get("razorpay_payment_id");
   const jwt = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -61,7 +61,6 @@ const BookingDetailsPage = () => {
         }
       );
       setDetails(response.data);
-      // console.log("getting booking details", response.data)
     };
     getBookingDetails();
   }, []);
