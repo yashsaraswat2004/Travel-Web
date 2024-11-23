@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     ],
     paymentInformation: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'payment' // Ensure this matches the model name
+        ref: 'payment' 
     }],
     favorites: [
         {

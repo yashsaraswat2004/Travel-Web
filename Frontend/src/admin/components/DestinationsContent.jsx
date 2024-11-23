@@ -10,11 +10,12 @@ export default function DestinationsContent() {
       const response = await axios.get(
         "https://travel-tour-mlya.onrender.com/api/destination/alldestinations"
       );
+      console.log(response.data);
       setDestinations(response.data);
-      console.log("response", response.data);
     };
     fetchData();
-  }, []);
+   },[]);
+  
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
@@ -91,11 +92,11 @@ function DestinationRow({ name, country, activities, nights, price }) {
         <div className="text-sm text-gray-500">{price}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-        <a href="#" className="text-blue-600 hover:text-blue-900 mr-4">
+        <a href="" className="text-blue-600 hover:text-blue-900 mr-4">
           Edit
         </a>
-        <a href="#" className="text-red-600 hover:text-red-900">
-          Delete
+        <a href="" className="text-red-600 hover:text-red-900">
+          Delete 
         </a>
       </td>
     </tr>

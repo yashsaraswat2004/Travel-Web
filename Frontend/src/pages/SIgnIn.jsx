@@ -33,7 +33,6 @@ const SignIn = () => {
           },
         }
       );
-      console.log("response user role", response.data.role);
       const token = response.data.jwt;
       if (token && response.data.role === "user") {
         // Check if token exists

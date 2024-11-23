@@ -14,7 +14,7 @@ const createPaymentLink = async (req, res) => {
 
         const contactNumber = booking.user.mobile && /^[6-9]\d{9}$/.test(booking.user.mobile)
             ? booking.user.mobile
-            : '9635877303'; // Replace this
+            : '1236547899'; // replace this
 
         // Prepare the Razorpay payment link request
         const paymentLinkRequest = {

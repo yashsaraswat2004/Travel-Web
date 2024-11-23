@@ -42,8 +42,8 @@ const userBooking = async (req, res) => {
 const userPayments = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).populate({
-            path: 'paymentInformation', // Reference 'paymentInformation' field in User schema
-            model: 'payment', // Ensure the model name matches here
+            path: 'paymentInformation', 
+            model: 'payment',
             populate: {
                 path: 'destination',
                 select: 'name description pricePerPerson'
