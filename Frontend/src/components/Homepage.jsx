@@ -11,7 +11,10 @@ const Homepage = () => {
   // for navbar user verify
 
   //body search
-  const [keyword, setKeyword] = useState([]);
+  const [keyword, setKeyword] = useState({
+    From:"",
+    To:""
+  });
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -73,9 +76,8 @@ const Homepage = () => {
                   type="text"
                   placeholder="From ?"
                   className="text-transform:capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-18 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
-                  value={keyword}
+                  value={keyword.From}
                   onChange={handleKeywordChange}
-                  onKeyDown={handleKeyDown}
                 />
                 {errors.keyword && (
                   <p className="text-[#DF6951] font-poppins font-bold text-md mb-2 ml-2">
@@ -90,7 +92,7 @@ const Homepage = () => {
                   type="text"
                   placeholder="Destination ?"
                   className="text-transform:capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-20 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
-                  value={keyword}
+                  value={keyword.To}
                   onChange={handleKeywordChange}
                   onKeyDown={handleKeyDown}
                 />
@@ -206,7 +208,7 @@ const Homepage = () => {
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
-              <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#DF6951] absolute md:left-[10.133rem] left-16 flex  items-center justify-center">
+              <div className="md:w-[2rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#DF6951] absolute md:left-[10.133rem] left-16 flex  items-center justify-center">
                 <h1 className="text-white text-[1.25rem] font-[600] font-poppins">
                   +
                 </h1>
