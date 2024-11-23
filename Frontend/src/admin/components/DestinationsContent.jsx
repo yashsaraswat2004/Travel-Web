@@ -10,10 +10,11 @@ export default function DestinationsContent() {
       const response = await axios.get(
         "https://travel-tour-mlya.onrender.com/api/destination/alldestinations"
       );
+      console.log(response.data);
       setDestinations(response.data);
     };
     fetchData();
-  }, []);
+   },[]);
   
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
