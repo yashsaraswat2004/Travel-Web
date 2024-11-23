@@ -94,11 +94,11 @@ function DestinationRow({ name, country, activities, nights, price }) {
         <div className="text-sm text-gray-500">{price}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-        <a href="#" className="text-blue-600 hover:text-blue-900 mr-4">
+        <a href="" className="text-blue-600 hover:text-blue-900 mr-4">
           Edit
         </a>
-        <a href="#" className="text-red-600 hover:text-red-900">
-          Delete
+        <a href="" className="text-red-600 hover:text-red-900">
+          Delete 
         </a>
       </td>
     </tr>

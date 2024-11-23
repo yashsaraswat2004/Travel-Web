@@ -105,9 +105,9 @@ const BookingDetailsPage = () => {
         </Typography>
         <Box my={2}>
           <DetailItem label="Booking ID" value={bookingId || "N/A"} />
-          <DetailItem label="Tour" value={details.destination.name} />
-          <DetailItem label="Tour" value={details.destination.city} />
-          <DetailItem label="Tour" value={details.destination.country} />
+          <DetailItem label="Name" value={details.destination.name} />
+          <DetailItem label="City" value={details.destination.city} />
+          <DetailItem label="Country" value={details.destination.country} />
           <DetailItem
             label="Date"
             value={
