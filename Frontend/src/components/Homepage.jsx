@@ -12,7 +12,8 @@ const Homepage = () => {
 
   //body search
   const [keyword, setKeyword] = useState([]);
-
+  const [from, setFrom] = useState([]);
+  const [Traveller, setTraveller] = useState([]);
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handleSearch();
@@ -31,6 +32,7 @@ const Homepage = () => {
       if (response.status !== 200) {
         setErrors(response.data.errors);
       }
+      console.log("response from homeage search", response.data);
       navigate(`/package/${keyword}`);
     } catch (error) {
       console.log("error while searching from homepage body", error);
@@ -39,6 +41,13 @@ const Homepage = () => {
 
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
+  };
+
+  const handleFromChange = (e) => {
+    setFrom(e.target.value);
+  };
+  const handleTravellerChange = (e) => {
+    setTraveller(e.target.value);
   };
 
   return (
@@ -57,8 +66,23 @@ const Homepage = () => {
               No matter where you’re going to, we’ll take you there
             </h1>
           </div>
-          <div className="lg:h-[4.4287rem] md:h-24 h-14 lg:w-[56.5568rem] md:w-full w-[25rem] border bg-[#F3F3F399] rounded-[0.625rem] flex justify-center gap-10 items-center md:justify-between">
+          <div className="lg:h-[4.4287rem] md:h-24 h-14 lg:w-[65.5568rem] md:w-full w-[30rem] border bg-[#F3F3F399] rounded-[0.625rem] flex justify-center gap-10 items-center md:justify-between">
             <div className="flex items-center md:gap-2 gap-1">
+              <div className="md:ml-[3.05rem]  md:w-full w-28">
+                <input
+                  type="text"
+                  placeholder="From ?"
+                  className="text-transform:capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-28 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  value={from}
+                  onChange={handleFromChange}
+                  onKeyDown={handleKeyDown}
+                />
+                {errors.keyword && (
+                  <p className="text-[#DF6951] font-poppins font-bold text-md mb-2 ml-2">
+                    {errors.keyword}
+                  </p>
+                )}
+              </div>
               <div className="md:ml-[3.05rem]  md:w-full w-28">
                 <input
                   type="text"
@@ -93,6 +117,21 @@ const Homepage = () => {
                 <div className="">
                   <IoIosArrowDown size={20} color="black" />
                 </div>
+              </div>
+              <div className="md:ml-[3.05rem]  md:w-full w-28">
+                <input
+                  type="text"
+                  placeholder="No. of Travellers ?"
+                  className="text-transform:capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-28 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  value={Traveller}
+                  onChange={handleTravellerChange}
+                  onKeyDown={handleKeyDown}
+                />
+                {errors.keyword && (
+                  <p className="text-[#DF6951] font-poppins font-bold text-md mb-2 ml-2">
+                    {errors.keyword}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -148,7 +187,7 @@ const Homepage = () => {
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
-              <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#DF6951] absolute md:left-[10.133rem] left-16 flex  items-center justify-center">
+              <div className="md:w-[2rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#DF6951] absolute md:left-[10.133rem] left-16 flex  items-center justify-center">
                 <h1 className="text-white text-[1.25rem] font-[600] font-poppins">
                   +
                 </h1>
