@@ -187,7 +187,7 @@ const Homepage = () => {
                   className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full"
                 />
               </div>
-              <div className="md:w-[2.4856rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#DF6951] absolute md:left-[10.133rem] left-16 flex  items-center justify-center">
+              <div className="md:w-[2rem] md:h-[2.4856rem] w-6 h-6 rounded-full bg-[#DF6951] absolute md:left-[10.133rem] left-16 flex  items-center justify-center">
                 <h1 className="text-white text-[1.25rem] font-[600] font-poppins">
                   +
                 </h1>
