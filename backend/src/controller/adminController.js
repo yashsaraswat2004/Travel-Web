@@ -24,9 +24,9 @@ const addDestination = async (req, res) => {
       !facilities ||
       !numberOfNights ||
       !images ||
-      !images.length || 
+      !images.length ||
       !itinerary ||
-      !itinerary.length 
+      !itinerary.length
     ) {
       return res.status(404).json({ message: "All fields are required" });
     }
@@ -88,12 +88,14 @@ const updateDestination = async (req, res) => {
       req.body,
       { new: true, runValidators: true }
     );
-    
+
     if (!updatedDestination) return res.status(404).json({ message: 'Package not found' });
-    res.status(200).json({ message: 'Package updated successfully', Destination : updatedDestination });
+    res.status(200).json({ message: 'Package updated successfully', Destination: updatedDestination });
   } catch (error) {
     res.status(500).json({ message: 'Error updating package', error });
   }
 };
+
+
 
 export { addDestination, getAllBooking, deleteDestination, updateDestination };

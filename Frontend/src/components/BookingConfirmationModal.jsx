@@ -48,7 +48,7 @@ const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails }) => {
         sx={{
           m: 0,
           p: 2,
-          bgcolor: "primary.main",
+          bgcolor: "#FF6400",
           color: "primary.contrastText",
         }}
       >
