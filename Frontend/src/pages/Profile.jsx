@@ -243,11 +243,9 @@ export default function Profile() {
                         booking.destination.numberOfNights
                       );
 
-                      // Format the start and end dates
                       const formattedStartDate = formatDate(bookingDate);
                       const formattedEndDate = formatDate(endDate);
 
-                      // Create the combined date string without extra commas
                       const dateRange = `${formattedStartDate.split(" ")[0]} ${formattedStartDate.split(" ")[1]
                         }-${formattedEndDate.split(" ")[1]}, ${formattedEndDate.split(" ")[2]
                         }`;

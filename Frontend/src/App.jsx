@@ -109,7 +109,7 @@ function App() {
             }
           />
           <Route
-            path="/orders"
+            path="/orders/:id"
             element={
               <>
                 <Navbar jwt={jwt} />
