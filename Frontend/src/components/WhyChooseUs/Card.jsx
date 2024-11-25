@@ -6,13 +6,17 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const Card = ({ _id, src, Days, City, Country, price }) => {
+const Card = ({ _id, src, Days, City, Country, price, fromValue, passenger }) => {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("token");
 
+  console.log("card passenger", passenger)
+
   const handleClick = () => {
-    navigate(`/package/packageinfo/${_id}`);
+    navigate(`/package/packageinfo/${_id}`, { state: { fromValue, passenger } });
   };
+
+
 
   const handleFavorite = async () => {
     if (!jwt) {
@@ -107,5 +111,7 @@ Card.propTypes = {
   Days: PropTypes.number,
   City: PropTypes.string,
   Country: PropTypes.string,
+  fromValue: PropTypes.string,
   price: PropTypes.number,
+  passenger: PropTypes.number,
 };

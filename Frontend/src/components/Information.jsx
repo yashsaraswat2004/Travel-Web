@@ -10,7 +10,10 @@ const Information = ({
   city,
   facilities,
   nights,
+  fromValue,
+  passenger
 }) => {
+  console.log("information passenger", passenger)
   return (
     <div className="flex flex-col md:flex-row gap-16 w-fit xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto -mt-4 py-9 justify-center bg-white shadow-lg shadow-zinc-300">
       <div className="md:w-2/4 w-3/4  md:place-self-start place-self-center">
@@ -46,7 +49,7 @@ const Information = ({
         </div>
       </div>
       <div className="md:w-1/3 w-3/4 md:mx-0 mx-auto">
-        <BookingForm name={name} price={price} />
+        <BookingForm passenger={passenger} fromValue={fromValue} name={name} price={price} />
       </div>
     </div>
   );
@@ -60,6 +63,8 @@ Information.propTypes = {
   city: PropTypes.string,
   facilities: PropTypes.string,
   nights: PropTypes.number,
+  passenger: PropTypes.number,
+  fromValue: PropTypes.string
 };
 
 export default Information;

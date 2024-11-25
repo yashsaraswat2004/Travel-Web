@@ -96,6 +96,24 @@ const updateDestination = async (req, res) => {
   }
 };
 
+const deleteAllBookings = async (req, res) => {
+  try {
+    // Delete all documents in the bookings collection
+    const result = await Booking.deleteMany({});
+
+    // Respond with success message
+    return res.status(200).json({
+      message: "All bookings have been deleted successfully.",
+      deletedCount: result.deletedCount, // Number of deleted bookings
+    });
+  } catch (error) {
+    console.error("Error deleting all bookings:", error);
+    return res.status(500).json({
+      message: "An error occurred while deleting bookings.",
+      error: error.message,
+    });
+  }
+};
 
 
-export { addDestination, getAllBooking, deleteDestination, updateDestination };
+export { addDestination, getAllBooking, deleteDestination, updateDestination, deleteAllBookings };

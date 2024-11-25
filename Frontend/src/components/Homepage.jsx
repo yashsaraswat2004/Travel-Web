@@ -8,7 +8,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
-  // for navbar user verify
+
 
   //body search
   const [keyword, setKeyword] = useState([]);
@@ -32,8 +32,7 @@ const Homepage = () => {
       if (response.status !== 200) {
         setErrors(response.data.errors);
       }
-      console.log("response from homeage search", response.data);
-      navigate(`/package/${keyword}`);
+      navigate(`/package/${keyword}`, { state: { from, travellers: Traveller } });
     } catch (error) {
       console.log("error while searching from homepage body", error);
     }
@@ -68,11 +67,12 @@ const Homepage = () => {
           </div>
           <div className="lg:h-[4.4287rem] md:h-24 h-14 lg:w-[65.5568rem] md:w-full w-[30rem] border bg-[#F3F3F399] rounded-[0.625rem] flex justify-center gap-10 items-center md:justify-between">
             <div className="flex items-center md:gap-2 gap-1">
+
               <div className="md:ml-[3.05rem]  md:w-full w-28">
                 <input
                   type="text"
                   placeholder="From ?"
-                  className="text-transform:capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-28 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  className="text-transform:capitalize capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-28 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
                   value={from}
                   onChange={handleFromChange}
                   onKeyDown={handleKeyDown}
@@ -83,11 +83,12 @@ const Homepage = () => {
                   </p>
                 )}
               </div>
+
               <div className="md:ml-[3.05rem]  md:w-full w-28">
                 <input
                   type="text"
                   placeholder="Where to ?"
-                  className="text-transform:capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-28 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
+                  className="text-transform:capitalize capitalize py-2 px-2 focus:outline-none md:text-[1.25rem] font-[600] font-poppins placeholder:text-black md:placeholder:text-[1.25rem] md:w-full w-28 placeholder:text-sm placeholder:font-[600] placeholder:font-poppins bg-transparent"
                   value={keyword}
                   onChange={handleKeywordChange}
                   onKeyDown={handleKeyDown}

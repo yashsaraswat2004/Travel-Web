@@ -1,5 +1,5 @@
 import Card from "../components/WhyChooseUs/Card";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -12,6 +12,12 @@ const PackageShowing = () => {
 
   const packagesPerPage = 6;
 
+  //taking the from value from the search
+  const location = useLocation();
+  const fromValue = location.state?.from;
+  const passenger = location.state?.travellers;
+  console.log("packageshowing passenger", passenger)
+
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
@@ -20,7 +26,7 @@ const PackageShowing = () => {
             `https://travel-tour-mlya.onrender.com/api/destination?keyword=${id}`
           );
           setSearchResults(response.data);
-        
+
         } catch (error) {
           console.log("Error while fetching data:", error);
         }
@@ -67,6 +73,8 @@ const PackageShowing = () => {
               price={result.pricePerPerson}
               City={result.name}
               Country={result.country}
+              fromValue={fromValue}
+              passenger={passenger}
             />
           ))
         ) : (

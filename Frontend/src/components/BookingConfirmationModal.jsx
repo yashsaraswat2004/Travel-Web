@@ -13,6 +13,8 @@ import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -23,24 +25,42 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails }) => {
+const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails, passenger, fromValue }) => {
   const jwt = localStorage.getItem("token");
 
+  // const navigate = useNavigate();
+
   const handlePaymentClick = async () => {
-    const response = await axios.post(
-      `https://travel-tour-mlya.onrender.com/api/payment/${bookingDetails.bookingId}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
+    try {
+      const response = await axios.post(
+        `https://travel-tour-mlya.onrender.com/api/payment/${bookingDetails.bookingId}`,
+        { passenger, totalPrice: bookingDetails.totalPrice },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+  
+      if (response.data.payment_link_url) {
+        localStorage.setItem(
+          "bookingState",
+          JSON.stringify({ passenger, fromValue })
+        );
+  
+        window.location.href = response.data.payment_link_url;
       }
-    );
-    if (response.data.payment_link_url) {
-      window.location.href = response.data.payment_link_url;
+  
+      onClose();
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+      Swal.fire("Error initiating payment", error.message, "error");
     }
-    onClose();
   };
+  
+
+
+
 
   return (
     <StyledDialog open={isOpen} onClose={onClose} fullWidth maxWidth="sm">
@@ -77,7 +97,8 @@ const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails }) => {
           Your booking has been confirmed. Here are the details:
         </Typography>
         <Box my={2}>
-          <DetailItem label="Tour" value={bookingDetails.name} />
+          <DetailItem label="To" value={bookingDetails.name} />
+          <DetailItem label="From" value={fromValue} />
           <DetailItem
             label="Date"
             value={new Date(bookingDetails.date).toLocaleDateString()}
@@ -88,7 +109,7 @@ const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails }) => {
           />
           <DetailItem
             label="Number of People"
-            value={bookingDetails.numberOfPeople}
+            value={passenger}
           />
           <DetailItem
             label="Total Price"
@@ -96,6 +117,7 @@ const BookingConfirmationModal = ({ isOpen, onClose, bookingDetails }) => {
           />
         </Box>
       </DialogContent>
+
       <DialogActions>
         <Button
           onClick={handlePaymentClick}
@@ -143,6 +165,11 @@ BookingConfirmationModal.propTypes = {
     totalPrice: PropTypes.number.isRequired,
     bookingId: PropTypes.number.isRequired,
   }).isRequired,
+};
+
+BookingConfirmationModal.propTypes = {
+  fromValue: PropTypes.string,
+  passenger: PropTypes.number,
 };
 
 export default BookingConfirmationModal;

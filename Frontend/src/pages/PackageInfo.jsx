@@ -5,16 +5,23 @@ import { FaCar, FaInfo } from "react-icons/fa";
 import Information from "../components/Information";
 import { useEffect, useState } from "react";
 import TourPlan from "../components/TourPlan";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Gallery from "../components/Gallery";
+import PropTypes from "prop-types";
 
 const PackageInfo = () => {
   const { id } = useParams();
   const [searchResults, setSearchResults] = useState([]);
   const [activeTab, setActiveTab] = useState("information");
   const jwt = localStorage.getItem("token");
+
+  const location = useLocation();
+  const { fromValue } = location.state || {};
+  const { passenger } = location.state || {};
+
+  console.log("package passenger", passenger);
 
   useEffect(() => {
     if (!id) Swal.fire("No id is Provided", "", "warning");
@@ -52,11 +59,10 @@ const PackageInfo = () => {
               <div className="xl:w-fit w-3/4   lg:h-[4.588rem] h-14 mx-auto  rounded-sm flex -mt-4 justify-center">
                 {/* information section  */}
                 <div
-                  className={`xl:w-[18.8125rem] w-1/3 flex items-center justify-center md:gap-2 gap-1 ${
-                    activeTab === "information"
-                      ? "bg-[#8B8484]"
-                      : "bg-white text-black"
-                  }`}
+                  className={`xl:w-[18.8125rem] w-1/3 flex items-center justify-center md:gap-2 gap-1 ${activeTab === "information"
+                    ? "bg-[#8B8484]"
+                    : "bg-white text-black"
+                    }`}
                   onClick={() => setActiveTab("information")}
                 >
                   <FaInfo size={20} className="cursor-pointer" />
@@ -67,11 +73,10 @@ const PackageInfo = () => {
 
                 {/* tour plan section  */}
                 <div
-                  className={`xl:w-[18.8125rem] w-1/3  flex items-center justify-center md:gap-2 gap-1 ${
-                    activeTab === "tourplan"
-                      ? "bg-[#8B8484]"
-                      : "bg-white text-black"
-                  }`}
+                  className={`xl:w-[18.8125rem] w-1/3  flex items-center justify-center md:gap-2 gap-1 ${activeTab === "tourplan"
+                    ? "bg-[#8B8484]"
+                    : "bg-white text-black"
+                    }`}
                   onClick={() => setActiveTab("tourplan")}
                 >
                   <FaCar size={28} className="cursor-pointer" />
@@ -82,11 +87,10 @@ const PackageInfo = () => {
 
                 {/* gallery section  */}
                 <div
-                  className={`xl:w-[18.8125rem] w-1/3  flex items-center justify-center md:gap-2 gap-1 ${
-                    activeTab === "gallery"
-                      ? "bg-[#8B8484]"
-                      : "bg-white text-black"
-                  }`}
+                  className={`xl:w-[18.8125rem] w-1/3  flex items-center justify-center md:gap-2 gap-1 ${activeTab === "gallery"
+                    ? "bg-[#8B8484]"
+                    : "bg-white text-black"
+                    }`}
                   onClick={() => setActiveTab("gallery")}
                 >
                   <RiGalleryView2 size={28} className="cursor-pointer" />
@@ -105,6 +109,8 @@ const PackageInfo = () => {
                   city={result.city}
                   facilities={result.facilities}
                   nights={result.numberOfNights}
+                  fromValue={fromValue}
+                  passenger={passenger}
                 />
               ) : null}
               {activeTab === "tourplan" ? (
@@ -124,4 +130,9 @@ const PackageInfo = () => {
   );
 };
 
+PackageInfo.propTypes = {
+  fromValue: PropTypes.string
+};
+
 export default PackageInfo;
+

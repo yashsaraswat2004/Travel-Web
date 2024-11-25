@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
   Container,
@@ -24,6 +24,12 @@ const BookingDetailsPage = () => {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const location = useLocation();
+  const { fromValue } = location.state || {};
+
+  // console.log("booking details Passenger:", passenger);
+  console.log("booking details From Value:", fromValue);
 
   useEffect(() => {
     const fetchBookingDetails = async () => {
