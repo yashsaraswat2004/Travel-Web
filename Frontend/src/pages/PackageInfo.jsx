@@ -114,7 +114,7 @@ const PackageInfo = () => {
                 />
               ) : null}
               {activeTab === "tourplan" ? (
-                <TourPlan itinerary={result.itinerary} />
+                <TourPlan fromValue={fromValue} passenger={passenger} itinerary={result.itinerary} />
               ) : null}
               {activeTab === "gallery" ? (
                 <Gallery images={result.images} />
